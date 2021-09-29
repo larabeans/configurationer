@@ -19,10 +19,12 @@ class CreateConfigurationerTask extends Task
     public function run(array $data)
     {
         try {
+           // dd($data['configuration']);
             $configurationType = config('configuration.configable_types');
             $index="";
             $type= $data['configable_type'];
 
+            // getting the address of configable type from the array of configable_types from config file.
             foreach($configurationType as $key => $value){
                 if($key == $type){
                     $index =$value['class_path'];
@@ -32,11 +34,12 @@ class CreateConfigurationerTask extends Task
             if($index ==null){
                 throw new NotFoundException();
             }
+
             $configurationData= json_encode($data['configuration']);
 
             $queryData=[
                 'configable_type'=>$index,
-                'configable_id'=>$data->configable_id,
+                'configable_id'=>$data['configable_id'],
                 'configuration'=>$configurationData
             ];
             return $this->repository->create($queryData);
