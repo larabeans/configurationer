@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Containers\AppSection\Configurationer\Actions;
+namespace App\Containers\Vendor\Configurationer\Actions;
 
-use App\Containers\AppSection\Configurationer\Models\Configuration;
-use App\Containers\AppSection\Configurationer\Tasks\CreateConfigurationerTask;
+use App\Containers\Vendor\Configurationer\Models\Configuration;
+use App\Containers\Vendor\Configurationer\Tasks\CreateConfigurationerTask;
 use App\Ship\Parents\Actions\Action;
 use App\Ship\Parents\Requests\Request;
-use App\Containers\AppSection\Configurationer\UI\API\Requests\CreateConfigurationerRequest;
+use App\Containers\Vendor\Configurationer\UI\API\Requests\CreateConfigurationerRequest;
 
 class CreateConfigurationerAction extends Action
 {

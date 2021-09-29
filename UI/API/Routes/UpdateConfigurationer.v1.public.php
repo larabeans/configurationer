@@ -16,7 +16,7 @@
  *@apiUse             ConfigurationSuccessSingleResponse
  */
 
-use App\Containers\AppSection\Configurationer\UI\API\Controllers\Controller;
+use App\Containers\Vendor\Configurationer\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 Route::patch('configurations/{id}', [Controller::class, 'updateConfigurationer'])

@@ -11,13 +11,13 @@
  * @apiPermission      Authenticated user
  *
  * @apiParam           {String}  configable_type eg. user, tenant
- * @apiParam           {String}  configable_id
+ * @apiParam           {String}  configable_id  eg. id of user or tenant
  * @apiParam           {Object}  configuration eg. {"Language":"urdu",..}
  *
  * @apiUse             ConfigurationSuccessSingleResponse
  */
 
-use App\Containers\AppSection\Configurationer\UI\API\Controllers\Controller;
+use App\Containers\Vendor\Configurationer\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 Route::post('configurations', [Controller::class, 'createConfigurationer'])

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Containers\AppSection\Configurationer\Providers;
+namespace App\Containers\Vendor\Configurationer\Providers;
 
 use App\Ship\Parents\Providers\MainProvider;
 
@@ -15,6 +15,11 @@ class MainServiceProvider extends MainProvider
     public array $serviceProviders = [
         // InternalServiceProviderExample::class,
     ];
+
+    protected $listen = [
+
+    ];
+
 
     /**
      * Container Aliases

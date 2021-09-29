@@ -10,12 +10,12 @@
  * @apiVersion         1.0.0
  * @apiPermission      Authenticated user
  *
- * @apiParam           {String}  tenant_id
+ * @apiParam           {String}  tenant_id id of tenant
  *
  * @apiUse             ConfigurationSuccessSingleResponse
  */
 
-use App\Containers\AppSection\Configurationer\UI\API\Controllers\Controller;
+use App\Containers\Vendor\Configurationer\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 Route::get('configurations/tenant/{tenant_id}', [Controller::class, 'getTenantConfiguration'])

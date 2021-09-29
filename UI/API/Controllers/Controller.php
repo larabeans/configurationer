@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Containers\AppSection\Configurationer\UI\API\Controllers;
+namespace App\Containers\Vendor\Configurationer\UI\API\Controllers;
 
-use App\Containers\AppSection\Configurationer\UI\API\Requests\CreateConfigurationerRequest;
-use App\Containers\AppSection\Configurationer\UI\API\Requests\DeleteConfigurationerRequest;
-use App\Containers\AppSection\Configurationer\UI\API\Requests\GetAllConfigurationersRequest;
-use App\Containers\AppSection\Configurationer\UI\API\Requests\FindConfigurationerByIdRequest;
-use App\Containers\AppSection\Configurationer\UI\API\Requests\UpdateConfigurationerRequest;
-use App\Containers\AppSection\Configurationer\UI\API\Requests\GetUserConfigurationRequest;
-use App\Containers\AppSection\Configurationer\UI\API\Requests\GetTenantConfigurationRequest;
-use App\Containers\AppSection\Configurationer\UI\API\Transformers\ConfigurationerTransformer;
-use App\Containers\AppSection\Configurationer\UI\API\Requests\GetDefaultConfigurationerRequest;
-use App\Containers\AppSection\Configurationer\Actions\CreateConfigurationerAction;
-use App\Containers\AppSection\Configurationer\Actions\FindConfigurationerByIdAction;
-use App\Containers\AppSection\Configurationer\Actions\GetAllConfigurationersAction;
-use App\Containers\AppSection\Configurationer\Actions\UpdateConfigurationerAction;
-use App\Containers\AppSection\Configurationer\Actions\DeleteConfigurationerAction;
-use App\Containers\AppSection\Configurationer\Actions\GetUserConfigurationAction;
-use App\Containers\AppSection\Configurationer\Actions\GetDefaultConfigurationerAction;
-use App\Containers\AppSection\Configurationer\Actions\GetTenantConfigurationerAction;
+use App\Containers\Vendor\Configurationer\UI\API\Requests\CreateConfigurationerRequest;
+use App\Containers\Vendor\Configurationer\UI\API\Requests\DeleteConfigurationerRequest;
+use App\Containers\Vendor\Configurationer\UI\API\Requests\GetAllConfigurationersRequest;
+use App\Containers\Vendor\Configurationer\UI\API\Requests\FindConfigurationerByIdRequest;
+use App\Containers\Vendor\Configurationer\UI\API\Requests\UpdateConfigurationerRequest;
+use App\Containers\Vendor\Configurationer\UI\API\Requests\GetUserConfigurationRequest;
+use App\Containers\Vendor\Configurationer\UI\API\Requests\GetTenantConfigurationRequest;
+use App\Containers\Vendor\Configurationer\UI\API\Transformers\ConfigurationerTransformer;
+use App\Containers\Vendor\Configurationer\UI\API\Requests\GetDefaultConfigurationerRequest;
+use App\Containers\Vendor\Configurationer\Actions\CreateConfigurationerAction;
+use App\Containers\Vendor\Configurationer\Actions\FindConfigurationerByIdAction;
+use App\Containers\Vendor\Configurationer\Actions\GetAllConfigurationersAction;
+use App\Containers\Vendor\Configurationer\Actions\UpdateConfigurationerAction;
+use App\Containers\Vendor\Configurationer\Actions\DeleteConfigurationerAction;
+use App\Containers\Vendor\Configurationer\Actions\GetUserConfigurationAction;
+use App\Containers\Vendor\Configurationer\Actions\GetDefaultConfigurationerAction;
+use App\Containers\Vendor\Configurationer\Actions\GetTenantConfigurationerAction;
 use App\Ship\Parents\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
 

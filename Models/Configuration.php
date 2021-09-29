@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Containers\AppSection\Configurationer\Models;
+namespace App\Containers\Vendor\Configurationer\Models;
 
 use App\Containers\Vendor\Beaner\Parents\Models\Model;
 
