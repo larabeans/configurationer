@@ -11,9 +11,9 @@ HTTP/1.1 200 OK
 "Configuration":{
  *  "Language":"Urdu",
  *  "Currency":"PKR",
- *       .
- *       .
- *       .
+ *       //...
+ *       //...
+ *       //...
  },
 },
 "meta":{
