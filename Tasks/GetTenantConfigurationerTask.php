@@ -20,14 +20,18 @@ class GetTenantConfigurationerTask extends Task
     {
         try {
             $response =$this->repository->where('configable_id',$id)->first();
+           if($response == null){
+               throw new NotFoundException();
+           }
             $configurationData= json_decode( $response->configuration);
             $data=[];
-            $data['Currency']=$configurationData->currency;
-            //dd($data);
-            return $data;
+           // $data['Currency']=$configurationData->currency;
+
+            $data['configuration']=$configurationData;
+            return $response;
         }
         catch (Exception $exception) {
-            throw new NotFoundException();
+            throw new NotFoundException($exception);
         }
     }
 }

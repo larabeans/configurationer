@@ -23,12 +23,16 @@ class GetUserConfigurationerTask extends Task
             $response =$this->repository->where('configable_id',$id)->first();
             $configurationData= json_decode( $response->configuration);
             $data=[];
-            $data['Language']=$configurationData->language;
-            //dd($data);
-            return $data;
+            if($response == null){
+                throw new NotFoundException();
+            }
+           // $data['Language']=$configurationData->language;
+
+            $data['configuration']=$configurationData;
+            return $response;
         }
         catch (Exception $exception) {
-            throw new NotFoundException();
+            throw new NotFoundException($exception);
         }
     }
 }
