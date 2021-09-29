@@ -49,19 +49,19 @@ class Controller extends ApiController
         return $configurationers;//$this->transform($configurationers, ConfigurationerTransformer::class);
     }
 
- public function getUserConfiguration(GetUserConfigurationRequest $request)//: array
+ public function getUserConfiguration(GetUserConfigurationRequest $request): array
 {
 
     $configurationers = app(GetUserConfigurationAction::class)->run($request);
-    return $configurationers;//$this->transform($configurationers, ConfigurationerTransformer::class);
+    return $this->transform($configurationers, ConfigurationerTransformer::class);
 }
 
 
- public function getTenantConfiguration(GetTenantConfigurationRequest $request)//: array
+ public function getTenantConfiguration(GetTenantConfigurationRequest $request): array
 {
 
     $configurationers = app(GetTenantConfigurationerAction::class)->run($request);
-    return $configurationers;//$this->transform($configurationers, ConfigurationerTransformer::class);
+    return $this->transform($configurationers, ConfigurationerTransformer::class);
 }
 
 
