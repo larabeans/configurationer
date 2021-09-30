@@ -11,7 +11,13 @@
  * @apiPermission      Authenticated User
  *
  *
- * @apiUse             ConfigurationSuccessSingleResponse
+ * @apiSuccessExample  {json}       Success-Response:
+ * HTTP/1.1 202 OK
+ * {
+ * "Languege": "Urdu",
+ * "Currency": "PKR",
+ * "Country":  "Pakistan"
+ * }
  */
 
 use App\Containers\Vendor\Configurationer\UI\API\Controllers\Controller;
