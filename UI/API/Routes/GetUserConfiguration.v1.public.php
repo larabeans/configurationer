@@ -8,9 +8,9 @@
  * @apiDescription     Endpoint description here..
  *
  * @apiVersion         1.0.0
- * @apiPermission      none
+ * @apiPermission      Authenticated User
  *
- * @apiParam           {String}  user_id id of tenant
+ * @apiParam           {String}  user_id id of user
  *
  * @apiUse             ConfigurationSuccessSingleResponse
  */
