@@ -2,7 +2,7 @@
 
 /**
  * @apiGroup           Configuration
- * @apiName            findConfigurationerById
+ * @apiName            findConfigurationById
  *
  * @api                {GET} /v1/configurations/:id Find Configuration by Id
  * @apiDescription     Serach Configuration Based on id
@@ -18,7 +18,7 @@
 use App\Containers\AppSection\Configurationer\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::get('configurations/{id}', [Controller::class, 'findConfigurationerById'])
+Route::get('configurations/{id}', [Controller::class, 'findConfigurationById'])
     ->name('api_configuration_find_configuration_by_id')
     ->middleware(['auth:api']);
 

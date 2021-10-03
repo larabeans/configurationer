@@ -2,7 +2,7 @@
 
 /**
  * @apiGroup           Configuration
- * @apiName            deleteConfigurationer
+ * @apiName            deleteConfiguration
  *
  * @api                {DELETE} /v1/configurations/:id Delete Configuration
  * @apiDescription     Delete Configuration

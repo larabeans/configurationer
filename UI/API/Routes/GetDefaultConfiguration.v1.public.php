@@ -2,7 +2,7 @@
 
 /**
  * @apiGroup           Configuration
- * @apiName            defaultConfigurationer
+ * @apiName            defaultConfiguration
  *
  * @api                {GET} /v1/configurations Get Default Configurations
  * @apiDescription     Shoe the response configurations

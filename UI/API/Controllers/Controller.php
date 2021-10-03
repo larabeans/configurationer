@@ -67,7 +67,7 @@ class Controller extends ApiController
 
     public function updateConfiguration(UpdateConfigurationRequest $request)
     {
-        $configuration = app(UpdateConfigurationerAction::class)->run($request);
+        $configuration = app(UpdateConfigurationAction::class)->run($request);
         return $this->transform($configuration, ConfigurationTransformer::class);
     }
 

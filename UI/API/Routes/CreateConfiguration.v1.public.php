@@ -2,7 +2,7 @@
 
 /**
  * @apiGroup           Configuration
- * @apiName            createConfigurationer
+ * @apiName            createConfiguration
  *
  * @api                {POST} /v1/configurations Create Configuration
  * @apiDescription     create configuration
@@ -20,7 +20,7 @@
 use App\Containers\AppSection\Configurationer\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::post('configurations', [Controller::class, 'createConfigurationer'])
+Route::post('configurations', [Controller::class, 'createConfiguration'])
     ->name('api_configuration_create_configuration')
     ->middleware(['auth:api']);
 

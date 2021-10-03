@@ -1,6 +1,6 @@
 {
   "name": "apiato/configuration",
-  "description": "Configurationer Container for apiato.",
+  "description": "Apiato container to make entities configurable",
   "require": {
   }
 }

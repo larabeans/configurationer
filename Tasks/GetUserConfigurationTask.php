@@ -7,7 +7,7 @@ use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Tasks\Task;
 use Exception;
 
-class GetUserConfigurationerTask extends Task
+class GetUserConfigurationTask extends Task
 {
     protected ConfigurationRepository $repository;
 

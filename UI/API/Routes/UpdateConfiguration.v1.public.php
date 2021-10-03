@@ -2,7 +2,7 @@
 
 /**
  * @apiGroup           Configuration
- * @apiName            updateConfigurationer
+ * @apiName            updateConfiguration
  *
  * @api                {PATCH} /v1/configurations/:id Update Configuration
  * @apiDescription     Update Configuration
