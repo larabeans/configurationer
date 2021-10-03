@@ -7,7 +7,7 @@ return [
         'language'=>'Urdu',
         'currency'=>'PKR'
     ],
-    'configable_types'=>[
+    'configurable_types'=>[
 
          'user' => [
             'identifier' => 'user',

@@ -3,11 +3,9 @@
 namespace App\Containers\Vendor\Configurationer\Tasks;
 
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
-use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Tasks\Task;
-use Exception;
 
-class FindConfigurationerByIdTask extends Task
+class GetAllConfigurationsTask extends Task
 {
     protected ConfigurationRepository $repository;
 
@@ -16,13 +14,8 @@ class FindConfigurationerByIdTask extends Task
         $this->repository = $repository;
     }
 
-    public function run($id)
+    public function run()
     {
-        try {
-            return $this->repository->find($id);
-        }
-        catch (Exception $exception) {
-            throw new NotFoundException();
-        }
+        return $this->repository->paginate();
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Containers\Vendor\Configurationer\Tasks;
+namespace App\Containers\AppSection\Configurationer\Tasks;
 
-use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
+use App\Containers\AppSection\Configurationer\Data\Repositories\ConfigurationRepository;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Tasks\Task;
 use Exception;
 
-class GetUserConfigurationerTask extends Task
+class GetUserConfigurationTask extends Task
 {
     protected ConfigurationRepository $repository;
 
@@ -20,17 +20,19 @@ class GetUserConfigurationerTask extends Task
     {
         try {
 
-            $response =$this->repository->where('configable_id',$id)->first();
+            $response =$this->repository->where('configurable_id',$id)->first();
+            $configurationData= json_decode( $response->configuration);
+            $data=[];
             if($response == null){
                 throw new NotFoundException();
             }
-            $configurationData= json_decode( $response->configuration);
-            $data=[];
+           // $data['Language']=$configurationData->language;
+
             $data['configuration']=$configurationData;
             return $response;
         }
         catch (Exception $exception) {
-            throw new NotFoundException();
+            throw new NotFoundException($exception);
         }
     }
 }

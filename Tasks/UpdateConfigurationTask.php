@@ -3,11 +3,11 @@
 namespace App\Containers\Vendor\Configurationer\Tasks;
 
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
-use App\Ship\Exceptions\DeleteResourceFailedException;
+use App\Ship\Exceptions\UpdateResourceFailedException;
 use App\Ship\Parents\Tasks\Task;
 use Exception;
 
-class DeleteConfigurationerTask extends Task
+class UpdateConfigurationTask extends Task
 {
     protected ConfigurationRepository $repository;
 
@@ -16,13 +16,14 @@ class DeleteConfigurationerTask extends Task
         $this->repository = $repository;
     }
 
-    public function run($id): ?int
+    public function run($id, array $data)
     {
         try {
-            return $this->repository->delete($id);
+
+            return $this->repository->update($data, $id);
         }
         catch (Exception $exception) {
-            throw new DeleteResourceFailedException();
+            throw new UpdateResourceFailedException();
         }
     }
 }

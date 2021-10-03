@@ -2,7 +2,7 @@
 
 /**
  * @apiGroup           Configuration
- * @apiName            updateConfigurationer
+ * @apiName            updateConfiguration
  *
  * @api                {PATCH} /v1/configurations/:id Update Configuration
  * @apiDescription     Update Configuration
@@ -19,7 +19,7 @@
 use App\Containers\Vendor\Configurationer\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::patch('configurations/{id}', [Controller::class, 'updateConfigurationer'])
-    ->name('api_configurationer_update_configurationer')
+Route::patch('configurations/{id}', [Controller::class, 'updateConfiguration'])
+    ->name('api_configuration_update_configuration')
     ->middleware(['auth:api']);
 

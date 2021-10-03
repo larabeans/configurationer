@@ -19,6 +19,6 @@ use App\Containers\Vendor\Configurationer\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 Route::get('configurations/tenant/{tenant_id}', [Controller::class, 'getTenantConfiguration'])
-    ->name('api_configurationer_get_tenant_configuration')
+    ->name('api_configuration_get_tenant_configuration')
     ->middleware(['auth:api']);
 

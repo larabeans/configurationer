@@ -7,7 +7,7 @@ use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Tasks\Task;
 use Exception;
 
-class GetTenantConfigurationerTask extends Task
+class FindConfigurationByIdTask extends Task
 {
     protected ConfigurationRepository $repository;
 
@@ -19,19 +19,10 @@ class GetTenantConfigurationerTask extends Task
     public function run($id)
     {
         try {
-            $response =$this->repository->where('configable_id',$id)->first();
-           if($response == null){
-               throw new NotFoundException();
-           }
-            $configurationData= json_decode( $response->configuration);
-            $data=[];
-           // $data['Currency']=$configurationData->currency;
-
-            $data['configuration']=$configurationData;
-            return $response;
+            return $this->repository->find($id);
         }
         catch (Exception $exception) {
-            throw new NotFoundException($exception);
+            throw new NotFoundException();
         }
     }
 }
