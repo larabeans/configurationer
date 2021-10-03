@@ -22,7 +22,7 @@
 use App\Containers\AppSection\Configurationer\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::delete('configurations/{id}', [Controller::class, 'deleteConfigurationer'])
-    ->name('api_configurationer_delete_configurationer')
+Route::delete('configurations/{id}', [Controller::class, 'deleteConfiguration'])
+    ->name('api_configuration_delete_configuration')
     ->middleware(['auth:api']);
 

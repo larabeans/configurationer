@@ -3,11 +3,11 @@
 namespace App\Containers\AppSection\Configurationer\Tasks;
 
 use App\Containers\AppSection\Configurationer\Data\Repositories\ConfigurationRepository;
-use App\Ship\Exceptions\NotFoundException;
+use App\Ship\Exceptions\DeleteResourceFailedException;
 use App\Ship\Parents\Tasks\Task;
 use Exception;
 
-class FindConfigurationerByIdTask extends Task
+class DeleteConfigurationTask extends Task
 {
     protected ConfigurationRepository $repository;
 
@@ -16,13 +16,13 @@ class FindConfigurationerByIdTask extends Task
         $this->repository = $repository;
     }
 
-    public function run($id)
+    public function run($id): ?int
     {
         try {
-            return $this->repository->find($id);
+            return $this->repository->delete($id);
         }
         catch (Exception $exception) {
-            throw new NotFoundException();
+            throw new DeleteResourceFailedException();
         }
     }
 }

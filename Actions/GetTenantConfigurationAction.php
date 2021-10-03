@@ -7,7 +7,7 @@ use App\Containers\AppSection\Configurationer\Tasks\GetTenantConfigurationerTask
 use App\Ship\Parents\Actions\Action;
 use App\Ship\Parents\Requests\Request;
 
-class GetTenantConfigurationerAction extends Action
+class GetTenantConfigurationAction extends Action
 {
     public function run(Request $request)
     {

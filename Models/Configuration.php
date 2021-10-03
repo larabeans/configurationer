@@ -8,8 +8,8 @@ class Configuration extends Model
 {
     protected $fillable = [
         'configuration',
-        'configable_type',
-        'configable_id'
+        'configurable_type',
+        'configurable_id'
 
     ];
 

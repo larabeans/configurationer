@@ -19,7 +19,7 @@ class GetTenantConfigurationerTask extends Task
     public function run($id)
     {
         try {
-            $response =$this->repository->where('configable_id',$id)->first();
+            $response =$this->repository->where('configurable_id',$id)->first();
            if($response == null){
                throw new NotFoundException();
            }

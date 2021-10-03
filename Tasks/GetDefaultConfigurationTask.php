@@ -3,11 +3,9 @@
 namespace App\Containers\AppSection\Configurationer\Tasks;
 
 use App\Containers\AppSection\Configurationer\Data\Repositories\ConfigurationRepository;
-use App\Ship\Exceptions\UpdateResourceFailedException;
 use App\Ship\Parents\Tasks\Task;
-use Exception;
 
-class UpdateConfigurationerTask extends Task
+class GetDefaultConfigurationTask extends Task
 {
     protected ConfigurationRepository $repository;
 
@@ -16,13 +14,8 @@ class UpdateConfigurationerTask extends Task
         $this->repository = $repository;
     }
 
-    public function run($id, array $data)
+    public function run()
     {
-        try {
-            return $this->repository->update($data, $id);
-        }
-        catch (Exception $exception) {
-            throw new UpdateResourceFailedException();
-        }
+        return config('configuration.configuration');
     }
 }
