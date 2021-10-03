@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Containers\AppSection\Configurationer\Data\Repositories;
+namespace App\Containers\Vendor\Configurationer\Data\Repositories;
 
 use App\Ship\Parents\Repositories\Repository;
 
@@ -11,7 +11,7 @@ class ConfigurationRepository extends Repository
      */
     protected $fieldSearchable = [
         'id' => '=',
-        'configable_type',
-        'configable_id'
+        'configurable_type',
+        'configurable_id'
     ];
 }

@@ -2,7 +2,7 @@
 
 /**
  * @apiGroup           Configuration
- * @apiName            getAllConfigurationers
+ * @apiName            getAllConfigurations
  *
  * @api                {GET} /v1/configurations Get All Configuration
  * @apiDescription     Show all Configuration data
@@ -14,10 +14,10 @@
  * @apiUse             ConfigurationSuccessSingleResponse
  */
 
-use App\Containers\AppSection\Configurationer\UI\API\Controllers\Controller;
+use App\Containers\Vendor\Configurationer\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::get('configurations', [Controller::class, 'getAllConfigurationers'])
-    ->name('api_configurationer_get_all_configurationers')
+Route::get('configurations', [Controller::class, 'getAllConfigurations'])
+    ->name('api_configuration_get_all_configurations')
     ->middleware(['auth:api']);
 

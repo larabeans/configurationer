@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Containers\AppSection\Configurationer\Models;
+namespace App\Containers\Vendor\Configurationer\Models;
 
 use App\Containers\Vendor\Beaner\Parents\Models\Model;
 
@@ -8,8 +8,8 @@ class Configuration extends Model
 {
     protected $fillable = [
         'configuration',
-        'configable_type',
-        'configable_id'
+        'configurable_type',
+        'configurable_id'
 
     ];
 

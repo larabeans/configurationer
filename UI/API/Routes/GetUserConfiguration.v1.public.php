@@ -8,27 +8,17 @@
  * @apiDescription     Endpoint description here..
  *
  * @apiVersion         1.0.0
- * @apiPermission      none
+ * @apiPermission      Authenticated User
  *
- * @apiParam           {String}  user_id
+ * @apiParam           {String}  user_id id of user
  *
- * @apiSuccessExample  {json}  Success-Response:
- * HTTP/1.1 200 OK
-{
-    "Configuration":{
- *      "Language":"Urdu",
- *      "Currency":"PKR",
-        .
-        .
-        .
-   }
-}
+ * @apiUse             ConfigurationSuccessSingleResponse
  */
 
-use App\Containers\AppSection\Configurationer\UI\API\Controllers\Controller;
+use App\Containers\Vendor\Configurationer\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 Route::get('configurations/user/{user_id}', [Controller::class, 'getUserConfiguration'])
-    ->name('api_configurationer_get_user_configuration')
+    ->name('api_configuration_get_user_configuration')
     ->middleware(['auth:api']);
 

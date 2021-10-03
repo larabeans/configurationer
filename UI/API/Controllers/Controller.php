@@ -2,78 +2,78 @@
 
 namespace App\Containers\AppSection\Configurationer\UI\API\Controllers;
 
-use App\Containers\AppSection\Configurationer\UI\API\Requests\CreateConfigurationerRequest;
-use App\Containers\AppSection\Configurationer\UI\API\Requests\DeleteConfigurationerRequest;
-use App\Containers\AppSection\Configurationer\UI\API\Requests\GetAllConfigurationersRequest;
-use App\Containers\AppSection\Configurationer\UI\API\Requests\FindConfigurationerByIdRequest;
-use App\Containers\AppSection\Configurationer\UI\API\Requests\UpdateConfigurationerRequest;
+use App\Containers\AppSection\Configurationer\UI\API\Requests\CreateConfigurationRequest;
+use App\Containers\AppSection\Configurationer\UI\API\Requests\DeleteConfigurationRequest;
+use App\Containers\AppSection\Configurationer\UI\API\Requests\GetAllConfigurationsRequest;
+use App\Containers\AppSection\Configurationer\UI\API\Requests\FindConfigurationByIdRequest;
+use App\Containers\AppSection\Configurationer\UI\API\Requests\UpdateConfigurationRequest;
 use App\Containers\AppSection\Configurationer\UI\API\Requests\GetUserConfigurationRequest;
 use App\Containers\AppSection\Configurationer\UI\API\Requests\GetTenantConfigurationRequest;
-use App\Containers\AppSection\Configurationer\UI\API\Transformers\ConfigurationerTransformer;
-use App\Containers\AppSection\Configurationer\UI\API\Requests\GetDefaultConfigurationerRequest;
-use App\Containers\AppSection\Configurationer\Actions\CreateConfigurationerAction;
-use App\Containers\AppSection\Configurationer\Actions\FindConfigurationerByIdAction;
-use App\Containers\AppSection\Configurationer\Actions\GetAllConfigurationersAction;
-use App\Containers\AppSection\Configurationer\Actions\UpdateConfigurationerAction;
-use App\Containers\AppSection\Configurationer\Actions\DeleteConfigurationerAction;
+use App\Containers\AppSection\Configurationer\UI\API\Transformers\ConfigurationTransformer;
+use App\Containers\AppSection\Configurationer\UI\API\Requests\GetDefaultConfigurationRequest;
+use App\Containers\AppSection\Configurationer\Actions\CreateConfigurationAction;
+use App\Containers\AppSection\Configurationer\Actions\FindConfigurationByIdAction;
+use App\Containers\AppSection\Configurationer\Actions\GetAllConfigurationsAction;
+use App\Containers\AppSection\Configurationer\Actions\UpdateConfigurationAction;
+use App\Containers\AppSection\Configurationer\Actions\DeleteConfigurationAction;
 use App\Containers\AppSection\Configurationer\Actions\GetUserConfigurationAction;
-use App\Containers\AppSection\Configurationer\Actions\GetDefaultConfigurationerAction;
-use App\Containers\AppSection\Configurationer\Actions\GetTenantConfigurationerAction;
+use App\Containers\AppSection\Configurationer\Actions\GetDefaultConfigurationAction;
+use App\Containers\AppSection\Configurationer\Actions\GetTenantConfigurationAction;
 use App\Ship\Parents\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
 
 class Controller extends ApiController
 {
-    public function createConfigurationer(CreateConfigurationerRequest $request): JsonResponse
+    public function createConfiguration(CreateConfigurationRequest $request): JsonResponse
     {
 
-        $configurationer = app(CreateConfigurationerAction::class)->run($request);
-        return $this->created($this->transform($configurationer, ConfigurationerTransformer::class));
+        $configuration = app(CreateConfigurationAction::class)->run($request);
+        return $this->created($this->transform($configuration, ConfigurationTransformer::class));
     }
 
-    public function findConfigurationerById(FindConfigurationerByIdRequest $request): array
+    public function findConfigurationById(FindConfigurationByIdRequest $request): array
     {
-        $configurationer = app(FindConfigurationerByIdAction::class)->run($request);
-        return $this->transform($configurationer, ConfigurationerTransformer::class);
+        $configuration = app(FindConfigurationByIdAction::class)->run($request);
+        return $this->transform($configuration, ConfigurationTransformer::class);
     }
 
-    public function getAllConfigurationers(GetAllConfigurationersRequest $request): array
+    public function getAllConfigurations(GetAllConfigurationsRequest $request): array
     {
-        $configurationers = app(GetAllConfigurationersAction::class)->run($request);
-        return $this->transform($configurationers, ConfigurationerTransformer::class);
+        $configurations = app(GetAllConfigurationsAction::class)->run($request);
+        return $this->transform($configurations, ConfigurationTransformer::class);
     }
-   public function defaultConfigurationer(GetDefaultConfigurationerRequest $request): array
+   public function defaultConfiguration(GetDefaultConfigurationRequest $request): array
     {
 
-        $configurationers = app(GetDefaultConfigurationerAction::class)->run($request);
-        return $configurationers;//$this->transform($configurationers, ConfigurationerTransformer::class);
+        $configurations = app(GetDefaultConfigurationAction::class)->run($request);
+        return $configurations;//$this->transform($configurations, ConfigurationTransformer::class);
     }
 
  public function getUserConfiguration(GetUserConfigurationRequest $request)//: array
 {
 
-    $configurationers = app(GetUserConfigurationAction::class)->run($request);
-    return $configurationers;//$this->transform($configurationers, ConfigurationerTransformer::class);
+    $configurations = app(GetUserConfigurationAction::class)->run($request);
+    return $configurations;//$this->transform($configurations, ConfigurationTransformer::class);
 }
 
 
  public function getTenantConfiguration(GetTenantConfigurationRequest $request)//: array
 {
 
-    $configurationers = app(GetTenantConfigurationerAction::class)->run($request);
-    return $configurationers;//$this->transform($configurationers, ConfigurationerTransformer::class);
+    $configurations = app(GetTenantConfigurationAction::class)->run($request);
+    return $configurations;//$this->transform($configurations, ConfigurationTransformer::class);
 }
 
 
-    public function updateConfigurationer(UpdateConfigurationerRequest $request)
+    public function updateConfiguration(UpdateConfigurationRequest $request)
     {
-        $configurationer = app(UpdateConfigurationerAction::class)->run($request);
-        return $this->transform($configurationer, ConfigurationerTransformer::class);
+        $configuration = app(UpdateConfigurationAction::class)->run($request);
+        return $this->transform($configuration, ConfigurationTransformer::class);
     }
 
-    public function deleteConfigurationer(DeleteConfigurationerRequest $request): JsonResponse
+    public function deleteConfiguration(DeleteConfigurationRequest $request): JsonResponse
     {
-        app(DeleteConfigurationerAction::class)->run($request);
+        app(DeleteConfigurationAction::class)->run($request);
         return $this->noContent();
     }
 }

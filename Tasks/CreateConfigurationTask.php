@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Containers\AppSection\Configurationer\Tasks;
+namespace App\Containers\Vendor\Configurationer\Tasks;
 
-use App\Containers\AppSection\Configurationer\Data\Repositories\ConfigurationRepository;
+use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
 use App\Ship\Exceptions\CreateResourceFailedException;
 use App\Ship\Parents\Tasks\Task;
 use Exception;
 
-class CreateConfigurationerTask extends Task
+class CreateConfigurationTask extends Task
 {
     protected ConfigurationRepository $repository;
 
@@ -20,11 +20,11 @@ class CreateConfigurationerTask extends Task
     {
         try {
            // dd($data['configuration']);
-            $configurationType = config('configuration.configable_types');
+            $configurationType = config('configuration.configurable_types');
             $index="";
-            $type= $data['configable_type'];
+            $type= $data['configurable_type'];
 
-            // getting the address of configable type from the array of configable_types from config file.
+            // getting the address of configable type from the array of configurable_types from config file.
             foreach($configurationType as $key => $value){
                 if($key == $type){
                     $index =$value['class_path'];
@@ -38,8 +38,8 @@ class CreateConfigurationerTask extends Task
             $configurationData= json_encode($data['configuration']);
 
             $queryData=[
-                'configable_type'=>$index,
-                'configable_id'=>$data['configable_id'],
+                'configurable_type'=>$index,
+                'configurable_id'=>$data['configurable_id'],
                 'configuration'=>$configurationData
             ];
             return $this->repository->create($queryData);

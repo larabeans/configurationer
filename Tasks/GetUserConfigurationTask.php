@@ -7,7 +7,7 @@ use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Tasks\Task;
 use Exception;
 
-class GetUserConfigurationerTask extends Task
+class GetUserConfigurationTask extends Task
 {
     protected ConfigurationRepository $repository;
 
@@ -20,7 +20,7 @@ class GetUserConfigurationerTask extends Task
     {
         try {
 
-            $response =$this->repository->where('configable_id',$id)->first();
+            $response =$this->repository->where('configurable_id',$id)->first();
             $configurationData= json_decode( $response->configuration);
             $data=[];
             if($response == null){

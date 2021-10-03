@@ -3,14 +3,14 @@
 namespace App\Containers\AppSection\Configurationer\Actions;
 
 use App\Containers\AppSection\Configurationer\Models\Configuration;
-use App\Containers\AppSection\Configurationer\Tasks\GetTenantConfigurationerTask;
+use App\Containers\AppSection\Configurationer\Tasks\GetTenantConfigurationTask;
 use App\Ship\Parents\Actions\Action;
 use App\Ship\Parents\Requests\Request;
 
-class GetTenantConfigurationerAction extends Action
+class GetTenantConfigurationAction extends Action
 {
     public function run(Request $request)
     {
-        return app(GetTenantConfigurationerTask::class)->run($request->tenant_id);
+        return app(GetTenantConfigurationTask::class)->run($request->tenant_id);
     }
 }

@@ -1,6 +1,27 @@
 {
-  "name": "apiato/configurationer",
-  "description": "Configurationer Container for apiato.",
-  "require": {
-  }
+  "name": "larabeans/configurationer",
+  "description": "Apiato container to make entities configurable",
+  "type": "apiato-container",
+  "homepage": "https://larabeans.com/",
+  "version": "0.1.0",
+  "support": {
+    "issues": "https://github.com/larabeans/configurationer/issues",
+    "source": "https://github.com/larabeans/configurationer"
+  },
+  "authors": [
+    {
+      "name": "Ali Kazmi",
+      "email": "ali@kazmi.me"
+    }
+  ],
+  "keywords": [
+    "apiato",
+    "larabeans",
+    "Configurationer"
+  ],
+  "license": "MIT",
+  "require": {},
+  "require-dev": {},
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Containers\AppSection\Configurationer\Tasks;
+namespace App\Containers\Vendor\Configurationer\Tasks;
 
-use App\Containers\AppSection\Configurationer\Data\Repositories\ConfigurationRepository;
+use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
 use App\Ship\Exceptions\DeleteResourceFailedException;
 use App\Ship\Parents\Tasks\Task;
 use Exception;
 
-class DeleteConfigurationerTask extends Task
+class DeleteConfigurationTask extends Task
 {
     protected ConfigurationRepository $repository;
 

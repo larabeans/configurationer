@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Containers\AppSection\Configurationer\Tasks;
+namespace App\Containers\Vendor\Configurationer\Tasks;
 
-use App\Containers\AppSection\Configurationer\Data\Repositories\ConfigurationRepository;
+use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
 use App\Ship\Parents\Tasks\Task;
 
-class GetAllConfigurationersTask extends Task
+class GetDefaultConfigurationTask extends Task
 {
     protected ConfigurationRepository $repository;
 
@@ -16,6 +16,6 @@ class GetAllConfigurationersTask extends Task
 
     public function run()
     {
-        return $this->repository->paginate();
+        return config('configuration.configuration');
     }
 }

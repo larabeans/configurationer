@@ -3,11 +3,11 @@
 namespace App\Containers\AppSection\Configurationer\Actions;
 
 use App\Containers\AppSection\Configurationer\Models\Configuration;
-use App\Containers\AppSection\Configurationer\Tasks\UpdateConfigurationerTask;
+use App\Containers\AppSection\Configurationer\Tasks\UpdateConfigurationTask;
 use App\Ship\Parents\Actions\Action;
 use App\Ship\Parents\Requests\Request;
 
-class UpdateConfigurationerAction extends Action
+class UpdateConfigurationAction extends Action
 {
     public function run(Request $request): Configuration
     {
@@ -16,6 +16,6 @@ class UpdateConfigurationerAction extends Action
         ];
         //dd($data);
 
-        return app(UpdateConfigurationerTask::class)->run($request->id, $data);
+        return app(UpdateConfigurationTask::class)->run($request->id, $data);
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Containers\AppSection\Configurationer\Tasks;
+namespace App\Containers\Vendor\Configurationer\Tasks;
 
-use App\Containers\AppSection\Configurationer\Data\Repositories\ConfigurationRepository;
+use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
 use App\Ship\Exceptions\UpdateResourceFailedException;
 use App\Ship\Parents\Tasks\Task;
 use Exception;
 
-class UpdateConfigurationerTask extends Task
+class UpdateConfigurationTask extends Task
 {
     protected ConfigurationRepository $repository;
 
@@ -19,6 +19,7 @@ class UpdateConfigurationerTask extends Task
     public function run($id, array $data)
     {
         try {
+
             return $this->repository->update($data, $id);
         }
         catch (Exception $exception) {

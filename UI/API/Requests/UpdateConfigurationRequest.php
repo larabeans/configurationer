@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Containers\AppSection\Configurationer\UI\API\Requests;
+namespace App\Containers\Vendor\Configurationer\UI\API\Requests;
 
 use App\Ship\Parents\Requests\Request;
 
-class FindConfigurationerByIdRequest extends Request
+class UpdateConfigurationRequest extends Request
 {
     /**
      * Define which Roles and/or Permissions has access to this request.

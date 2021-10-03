@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Containers\AppSection\Configurationer\UI\API\Requests;
+namespace App\Containers\Vendor\Configurationer\UI\API\Requests;
 
 use App\Ship\Parents\Requests\Request;
 
-class CreateConfigurationerRequest extends Request
+class FindConfigurationByIdRequest extends Request
 {
     /**
      * Define which Roles and/or Permissions has access to this request.
@@ -18,7 +18,7 @@ class CreateConfigurationerRequest extends Request
      * Id's that needs decoding before applying the validation rules.
      */
     protected array $decode = [
-        // 'id',
+        'id',
     ];
 
     /**
@@ -26,7 +26,7 @@ class CreateConfigurationerRequest extends Request
      * validation rules on them and allows accessing them like request data.
      */
     protected array $urlParameters = [
-        // 'id',
+        'id',
     ];
 
     /**
@@ -35,7 +35,7 @@ class CreateConfigurationerRequest extends Request
     public function rules(): array
     {
         return [
-            // 'id' => 'required'
+            'id' => 'required'
         ];
     }
 
