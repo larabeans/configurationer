@@ -14,7 +14,7 @@ use App\Containers\AppSection\Configurationer\UI\API\Requests\GetDefaultConfigur
 use App\Containers\AppSection\Configurationer\Actions\CreateConfigurationAction;
 use App\Containers\AppSection\Configurationer\Actions\FindConfigurationByIdAction;
 use App\Containers\AppSection\Configurationer\Actions\GetAllConfigurationsAction;
-use App\Containers\AppSection\Configurationer\Actions\UpdateConfigurationerAction;
+use App\Containers\AppSection\Configurationer\Actions\UpdateConfigurationAction;
 use App\Containers\AppSection\Configurationer\Actions\DeleteConfigurationAction;
 use App\Containers\AppSection\Configurationer\Actions\GetUserConfigurationAction;
 use App\Containers\AppSection\Configurationer\Actions\GetDefaultConfigurationAction;

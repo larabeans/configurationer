@@ -2,7 +2,7 @@
 
 /**
  * @apiGroup           Configuration
- * @apiName            getAllConfigurationers
+ * @apiName            getAllConfigurations
  *
  * @api                {GET} /v1/configurations Get All Configuration
  * @apiDescription     Show all Configuration data
