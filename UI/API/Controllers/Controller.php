@@ -53,7 +53,7 @@ class Controller extends ApiController
 {
 
     $configurations = app(GetUserConfigurationAction::class)->run($request);
-    return $configurations;//$this->transform($configurations, ConfigurationTransformer::class);
+    return $this->transform($configurations, ConfigurationTransformer::class);
 }
 
 
@@ -61,7 +61,7 @@ class Controller extends ApiController
 {
 
     $configurations = app(GetTenantConfigurationAction::class)->run($request);
-    return $configurations;//$this->transform($configurations, ConfigurationTransformer::class);
+    return $this->transform($configurations, ConfigurationTransformer::class);
 }
 
 
