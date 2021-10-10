@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Containers\AppSection\Configurationer\UI\API\Transformers;
+namespace App\Containers\Vendor\Configurationer\UI\API\Transformers;
 
-use App\Containers\AppSection\Configurationer\Models\Configuration;
+use App\Containers\Vendor\Configurationer\Models\Configuration;
 use App\Ship\Parents\Transformers\Transformer;
 
 class ConfigurationTransformer extends Transformer

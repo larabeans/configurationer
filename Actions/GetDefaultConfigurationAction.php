@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Containers\AppSection\Configurationer\Actions;
+namespace App\Containers\Vendor\Configurationer\Actions;
 
-use App\Containers\AppSection\Configurationer\Tasks\GetDefaultConfigurationTask;
+use App\Containers\Vendor\Configurationer\Tasks\GetDefaultConfigurationTask;
 use App\Ship\Parents\Actions\Action;
 use App\Ship\Parents\Requests\Request;
 

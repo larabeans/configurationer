@@ -19,7 +19,7 @@
 }
  */
 
-use App\Containers\Vendor\Configurationer\UI\API\Controllers\Controller;
+use AApp\Containers\Vendor\Configurationer\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 Route::delete('configurations/{id}', [Controller::class, 'deleteConfiguration'])

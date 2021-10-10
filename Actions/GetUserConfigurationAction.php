@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Containers\AppSection\Configurationer\Actions;
+namespace App\Containers\Vendor\Configurationer\Actions;
 
-use App\Containers\AppSection\Configurationer\Models\Configuration;
-use App\Containers\AppSection\Configurationer\Tasks\GetUserConfigurationTask;
+use App\Containers\Vendor\Configurationer\Models\Configuration;
+use App\Containers\Vendor\Configurationer\Tasks\GetUserConfigurationTask;
 use App\Ship\Parents\Actions\Action;
 use App\Ship\Parents\Requests\Request;
 
