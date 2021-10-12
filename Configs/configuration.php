@@ -120,7 +120,7 @@ return [
                     'is_right_to_left' => false
                 ]
             ],
-            'currentLanguage' => [
+            'current_language' => [
                 'name' => 'en',
                 'display_name' => 'English',
                 'icon' => 'famfamfam-flags us',
