@@ -13,7 +13,7 @@
  * @apiParam           {String}  id
  * @apiParam           {Json} configuration
  *
- *@apiUse             ConfigurationSuccessSingleResponse
+ * @apiUse             ConfigurationSuccessSingleResponse
  */
 
 use App\Containers\Vendor\Configurationer\UI\API\Controllers\Controller;

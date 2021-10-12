@@ -19,32 +19,31 @@ class CreateConfigurationTask extends Task
     public function run(array $data)
     {
         try {
-           // dd($data['configuration']);
+            // dd($data['configuration']);
             $configurationType = config('configuration.configurable_types');
-            $index="";
-            $type= $data['configurable_type'];
+            $index = "";
+            $type = $data['configurable_type'];
 
             // getting the address of configable type from the array of configurable_types from config file.
-            foreach($configurationType as $key => $value){
-                if($key == $type){
-                    $index =$value['class_path'];
+            foreach ($configurationType as $key => $value) {
+                if ($key == $type) {
+                    $index = $value['class_path'];
                 }
 
             }
-            if($index ==null){
+            if ($index == null) {
                 throw new NotFoundException();
             }
 
-            $configurationData= json_encode($data['configuration']);
+            $configurationData = json_encode($data['configuration']);
 
-            $queryData=[
-                'configurable_type'=>$index,
-                'configurable_id'=>$data['configurable_id'],
-                'configuration'=>$configurationData
+            $queryData = [
+                'configurable_type' => $index,
+                'configurable_id' => $data['configurable_id'],
+                'configuration' => $configurationData
             ];
             return $this->repository->create($queryData);
-        }
-        catch (Exception $exception) {
+        } catch (Exception $exception) {
             throw new CreateResourceFailedException($exception);
         }
     }

@@ -11,7 +11,7 @@ class GetAllConfigurationsRequest extends Request
      */
     protected array $access = [
         'permissions' => '',
-        'roles'       => '',
+        'roles' => '',
     ];
 
     /**

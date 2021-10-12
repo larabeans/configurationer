@@ -19,18 +19,17 @@ class GetTenantConfigurationTask extends Task
     public function run($id)
     {
         try {
-            $response =$this->repository->where('configurable_id',$id)->first();
-           if($response == null){
-               throw new NotFoundException();
-           }
-            $configurationData= json_decode( $response->configuration);
-            $data=[];
-           // $data['Currency']=$configurationData->currency;
+            $response = $this->repository->where('configurable_id', $id)->first();
+            if ($response == null) {
+                throw new NotFoundException();
+            }
+            $configurationData = json_decode($response->configuration);
+            $data = [];
+            // $data['Currency']=$configurationData->currency;
 
-            $data['configuration']=$configurationData;
+            $data['configuration'] = $configurationData;
             return $response;
-        }
-        catch (Exception $exception) {
+        } catch (Exception $exception) {
             throw new NotFoundException($exception);
         }
     }

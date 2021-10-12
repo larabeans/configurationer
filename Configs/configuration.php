@@ -2,22 +2,22 @@
 
 return [
 
-    'configuration'=>[
-        'time'=>'Karachi.Pakistan',
-        'language'=>'Urdu',
-        'currency'=>'PKR'
+    'configuration' => [
+        'time' => 'Karachi.Pakistan',
+        'language' => 'Urdu',
+        'currency' => 'PKR'
     ],
-    'configurable_types'=>[
+    'configurable_types' => [
 
-         'user' => [
+        'user' => [
             'identifier' => 'user',
             'display_name' => 'User',
             'class_path' => 'App\Containers\AppSection\User\Models\User'
-            ],
+        ],
         'tenant' => [
-          'identifier' => 'tenant',
-          'display_name' => 'Tenant',
-          'class_path' => 'App\Containers\Vendor\Tenanter\Models\Tenant'
-            ]
+            'identifier' => 'tenant',
+            'display_name' => 'Tenant',
+            'class_path' => 'App\Containers\Vendor\Tenanter\Models\Tenant'
+        ]
     ]
 ];

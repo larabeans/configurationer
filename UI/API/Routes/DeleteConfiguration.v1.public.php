@@ -14,9 +14,9 @@
  *
  * @apiSuccessExample  {json}  Success-Response:
  * HTTP/1.1 200 OK
-{
-  "message":"Resourse Deleted Successfully"
-}
+ * {
+ * "message":"Resourse Deleted Successfully"
+ * }
  */
 
 use AApp\Containers\Vendor\Configurationer\UI\API\Controllers\Controller;

@@ -11,8 +11,8 @@ class UpdateConfigurationAction extends Action
 {
     public function run(Request $request): Configuration
     {
-        $data =[
-           'configuration'=> json_encode($request->configuration)
+        $data = [
+            'configuration' => json_encode($request->configuration)
         ];
         //dd($data);
 

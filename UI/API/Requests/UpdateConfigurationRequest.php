@@ -11,7 +11,7 @@ class UpdateConfigurationRequest extends Request
      */
     protected array $access = [
         'permissions' => '',
-        'roles'       => '',
+        'roles' => '',
     ];
 
     /**

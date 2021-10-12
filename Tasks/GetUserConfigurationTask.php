@@ -20,18 +20,17 @@ class GetUserConfigurationTask extends Task
     {
         try {
 
-            $response =$this->repository->where('configurable_id',$id)->first();
-            $configurationData= json_decode( $response->configuration);
-            $data=[];
-            if($response == null){
+            $response = $this->repository->where('configurable_id', $id)->first();
+            $configurationData = json_decode($response->configuration);
+            $data = [];
+            if ($response == null) {
                 throw new NotFoundException();
             }
-           // $data['Language']=$configurationData->language;
+            // $data['Language']=$configurationData->language;
 
-            $data['configuration']=$configurationData;
+            $data['configuration'] = $configurationData;
             return $response;
-        }
-        catch (Exception $exception) {
+        } catch (Exception $exception) {
             throw new NotFoundException();
         }
     }

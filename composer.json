@@ -23,7 +23,6 @@
     "larabeans",
     "Configurationer"
   ],
- 
   "extra": {
     "apiato": {
       "container": {
@@ -32,7 +31,9 @@
     }
   },
   "license": "MIT",
-  "require": {"larabeans/core": "*"},
+  "require": {
+    "larabeans/core": "*"
+  },
   "require-dev": {},
   "minimum-stability": "dev",
   "prefer-stable": true
