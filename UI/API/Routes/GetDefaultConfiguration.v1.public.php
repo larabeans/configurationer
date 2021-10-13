@@ -5,11 +5,12 @@
  * @apiName            defaultConfiguration
  *
  * @api                {GET} /v1/configurations Get Default Configurations
- * @apiDescription     Return the default configurations
+ * @apiDescription     Return the default configurations, user specific configuration, tenant specific configuration
  *
  * @apiVersion         1.0.0
  * @apiPermission      Authenticated User
  *
+ * @apiParam            {String} [type] user/tenant for getting tenant or user specific configurations
  *
  * @apiSuccessExample  {json}       Success-Response:
  * HTTP/1.1 202 OK
@@ -26,5 +27,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('configurations', [Controller::class, 'defaultConfiguration'])
     ->name('api_configuration_default_configuration')
     ->middleware(['auth:api']);
-//dd("here");
 
