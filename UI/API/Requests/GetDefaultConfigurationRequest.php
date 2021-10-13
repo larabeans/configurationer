@@ -44,6 +44,8 @@ class GetDefaultConfigurationRequest extends Request
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->check([
+            'hasAccess',
+        ]);
     }
 }

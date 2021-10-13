@@ -24,5 +24,6 @@ use App\Containers\Vendor\Configurationer\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 Route::get('configurations', [Controller::class, 'defaultConfiguration'])
-    ->name('api_configuration_default_configuration');
+    ->name('api_configuration_default_configuration')
+    ->middleware(['auth:api']);
 

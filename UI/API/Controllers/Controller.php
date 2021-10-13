@@ -45,7 +45,11 @@ class Controller extends ApiController
 
     public function defaultConfiguration(GetDefaultConfigurationRequest $request): array
     {
-
+        // TODO:
+        // 1. Load Default from config file
+        // 2. Load From DB where Teanant is null (HOST Config)
+        // 3. Load from from DB, using tenant id
+        // Merge by overwriting as priority Tenant Config > Host Config > Default Config
         $configurations = app(GetDefaultConfigurationAction::class)->run($request);
         return $configurations;//$this->transform($configurations, ConfigurationTransformer::class);
     }

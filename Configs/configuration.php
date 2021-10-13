@@ -2,6 +2,7 @@
 
 return [
     'configuration' => [
+        // MultiTenancy Will Remain Part of Default Configurations
         'multi_tenancy' => [
             'is_enabled' => true,
             'ignore_feature_check_for_host_users' => false,
@@ -10,13 +11,15 @@ return [
                 'tenant' => 1 // A customer which has its own users, roles, permissions, settings... and uses the application completely isolated from other tenants
             ]
         ],
+
+        // Session will be created dynamically
         'session' => [
             'user_id' => null,
             'tenant_id' => null,
-            'impersonator_user_id' => null,
-            'impersonator_tenant_id' => null,
             'multi_tenancy_side' => 2 // HOST | TENANT
         ],
+
+        // This section will also need to make dynamic
         'localization' => [
             'current_culture' => [
                 'name' => 'en',
@@ -129,9 +132,13 @@ return [
                 'is_right_to_left' => false
             ],
         ],
+
+        // Not implemented in first release, may be part of coming releases
         'features' => [
             'all_features' => []
         ],
+
+        // Auth will be created dynamically
         'auth' => [
             'all_permissions' => [
 
@@ -140,11 +147,16 @@ return [
 
             ]
         ],
+
+        // Default, configurable at HOST and TENANT level
         'clock' => [
             'provider' => 'unspecifiedClockProvider'
         ],
+
+        // Default, configurable at HOST and TENANT level
         'timing' => [
             'time_zone_info' => [
+                // prepare from server settings
                 'server' => [
                     'time_zone_id' => 'UTC',
                     'base_utc_offset_in_milliseconds' => 0.0,
@@ -156,12 +168,18 @@ return [
                 ]
             ]
         ],
+
+        // Default
         'security' => [
             'anti_forgery' => [
                 'token_cookie_name' => 'XSRF-TOKEN',
                 'token_header_name' => 'X-XSRF-TOKEN'
             ]
         ],
+
+        // Settings will be created dynamically
+        'settings' => [],
+
         'custom' => []
     ],
     'configurable_types' => [
