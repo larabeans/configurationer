@@ -17,7 +17,7 @@ class CreateConfigurationsTable extends Migration
                 $table->increments('id')->primary('id');
             }
             $table->uuidMorphs('configurable');
-            $table->string('configuration');
+            $table->text('configuration');
 
             $table->timestamps();
             //$table->softDeletes();
