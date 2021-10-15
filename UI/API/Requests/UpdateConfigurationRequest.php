@@ -26,7 +26,7 @@ class UpdateConfigurationRequest extends Request
      * validation rules on them and allows accessing them like request data.
      */
     protected array $urlParameters = [
-        'id',
+        'type',
     ];
 
     /**
@@ -35,7 +35,7 @@ class UpdateConfigurationRequest extends Request
     public function rules(): array
     {
         return [
-            'id' => 'required'
+            'type' => 'required'
         ];
     }
 
