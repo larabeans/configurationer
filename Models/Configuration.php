@@ -3,6 +3,7 @@
 namespace App\Containers\Vendor\Configurationer\Models;
 
 use App\Containers\Vendor\Beaner\Parents\Models\Model;
+use App\Containers\Vendor\Configurationer\Models\ConfigurationHistory;
 
 class Configuration extends Model
 {
@@ -34,4 +35,8 @@ class Configuration extends Model
      * A resource key to be used in the serialized responses.
      */
     protected string $resourceKey = 'Configuration';
+
+    public function ConfigurationHistory(){
+        return $this->hasMany(ConfigurationHistory::class);
+    }
 }
