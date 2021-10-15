@@ -6,6 +6,7 @@ use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationReposit
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Tasks\Task;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class GetTenantConfigurationTask extends Task
 {
@@ -16,18 +17,20 @@ class GetTenantConfigurationTask extends Task
         $this->repository = $repository;
     }
 
-    public function run($id)
+    public function run()
     {
         try {
-            $response = $this->repository->where('configurable_id', $id)->first();
-            if ($response == null) {
-                throw new NotFoundException();
-            }
-            $configurationData = json_decode($response->configuration);
-            $data = [];
-            // $data['Currency']=$configurationData->currency;
+            $response = $this->repository->where('configurable_id', Auth::user()->tenant_id)->first();
 
-            $data['configuration'] = $configurationData;
+//            if ($response == null) {
+//                throw new NotFoundException();
+//            }
+//            $configurationData = json_decode($response->configuration);
+//            $data = [];
+//            // $data['Currency']=$configurationData->currency;
+//
+//            $data['configuration'] = $configurationData;
+
             return $response;
         } catch (Exception $exception) {
             throw new NotFoundException($exception);
