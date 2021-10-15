@@ -4,8 +4,10 @@ namespace App\Containers\Vendor\Configurationer\Tasks;
 
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
 use App\Ship\Exceptions\CreateResourceFailedException;
+use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Tasks\Task;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class CreateConfigurationTask extends Task
 {
@@ -19,7 +21,7 @@ class CreateConfigurationTask extends Task
     public function run(array $data)
     {
         try {
-            // dd($data['configuration']);
+
             $configurationType = config('configuration.configurable_types');
             $index = "";
             $type = $data['configurable_type'];
@@ -29,22 +31,34 @@ class CreateConfigurationTask extends Task
                 if ($key == $type) {
                     $index = $value['class_path'];
                 }
-
             }
             if ($index == null) {
                 throw new NotFoundException();
             }
+            $Configurable_id = null;
+            if ($type == "user") {
+                $Configurable_id=Auth::user()->id;
+            } elseif ($type == "tenant") {
+                $Configurable_id=Auth::user()->tenant_id;
+            }
+            if($Configurable_id == null){
+                throw new NotFoundException("No ". ucfirst($type). " Found");
+            }
 
             $configurationData = json_encode($data['configuration']);
 
+            if(!empty($this->repository->where("configurable_id",$Configurable_id)->first()))
+            {
+                throw new NotFoundException("Configuration Already Exists");
+            }
             $queryData = [
                 'configurable_type' => $index,
-                'configurable_id' => $data['configurable_id'],
+                'configurable_id' => $Configurable_id,
                 'configuration' => $configurationData
             ];
             return $this->repository->create($queryData);
         } catch (Exception $exception) {
-            throw new CreateResourceFailedException($exception);
+            throw new CreateResourceFailedException();
         }
     }
 }
