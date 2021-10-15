@@ -12,6 +12,6 @@ class GetUserConfigurationAction extends Action
     public function run(Request $request)
     {
 
-        return app(GetUserConfigurationTask::class)->run($request->user_id);
+        return app(GetUserConfigurationTask::class)->run();
     }
 }

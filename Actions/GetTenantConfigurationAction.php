@@ -11,6 +11,6 @@ class GetTenantConfigurationAction extends Action
 {
     public function run(Request $request)
     {
-        return app(GetTenantConfigurationTask::class)->run($request->tenant_id);
+        return app(GetTenantConfigurationTask::class)->run();
     }
 }

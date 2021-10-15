@@ -16,6 +16,6 @@ class UpdateConfigurationAction extends Action
         ];
         //dd($data);
 
-        return app(UpdateConfigurationTask::class)->run($request->id, $data);
+        return app(UpdateConfigurationTask::class)->run($request->type, $data);
     }
 }
