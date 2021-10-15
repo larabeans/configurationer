@@ -16,7 +16,6 @@ class CreateConfigurationAction extends Action
         //dd($request->configurable_type);
         $data = $request->sanitizeInput([
             "configurable_type",
-            "configurable_id",
             "configuration"
         ]);
 
