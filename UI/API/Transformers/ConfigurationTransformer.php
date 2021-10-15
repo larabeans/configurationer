@@ -25,7 +25,7 @@ class ConfigurationTransformer extends Transformer
     {
         $response = [
             'object' => $configuration->getResourceKey(),
-            'id' => $configuration->getHashedKey(),
+            //'id' => $configuration->getHashedKey(),
             'configuration' => $configuration->configuration,
             'created_at' => $configuration->created_at,
             'updated_at' => $configuration->updated_at,
@@ -35,7 +35,7 @@ class ConfigurationTransformer extends Transformer
         ];
 
         $response = $this->ifAdmin([
-            'real_id' => $configuration->id,
+            //'real_id' => $configuration->id,
             // 'deleted_at' => $configuration->deleted_at,
         ], $response);
 
