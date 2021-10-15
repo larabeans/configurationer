@@ -9,6 +9,7 @@ use App\Containers\Vendor\Configurationer\UI\API\Requests\FindConfigurationByIdR
 use App\Containers\Vendor\Configurationer\UI\API\Requests\UpdateConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\GetUserConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\GetTenantConfigurationRequest;
+use App\Containers\Vendor\Configurationer\UI\API\Requests\GetConfigurationHistoryRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Transformers\ConfigurationTransformer;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\GetDefaultConfigurationRequest;
 use App\Containers\Vendor\Configurationer\Actions\CreateConfigurationAction;
@@ -19,6 +20,7 @@ use App\Containers\Vendor\Configurationer\Actions\DeleteConfigurationAction;
 use App\Containers\Vendor\Configurationer\Actions\GetUserConfigurationAction;
 use App\Containers\Vendor\Configurationer\Actions\GetDefaultConfigurationAction;
 use App\Containers\Vendor\Configurationer\Actions\GetTenantConfigurationAction;
+use App\Containers\Vendor\Configurationer\Actions\GetConfigurationHistoryAction;
 use App\Ship\Parents\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
 
@@ -43,9 +45,20 @@ class Controller extends ApiController
         return $this->transform($configurations, ConfigurationTransformer::class);
     }
 
+    // TODO:
+    public function getConfigurationHistory(GetConfigurationHistoryRequest $request)
+    {
+        $configurations = app(GetConfigurationHistoryAction::class)->run($request);
+        return $configurations;//$this->transform($configurations, ConfigurationTransformer::class);
+    }
+
     public function defaultConfiguration(GetDefaultConfigurationRequest $request): array
     {
-
+        // TODO:
+        // 1. Load Default from config file
+        // 2. Load From DB where Teanant is null (HOST Config)
+        // 3. Load from from DB, using tenant id
+        // Merge by overwriting as priority Tenant Config > Host Config > Default Config
         $configurations = app(GetDefaultConfigurationAction::class)->run($request);
         return $configurations;//$this->transform($configurations, ConfigurationTransformer::class);
     }
