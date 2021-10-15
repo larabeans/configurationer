@@ -11,7 +11,6 @@
  * @apiPermission      Authenticated user
  *
  * @apiParam           {String}  configurable_type eg. user, tenant
- * @apiParam           {String}  configurable_id
  * @apiParam           {Object}  configuration eg. {"Language":"urdu",..}
  *
  * @apiUse             ConfigurationSuccessSingleResponse
