@@ -10,6 +10,6 @@ class GetDefaultConfigurationAction extends Action
 {
     public function run(Request $request)
     {
-        return app(GetDefaultConfigurationTask::class)->run();
+        return app(GetDefaultConfigurationTask::class)->run($request->type);
     }
 }

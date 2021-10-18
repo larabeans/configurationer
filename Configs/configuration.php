@@ -12,13 +12,6 @@ return [
             ]
         ],
 
-        // Session will be created dynamically
-        'session' => [
-            'user_id' => null,
-            'tenant_id' => null,
-            'multi_tenancy_side' => 2 // HOST | TENANT
-        ],
-
         // This section will also need to make dynamic
         'localization' => [
             'current_culture' => [
@@ -138,16 +131,6 @@ return [
             'all_features' => []
         ],
 
-        // Auth will be created dynamically
-        'auth' => [
-            'all_permissions' => [
-
-            ],
-            'granted_permissions' => [
-
-            ]
-        ],
-
         // Default, configurable at HOST and TENANT level
         'clock' => [
             'provider' => 'unspecifiedClockProvider'
@@ -192,6 +175,69 @@ return [
             'identifier' => 'tenant',
             'display_name' => 'Tenant',
             'class_path' => 'App\Containers\Vendor\Tenanter\Models\Tenant'
+        ]
+    ],
+    'settings' => [
+        'general' => [
+            'clock' => 'UTC' //UTC,Unspecified,Local
+        ],
+        'tenant_management' => [
+            'form_based_registration' => [
+                'allowed' => true,
+                'active_by_default' => 'admin',
+                'default_mode' => 'active' // active,passive
+
+            ],
+            'session' => [
+                'timeout' => 0.0,
+                'modal_wait_time' => 0.0
+            ],
+            'cookie' => [
+                'enable_consent' => true
+            ],
+            'other' => [
+                'email_confirmation' => true
+            ],
+            'profile' => [
+                'avatar' => true
+            ]
+        ],
+        'user_management' => [
+            'form_based_registration' => [
+                'allowed' => false,
+                'default_mode' => 'active' // active,passive
+            ],
+            'session' => [
+                'timeout' => 0.0,
+                'modal_wait_time' => 0.0
+            ],
+            'cookie' => [
+                'enable_consent' => false
+            ],
+            'other' => [
+                'email_confirmation' => true
+            ],
+            'profile' => [
+                'avatar' => true
+            ]
+        ],
+        'security' => [
+            'passwords' => [
+                'use_default' => false,
+                'lower_case' => false,
+                'digit' => false,
+                'non-alphanumeric' => false,
+                'uppercase' => false
+            ],
+            'lockout' => null,
+            'MFA' => null,
+            'concurrent_login' => true
+        ],
+        'email' => "admin@admin.com",
+        'invoice' => [
+            'legal_name' => 000,
+            'address' => null,
+            'tax #' => 0000
         ]
     ]
 ];

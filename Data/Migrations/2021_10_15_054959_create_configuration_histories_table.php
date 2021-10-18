@@ -3,20 +3,21 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateConfigurationsTable extends Migration
+class CreateConfigurationHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('configurations', function (Blueprint $table) {
+        Schema::create('configuration_histories', function (Blueprint $table) {
             if (config('uuider.installed', false)) {
                 $table->uuid('id')->primary('id');
+                $table->uuid('configuration_id');
             } else {
                 $table->increments('id')->primary('id');
+                $table->foreignId('configuration_id');
             }
-            $table->uuidMorphs('configurable');
             $table->text('configuration');
 
             $table->timestamps();
@@ -29,6 +30,6 @@ class CreateConfigurationsTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('configurations');
+        Schema::dropIfExists('configuration_histories');
     }
 }

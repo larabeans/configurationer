@@ -3,15 +3,14 @@
 namespace App\Containers\Vendor\Configurationer\Models;
 
 use App\Containers\Vendor\Beaner\Parents\Models\Model;
-use App\Containers\Vendor\Configurationer\Models\ConfigurationHistory;
+use App\Containers\Vendor\Configurationer\Models\Configuration;
 
-class Configuration extends Model
+class ConfigurationHistory extends Model
 {
+    protected $table="configuration_histories";
     protected $fillable = [
-        'configuration',
-        'configurable_type',
-        'configurable_id'
-
+        'configuration_id',
+        'configuration'
     ];
 
     protected $attributes = [
@@ -34,9 +33,9 @@ class Configuration extends Model
     /**
      * A resource key to be used in the serialized responses.
      */
-    protected string $resourceKey = 'Configuration';
+    protected string $resourceKey = 'ConfigurationHistory';
 
-    public function ConfigurationHistory(){
-        return $this->hasMany(ConfigurationHistory::class);
+    public function Configuration(){
+        return $this->belongsTo(Configuration::class,"configuration_id");
     }
 }
