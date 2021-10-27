@@ -26,7 +26,7 @@ class ConfigurationTransformer extends Transformer
         $response = [
             'object' => $configuration->getResourceKey(),
             //'id' => $configuration->getHashedKey(),
-            'configuration' => $configuration->configuration,
+            'configuration' =>  json_decode($configuration->configuration),
             'created_at' => $configuration->created_at,
             'updated_at' => $configuration->updated_at,
             'readable_created_at' => $configuration->created_at->diffForHumans(),
