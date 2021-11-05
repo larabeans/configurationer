@@ -2,10 +2,12 @@
 
 namespace App\Containers\Vendor\Configurationer\UI\API\Controllers;
 
+use App\Containers\Vendor\Configurationer\Actions\GetHostConfigurationAction;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\CreateConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\DeleteConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\GetAllConfigurationsRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\FindConfigurationByIdRequest;
+use App\Containers\Vendor\Configurationer\UI\API\Requests\GetHostConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\UpdateConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\GetUserConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\GetTenantConfigurationRequest;
@@ -45,11 +47,17 @@ class Controller extends ApiController
         return $this->transform($configurations, ConfigurationTransformer::class);
     }
 
-    // TODO:
+
     public function getConfigurationHistory(GetConfigurationHistoryRequest $request)
     {
         $configurations = app(GetConfigurationHistoryAction::class)->run($request);
         return $configurations;//$this->transform($configurations, ConfigurationTransformer::class);
+    }
+
+    public function getHostConfiguration(GetHostConfigurationRequest $request)
+    {
+        $configurations = app(GetHostConfigurationAction::class)->run($request);
+        return $this->transform($configurations, ConfigurationTransformer::class);
     }
 
     public function defaultConfiguration(GetDefaultConfigurationRequest $request): array
