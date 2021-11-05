@@ -10,7 +10,8 @@ class Configuration extends Model
     protected $fillable = [
         'configuration',
         'configurable_type',
-        'configurable_id'
+        'configurable_id',
+        'tenant_id'
 
     ];
 
