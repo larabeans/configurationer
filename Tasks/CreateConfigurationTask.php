@@ -21,52 +21,58 @@ class CreateConfigurationTask extends Task
     public function run(array $data)
     {
         try {
+            if ($data['configurable_type'] == 'host') {
+                return $this->repository->create([
+                    'configurable_type' => '',
+                    'configurable_id' => '',
+                    'configuration' => json_encode($data['configuration'])
+                ]);
+            } else {
 
-            $configurationType = config('configuration.configurable_types');
-            $index = "";
-            $type = $data['configurable_type'];
+                $configurationType = config('configuration.configurable_types');
+                $index = "";
+                $type = $data['configurable_type'];
 
-            // getting the address of configable type from the array of configurable_types from config file.
-            foreach ($configurationType as $key => $value) {
-                if ($key == $type) {
-                    $index = $value['class_path'];
+                // getting the address of configable type from the array of configurable_types from config file.
+                foreach ($configurationType as $key => $value) {
+                    if ($key == $type) {
+                        $index = $value['class_path'];
+                    }
                 }
-            }
-            if ($index == null) {
-                throw new NotFoundException();
-            }
-            $Configurable_id = null;
-            if ($type == "user") {
-                $Configurable_id = Auth::user()->id;
-            } elseif ($type == "tenant") {
+                if ($index == null) {
+                    throw new NotFoundException();
+                }
+                $Configurable_id = null;
+                if ($type == "user") {
+                    $Configurable_id = Auth::user()->id;
+                } elseif ($type == "tenant") {
 
-                if (isset($data['tenant_id'])) {
-                    $Configurable_id = $data['tenant_id'];
-                } else {
-                    $Configurable_id = Auth::user()->tenant_id;
+                    if (isset($data['tenant_id'])) {
+                        $Configurable_id = $data['tenant_id'];
+                    } else {
+                        $Configurable_id = Auth::user()->tenant_id;
+                    }
+                }
+                if ($Configurable_id == null) {
+                    throw new NotFoundException("No " . ucfirst($type) . " Found");
                 }
 
-            }
-            if ($Configurable_id == null) {
-                throw new NotFoundException("No " . ucfirst($type) . " Found");
-            }
+                $configurationData = json_encode($data['configuration']);
 
-            $configurationData = json_encode($data['configuration']);
+                if (!empty($this->repository->where("configurable_id", $Configurable_id)->first())) {
+                    throw new NotFoundException("Configuration Already Exists");
+                }
+                $queryData = [
+                    'configurable_type' => $index,
+                    'configurable_id' => $Configurable_id,
+                    'configuration' => $configurationData
+                ];
+                if ($data['configurable_type'] == "tenant") {
+                    $queryData['tenant_id'] = $Configurable_id;
+                }
 
-            if (!empty($this->repository->where("configurable_id", $Configurable_id)->first())) {
-                throw new NotFoundException("Configuration Already Exists");
+                return $this->repository->create($queryData);
             }
-            $queryData = [
-                'configurable_type' => $index,
-                'configurable_id' => $Configurable_id,
-                'configuration' => $configurationData
-            ];
-            if($data['configurable_type']=="tenant")
-            {
-                $queryData['tenant_id']=$Configurable_id;
-            }
-
-            return $this->repository->create($queryData);
         } catch (Exception $exception) {
             throw new CreateResourceFailedException($exception);
         }
