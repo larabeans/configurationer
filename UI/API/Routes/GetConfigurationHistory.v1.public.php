@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @apiGroup           Configurationer
+ * @apiGroup           Configuration
  * @apiName            getConfigurationHistory
  *
  * @api                {GET} /v1/history/configurations Get Configuration History
