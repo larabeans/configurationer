@@ -30,15 +30,19 @@ class UpdateConfigurationTask extends Task
                 $configurable_id=Auth::user()->tenant_id;
             }
             $configuration = $this->repository->where('configurable_id',$configurable_id)->first();
+
             if(!$configuration){
 
                 throw new NotFoundException();
             }
 
-            $history = app(CreateConfigurationHistoryTask::class)->run([$configuration->id,$configuration->configuration]);
-            return $this->repository->update($data,$configuration->id);
+            $history = app(CreateConfigurationHistoryTask::class)->run([$configuration->id,json_encode($configuration->configuration)]);
+            $d = [
+                'configuration'=>json_encode($data['configuration'])
+            ];
+            return $this->repository->update($d,$configuration->id);
         } catch (Exception $exception) {
-            throw new UpdateResourceFailedException();
+            throw new UpdateResourceFailedException($exception);
         }
     }
 }
