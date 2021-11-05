@@ -39,7 +39,14 @@ class CreateConfigurationTask extends Task
             if ($type == "user") {
                 $Configurable_id=Auth::user()->id;
             } elseif ($type == "tenant") {
-                $Configurable_id=Auth::user()->tenant_id;
+                if(isset($data['tenant_id']))
+                {
+                    $Configurable_id = $data['tenant_id'];
+                }
+                else {
+                    $Configurable_id=Auth::user()->tenant_id;
+                }
+
             }
             if($Configurable_id == null){
                 throw new NotFoundException("No ". ucfirst($type). " Found");
@@ -58,7 +65,7 @@ class CreateConfigurationTask extends Task
             ];
             return $this->repository->create($queryData);
         } catch (Exception $exception) {
-            throw new CreateResourceFailedException();
+            throw new CreateResourceFailedException($exception);
         }
     }
 }
