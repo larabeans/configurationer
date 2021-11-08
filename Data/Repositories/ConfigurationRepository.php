@@ -12,6 +12,6 @@ class ConfigurationRepository extends Repository
     protected $fieldSearchable = [
         'id' => '=',
         'configurable_type',
-        'configurable_id'
+        'configurable_id' => '='
     ];
 }

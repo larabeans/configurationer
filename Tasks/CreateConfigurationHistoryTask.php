@@ -19,13 +19,12 @@ class CreateConfigurationHistoryTask extends Task
     public function run(array $data)
     {
         try {
-            $historyData=[
-                "configuration_id"=>$data[0],
-                "configuration"=>$data[1]
+            $historyData = [
+                "configuration_id" => $data[0],
+                "configuration" => $data[1]
             ];
             return $this->repository->create($historyData);
-        }
-        catch (Exception $exception) {
+        } catch (Exception $exception) {
             throw new CreateResourceFailedException($exception);
         }
     }

@@ -47,6 +47,7 @@ class CreateConfigurationTask extends Task
                     $Configurable_id = Auth::user()->id;
                 } elseif ($type == "tenant") {
 
+                    //if data comming from TenantRegisteredListener, get tenant_id from data else from auth token
                     if (isset($data['tenant_id'])) {
                         $Configurable_id = $data['tenant_id'];
                     } else {

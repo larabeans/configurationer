@@ -14,7 +14,7 @@ class GetConfigurationHistoryTask extends Task
     protected ConfigurationHistoryRepository $repository;
     protected ConfigurationRepository $configurationRepository;
 
-    public function __construct(ConfigurationHistoryRepository $repository,ConfigurationRepository $configurationRepository)
+    public function __construct(ConfigurationHistoryRepository $repository, ConfigurationRepository $configurationRepository)
     {
         $this->repository = $repository;
         $this->configurationRepository = $configurationRepository;
@@ -24,29 +24,26 @@ class GetConfigurationHistoryTask extends Task
     {
         $Configurable_id = null;
         if ($type == "user") {
-            $Configurable_id=Auth::user()->id;
+            $Configurable_id = Auth::user()->id;
         } elseif ($type == "tenant") {
-            $Configurable_id=Auth::user()->tenant_id;
+            $Configurable_id = Auth::user()->tenant_id;
         }
-        if($Configurable_id == null){
-            throw new NotFoundException("No ". ucfirst($type). " Found");
+        if ($Configurable_id == null) {
+            throw new NotFoundException("No " . ucfirst($type) . " Found");
         }
 
-        $ConfigurationData =DB::table('configurations')->where("configurable_id",$Configurable_id)->first(); //$this->configurationRepository->where("configurable_id",$Configurable_id)->first();
+        $ConfigurationData = DB::table('configurations')->where("configurable_id", $Configurable_id)->first();
 
-        if(!$ConfigurationData){
+        if (!$ConfigurationData) {
             throw new NotFoundException("No Configuration Found");
         }
-        //dd($ConfigurationData->configuration);
 
-        //return
-        $data=  $this->repository->where("configuration_id",$ConfigurationData->id)->orderBy("created_at", 'DESC')->paginate();
+        $data = $this->repository->where("configuration_id", $ConfigurationData->id)->orderBy("created_at", 'DESC')->paginate();
 
-        if(sizeof($data)==0)
-        {
+        if (sizeof($data) == 0) {
             throw new NotFoundException("No History");
         }
         return $data;
-        //dd($a);
+
     }
 }

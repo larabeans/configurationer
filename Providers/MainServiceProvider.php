@@ -42,6 +42,7 @@ class MainServiceProvider extends MainProvider
         // $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         // ...
     }
+
     public function boot(): void
     {
         parent::boot();

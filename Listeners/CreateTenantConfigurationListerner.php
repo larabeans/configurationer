@@ -21,14 +21,15 @@ class CreateTenantConfigurationListerner
     /**
      * Handle the event.
      *
-     * @param  \App\Events\OrderShipped  $event
+     * @param \App\Events\OrderShipped $event
      * @return void
      */
     public function handle(TenantRegisteredEvent $event)
     {
 
-        app(CreateConfigurationTask::class)->run(['configurable_type'=>'tenant','configuration'=>[],'tenant_id'=>$event->entity->id]);
+        app(CreateConfigurationTask::class)->run(['configurable_type' => 'tenant', 'configuration' => [], 'tenant_id' => $event->entity->id]);
 
-        // Access the order using $event->order...
+
+        // Access the tenant using $event->entity
     }
 }

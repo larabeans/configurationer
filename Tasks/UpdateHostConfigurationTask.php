@@ -17,17 +17,16 @@ class UpdateHostConfigurationTask extends Task
         $this->repository = $repository;
     }
 
-    public function run( array $data)
+    public function run(array $data)
     {
         try {
-            $con =app(GetHostConfigurationTask::class)->run();
-            $history = app(CreateConfigurationHistoryTask::class)->run([$con->id,json_encode($con->configuration)]);
+            $con = app(GetHostConfigurationTask::class)->run();
+            $history = app(CreateConfigurationHistoryTask::class)->run([$con->id, json_encode($con->configuration)]);
             $d = [
-                'configuration'=>json_encode($data['configuration'])
+                'configuration' => json_encode($data['configuration'])
             ];
             return $this->repository->update($d, $con->id);
-        }
-        catch (Exception $exception) {
+        } catch (Exception $exception) {
             throw new UpdateResourceFailedException();
         }
     }

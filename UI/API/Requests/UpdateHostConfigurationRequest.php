@@ -11,7 +11,7 @@ class UpdateHostConfigurationRequest extends Request
      */
     protected array $access = [
         'permissions' => '',
-        'roles'       => 'admin',
+        'roles' => 'admin',
     ];
 
     /**

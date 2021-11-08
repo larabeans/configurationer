@@ -21,18 +21,9 @@ class GetUserConfigurationTask extends Task
     public function run()
     {
         try {
-            $user = app(GetAuthenticatedUserTask::class)->run();
-
-
+            //$user = app(GetAuthenticatedUserTask::class)->run();
             $response = $this->repository->where('configurable_id', Auth::id())->first();
-//            $configurationData = json_decode($response->configuration);
-//            $data = [];
-//            if ($response == null) {
-//                throw new NotFoundException();
-//            }
-//            // $data['Language']=$configurationData->language;
-//
-//            $data['configuration'] = $configurationData;
+
             return $response;
         } catch (Exception $exception) {
             throw new NotFoundException();
