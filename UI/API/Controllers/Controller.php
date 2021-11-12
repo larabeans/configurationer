@@ -37,19 +37,6 @@ class Controller extends ApiController
         return $this->created($this->transform($configuration, ConfigurationTransformer::class));
     }
 
-    public function findConfigurationById(FindConfigurationByIdRequest $request): array
-    {
-        $configuration = app(FindConfigurationByIdAction::class)->run($request);
-        return $this->transform($configuration, ConfigurationTransformer::class);
-    }
-
-    public function getAllConfigurations(GetAllConfigurationsRequest $request): array
-    {
-        $configurations = app(GetAllConfigurationsAction::class)->run($request);
-        return $this->transform($configurations, ConfigurationTransformer::class);
-    }
-
-
     public function getConfigurationHistory(GetConfigurationHistoryRequest $request)
     {
         $configurations = app(GetConfigurationHistoryAction::class)->run($request);
