@@ -4,12 +4,10 @@ namespace App\Containers\Vendor\Configurationer\Tasks;
 
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
 use App\Ship\Exceptions\NotFoundException;
-use App\Ship\Parents\Tasks\Task;
 use Exception;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
+use App\Ship\Parents\Tasks\Task;
 
-class GetTenantConfigurationTask extends Task
+class GetHostConfigurationTask extends Task
 {
     protected ConfigurationRepository $repository;
 
@@ -21,8 +19,11 @@ class GetTenantConfigurationTask extends Task
     public function run()
     {
         try {
-            $tenant_id = Auth::user()->tenant_id;
-            $response = $this->repository->findWhere(['configurable_id' => $tenant_id])->first();
+            $response = $this->repository->findWhere([
+                'tenant_id' => null,
+                'configurable_id' => ''
+            ])->first();
+
             return $response;
         } catch (Exception $exception) {
             throw new NotFoundException();

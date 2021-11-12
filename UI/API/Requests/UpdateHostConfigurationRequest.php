@@ -4,14 +4,14 @@ namespace App\Containers\Vendor\Configurationer\UI\API\Requests;
 
 use App\Ship\Parents\Requests\Request;
 
-class GetConfigurationHistoryRequest extends Request
+class UpdateHostConfigurationRequest extends Request
 {
     /**
      * Define which Roles and/or Permissions has access to this request.
      */
     protected array $access = [
         'permissions' => '',
-        'roles' => '',
+        'roles' => 'admin',
     ];
 
     /**

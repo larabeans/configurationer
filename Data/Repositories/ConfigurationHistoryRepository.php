@@ -10,7 +10,6 @@ class ConfigurationHistoryRepository extends Repository
      * @var array
      */
     protected $fieldSearchable = [
-        'id' => '=',
-        // ...
+        'id' => '='
     ];
 }

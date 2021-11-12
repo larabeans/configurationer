@@ -14,7 +14,6 @@ class UpdateConfigurationAction extends Action
         $data = [
             'configuration' => json_encode($request->configuration)
         ];
-        //dd($data);
 
         return app(UpdateConfigurationTask::class)->run($request->type, $data);
     }

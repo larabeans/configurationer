@@ -17,14 +17,14 @@ class GetDefaultConfigurationTask extends Task
         $this->repository = $repository;
     }
 
-    public function run(string $type=null)
+    public function run(string $type = null)
     {
 
         $assignedPermissionData = [];
         $allPermissionsData = [];
         $auth = [];
         $session = [];
-        $settingData =[];
+        $settingData = [];
 
         $configData = config('configuration.configuration');
         $user = app(GetAuthenticatedUserTask::class)->run();
@@ -62,19 +62,19 @@ class GetDefaultConfigurationTask extends Task
             $session['multi_tenancy_side'] = 1;
 
         }
-        $response= array_merge($configData,['session'=>$session],['auth'=>$auth]);
+        $response = array_merge($configData, ['session' => $session], ['auth' => $auth]);
 
         $setting = config('configuration.settings');
 
 
-        if($type == 'tenant'){
-            $settingData['tenant_management']=$setting['tenant_management'];
+        // get tenant specific or user specific data
+        if ($type == 'tenant') {
+            $settingData['tenant_management'] = $setting['tenant_management'];
 
+        } elseif ($type == 'user') {
+            $settingData['user_management'] = $setting['user_management'];
         }
-        elseif ($type=='user'){
-            $settingData['user_management']=$setting['user_management'];
-        }
-        $response= array_merge($response,['settings'=>$settingData]);
+        $response = array_merge($response, ['settings' => $settingData]);
 
         return $response;
     }

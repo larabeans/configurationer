@@ -8,7 +8,7 @@ trait HasConfiguration
 {
     public function configuration()
     {
-        return $this->morphOne(Configuration::class,'configurable')->orderBy('created_at', 'desc');
+        return $this->morphOne(Configuration::class, 'configurable')->orderBy('created_at', 'desc');
     }
 
 }

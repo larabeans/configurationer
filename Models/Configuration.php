@@ -10,8 +10,8 @@ class Configuration extends Model
     protected $fillable = [
         'configuration',
         'configurable_type',
-        'configurable_id'
-
+        'configurable_id',
+        'tenant_id'
     ];
 
     protected $attributes = [
@@ -36,7 +36,8 @@ class Configuration extends Model
      */
     protected string $resourceKey = 'Configuration';
 
-    public function ConfigurationHistory(){
+    public function ConfigurationHistory()
+    {
         return $this->hasMany(ConfigurationHistory::class);
     }
 }

@@ -7,7 +7,7 @@ use App\Containers\Vendor\Configurationer\Models\Configuration;
 
 class ConfigurationHistory extends Model
 {
-    protected $table="configuration_histories";
+    protected $table = "configuration_histories";
     protected $fillable = [
         'configuration_id',
         'configuration'
@@ -35,7 +35,8 @@ class ConfigurationHistory extends Model
      */
     protected string $resourceKey = 'ConfigurationHistory';
 
-    public function Configuration(){
-        return $this->belongsTo(Configuration::class,"configuration_id");
+    public function Configuration()
+    {
+        return $this->belongsTo(Configuration::class, "configuration_id");
     }
 }

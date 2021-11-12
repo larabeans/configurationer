@@ -13,10 +13,11 @@ class CreateConfigurationsTable extends Migration
         Schema::create('configurations', function (Blueprint $table) {
             if (config('uuider.installed', false)) {
                 $table->uuid('id')->primary('id');
+                $table->nullableUuidMorphs('configurable');
             } else {
                 $table->increments('id')->primary('id');
+                $table->nullableMorphs('configuration');
             }
-            $table->uuidMorphs('configurable');
             $table->text('configuration');
 
             $table->timestamps();
