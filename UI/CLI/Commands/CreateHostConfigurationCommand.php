@@ -4,7 +4,7 @@ namespace App\Containers\Vendor\Configurationer\UI\CLI\Commands;
 
 
 use App\Containers\Vendor\Configurationer\Tasks\CreateConfigurationTask;
-use App\Containers\Vendor\Configurationer\Tasks\GetHostConfigurationTask;
+use App\Containers\Vendor\Configurationer\Tasks\GetConfigurationTask;
 use Illuminate\Console\Command;
 
 class CreateHostConfigurationCommand extends Command
@@ -15,7 +15,7 @@ class CreateHostConfigurationCommand extends Command
 
     public function handle()
     {
-        $configuration = app(GetHostConfigurationTask::class)->run();
+        $configuration = app(GetConfigurationTask::class)->run("host");
         if (!empty($configuration)) {
             $this->line("<fg=red>" . "Configuration already exist.");
         } else {
