@@ -3,7 +3,6 @@
 namespace App\Containers\Vendor\Configurationer\UI\API\Controllers;
 
 use App\Containers\Vendor\Configurationer\Actions\GetHostConfigurationAction;
-use App\Containers\Vendor\Configurationer\Actions\UpdateHostConfigurationAction;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\CreateConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\DeleteConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\GetAllConfigurationsRequest;
@@ -13,7 +12,6 @@ use App\Containers\Vendor\Configurationer\UI\API\Requests\UpdateConfigurationReq
 use App\Containers\Vendor\Configurationer\UI\API\Requests\GetUserConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\GetTenantConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\GetConfigurationHistoryRequest;
-use App\Containers\Vendor\Configurationer\UI\API\Requests\UpdateHostConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Transformers\ConfigurationTransformer;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\GetDefaultConfigurationRequest;
 use App\Containers\Vendor\Configurationer\Actions\CreateConfigurationAction;
@@ -36,19 +34,6 @@ class Controller extends ApiController
         $configuration = app(CreateConfigurationAction::class)->run($request);
         return $this->created($this->transform($configuration, ConfigurationTransformer::class));
     }
-
-    public function findConfigurationById(FindConfigurationByIdRequest $request): array
-    {
-        $configuration = app(FindConfigurationByIdAction::class)->run($request);
-        return $this->transform($configuration, ConfigurationTransformer::class);
-    }
-
-    public function getAllConfigurations(GetAllConfigurationsRequest $request): array
-    {
-        $configurations = app(GetAllConfigurationsAction::class)->run($request);
-        return $this->transform($configurations, ConfigurationTransformer::class);
-    }
-
 
     public function getConfigurationHistory(GetConfigurationHistoryRequest $request)
     {
@@ -92,12 +77,6 @@ class Controller extends ApiController
     public function updateConfiguration(UpdateConfigurationRequest $request)
     {
         $configuration = app(UpdateConfigurationAction::class)->run($request);
-        return $this->transform($configuration, ConfigurationTransformer::class);
-    }
-
-    public function updateHostConfiguration(UpdateHostConfigurationRequest $request)
-    {
-        $configuration = app(UpdateHostConfigurationAction::class)->run($request);
         return $this->transform($configuration, ConfigurationTransformer::class);
     }
 

@@ -10,7 +10,7 @@
  * @apiVersion         1.0.0
  * @apiPermission      Authenticated User
  *
- * @apiParam           {String}  type user/tenant
+ * @apiParam           {String}  type user/tenant/host
  * @apiParam           {Json} configuration
  *
  * @apiUse             ConfigurationSuccessSingleResponse

@@ -9,7 +9,7 @@ use App\Ship\Parents\Tasks\Task;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 
-class GetUserConfigurationTask extends Task
+class GetConfigurationTask extends Task
 {
     protected ConfigurationRepository $repository;
 
@@ -18,11 +18,25 @@ class GetUserConfigurationTask extends Task
         $this->repository = $repository;
     }
 
-    public function run()
+    public function run($type)
     {
+
+        $response = null;
         try {
-            //$user = app(GetAuthenticatedUserTask::class)->run();
-            $response = $this->repository->where('configurable_id', Auth::id())->first();
+            if ($type == "user") {
+                $id = Auth::id();
+                $response = $this->repository->where('configurable_id', $id)->first();
+
+            } elseif ($type == "tenant") {
+                $tenant_id = Auth::user()->tenant_id;
+                $response = $this->repository->findWhere(['configurable_id' => $tenant_id])->first();
+
+            } elseif ($type == "host") {
+                $response = $this->repository->findWhere([
+                    'tenant_id' => null,
+                    'configurable_id' => ''
+                ])->first();
+            }
 
             return $response;
         } catch (Exception $exception) {
