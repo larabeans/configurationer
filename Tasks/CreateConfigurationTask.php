@@ -28,7 +28,6 @@ class CreateConfigurationTask extends Task
                     'configuration' => json_encode($data['configuration'])
                 ]);
             } else {
-
                 $configurationType = config('configuration.configurable_types');
                 $index = "";
                 $type = $data['configurable_type'];

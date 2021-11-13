@@ -44,6 +44,5 @@ class GetConfigurationHistoryTask extends Task
             throw new NotFoundException("No History");
         }
         return $data;
-
     }
 }

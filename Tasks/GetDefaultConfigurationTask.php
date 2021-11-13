@@ -19,7 +19,6 @@ class GetDefaultConfigurationTask extends Task
 
     public function run(string $type = null)
     {
-
         $assignedPermissionData = [];
         $allPermissionsData = [];
         $auth = [];
@@ -38,14 +37,11 @@ class GetDefaultConfigurationTask extends Task
         //checking if user has role, if it has fetch all the permission assign to role
         if (sizeof($user->roles) == 0) {
             $auth['granted_permissions'] = null;
-
         } else {
-
             $role = $user->roles[0]->id; //get role_id of assigned to user
             $roleData = app(FindRoleTask::class)->run($role);
             foreach ($roleData->permissions as $r) {
                 array_push($assignedPermissionData, $r->name);
-
             }
             $auth['granted_permissions'] = $assignedPermissionData;
         }
@@ -54,13 +50,11 @@ class GetDefaultConfigurationTask extends Task
         $session['user_id'] = $user->id;
 
         if ($user->tenant_id == null) {
-
             $session['tenant_id'] = null;
             $session['multi_tenancy_side'] = 2;
         } else {
             $session['tenant_id'] = $user->tenant_id;
             $session['multi_tenancy_side'] = 1;
-
         }
         $response = array_merge($configData, ['session' => $session], ['auth' => $auth]);
 
@@ -70,7 +64,6 @@ class GetDefaultConfigurationTask extends Task
         // get tenant specific or user specific data
         if ($type == 'tenant') {
             $settingData['tenant_management'] = $setting['tenant_management'];
-
         } elseif ($type == 'user') {
             $settingData['user_management'] = $setting['user_management'];
         }

@@ -21,4 +21,3 @@ use Illuminate\Support\Facades\Route;
 Route::get('history/{type}/configurations', [Controller::class, 'getConfigurationHistory'])
     ->name('api_configurationer_get_configuration_history')
     ->middleware(['auth:api']);
-

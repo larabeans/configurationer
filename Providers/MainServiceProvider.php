@@ -51,6 +51,5 @@ class MainServiceProvider extends MainProvider
             TenantRegisteredEvent::class,
             [CreateTenantConfigurationListerner::class, 'handle']
         );
-
     }
 }

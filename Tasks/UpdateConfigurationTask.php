@@ -30,17 +30,14 @@ class UpdateConfigurationTask extends Task
             if ($type == "user") {
                 $configurable_id = Auth::user()->id;
                 $configuration= $this->getConfiguration($configurable_id);
-
-            } else if ($type == "tenant") {
+            } elseif ($type == "tenant") {
                 $configurable_id = Auth::user()->tenant_id;
                 $configuration= $this->getConfiguration($configurable_id);
-
-            } else if ($type == "host") {
+            } elseif ($type == "host") {
                 $configuration = $this->repository->findWhere([
                     'tenant_id' => null,
                     'configurable_id' => ''
                 ])->first();
-
             }
 
 
@@ -59,11 +56,11 @@ class UpdateConfigurationTask extends Task
         }
     }
 
-    private function getConfiguration($id){
+    private function getConfiguration($id)
+    {
         $configuration = $this->repository->where('configurable_id', $id)->first();
 
         if (!$configuration) {
-
             throw new NotFoundException("Configuration not found");
         }
         return $configuration;

@@ -25,4 +25,3 @@ use Illuminate\Support\Facades\Route;
 Route::delete('configurations/{id}', [Controller::class, 'deleteConfiguration'])
     ->name('api_configuration_delete_configuration')
     ->middleware(['auth:api']);
-

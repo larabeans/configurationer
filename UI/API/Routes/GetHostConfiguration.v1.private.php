@@ -19,4 +19,3 @@ use Illuminate\Support\Facades\Route;
 Route::get('configuration/host', [Controller::class, 'getHostConfiguration'])
     ->name('api_configurationer_get_host_configuration')
     ->middleware(['auth:api']);
-

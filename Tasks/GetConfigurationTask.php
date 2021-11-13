@@ -20,17 +20,14 @@ class GetConfigurationTask extends Task
 
     public function run($type)
     {
-
         $response = null;
         try {
             if ($type == "user") {
                 $id = Auth::id();
                 $response = $this->repository->where('configurable_id', $id)->first();
-
             } elseif ($type == "tenant") {
                 $tenant_id = Auth::user()->tenant_id;
                 $response = $this->repository->findWhere(['configurable_id' => $tenant_id])->first();
-
             } elseif ($type == "host") {
                 $response = $this->repository->findWhere([
                     'tenant_id' => null,

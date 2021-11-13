@@ -22,4 +22,3 @@ use Illuminate\Support\Facades\Route;
 Route::post('configurations', [Controller::class, 'createConfiguration'])
     ->name('api_configuration_create_configuration')
     ->middleware(['auth:api']);
-

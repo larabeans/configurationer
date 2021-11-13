@@ -2,7 +2,6 @@
 
 namespace App\Containers\Vendor\Configurationer\UI\CLI\Commands;
 
-
 use App\Containers\Vendor\Configurationer\Tasks\CreateConfigurationTask;
 use App\Containers\Vendor\Configurationer\Tasks\GetConfigurationTask;
 use Illuminate\Console\Command;

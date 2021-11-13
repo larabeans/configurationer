@@ -20,4 +20,3 @@ use Illuminate\Support\Facades\Route;
 Route::get('configuration/tenant', [Controller::class, 'getTenantConfiguration'])
     ->name('api_configuration_get_tenant_configuration')
     ->middleware(['auth:api']);
-

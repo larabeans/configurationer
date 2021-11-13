@@ -30,7 +30,6 @@ class Controller extends ApiController
 {
     public function createConfiguration(CreateConfigurationRequest $request): JsonResponse
     {
-
         $configuration = app(CreateConfigurationAction::class)->run($request);
         return $this->created($this->transform($configuration, ConfigurationTransformer::class));
     }
@@ -60,7 +59,6 @@ class Controller extends ApiController
 
     public function getUserConfiguration(GetUserConfigurationRequest $request)//: array
     {
-
         $configurations = app(GetUserConfigurationAction::class)->run($request);
         return $this->transform($configurations, ConfigurationTransformer::class);
     }
@@ -68,7 +66,6 @@ class Controller extends ApiController
 
     public function getTenantConfiguration(GetTenantConfigurationRequest $request)//: array
     {
-
         $configurations = app(GetTenantConfigurationAction::class)->run($request);
         return $this->transform($configurations, ConfigurationTransformer::class);
     }

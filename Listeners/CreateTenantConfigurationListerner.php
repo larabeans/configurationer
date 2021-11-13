@@ -5,7 +5,6 @@ namespace App\Containers\Vendor\Configurationer\Listeners;
 use App\Containers\Vendor\Configurationer\Tasks\CreateConfigurationTask;
 use App\Containers\Vendor\Tenanter\Events\TenantRegisteredEvent;
 
-
 class CreateTenantConfigurationListerner
 {
     /**
@@ -26,7 +25,6 @@ class CreateTenantConfigurationListerner
      */
     public function handle(TenantRegisteredEvent $event)
     {
-
         app(CreateConfigurationTask::class)->run(['configurable_type' => 'tenant', 'configuration' => [], 'tenant_id' => $event->entity->id]);
 
 

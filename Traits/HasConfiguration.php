@@ -10,5 +10,4 @@ trait HasConfiguration
     {
         return $this->morphOne(Configuration::class, 'configurable')->orderBy('created_at', 'desc');
     }
-
 }
