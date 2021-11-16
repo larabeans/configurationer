@@ -20,19 +20,21 @@ class GetConfigurationHistoryTask extends Task
         $this->configurationRepository = $configurationRepository;
     }
 
-    public function run(string $type)
+    public function run()
     {
-        $Configurable_id = null;
-        if ($type == "user") {
-            $Configurable_id = Auth::user()->id;
-        } elseif ($type == "tenant") {
+        $ConfigurationData = null;
+        if (Auth::user()->tenant_id == null) {
+            if(sizeof(Auth::user()->roles) == 0) {
+                $Configurable_id = Auth::user()->id;
+                $ConfigurationData = DB::table('configurations')->where("configurable_id", $Configurable_id)->first();
+            }
+            else {
+                $ConfigurationData = DB::table('configurations')->where(['tenant_id'=>null,'configurable_id' => ''])->first();
+            }
+        } elseif (Auth::user()->tenant_id !== null) {
             $Configurable_id = Auth::user()->tenant_id;
+            $ConfigurationData = DB::table('configurations')->where("configurable_id", $Configurable_id)->first();
         }
-        if ($Configurable_id == null) {
-            throw new NotFoundException("No " . ucfirst($type) . " Found");
-        }
-
-        $ConfigurationData = DB::table('configurations')->where("configurable_id", $Configurable_id)->first();
 
         if (!$ConfigurationData) {
             throw new NotFoundException("No Configuration Found");
@@ -43,7 +45,7 @@ class GetConfigurationHistoryTask extends Task
         if (sizeof($data) == 0) {
             throw new NotFoundException("No History");
         }
-        return $data;
+        return json_encode( $data);
 
     }
 }

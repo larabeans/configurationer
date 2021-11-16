@@ -22,28 +22,33 @@ class UpdateConfigurationTask extends Task
         $this->historyRepository = $historyRepository;
     }
 
-    public function run($type, array $data)
+    public function run(array $data)
     {
         $configurable_id = null;
         $configuration =null;
-        try {
-            if ($type == "user") {
-                $configurable_id = Auth::user()->id;
-                $configuration= $this->getConfiguration($configurable_id);
 
-            } else if ($type == "tenant") {
-                $configurable_id = Auth::user()->tenant_id;
-                $configuration= $this->getConfiguration($configurable_id);
+            if (Auth::user()->tenant_id == null ) {
 
-            } else if ($type == "host") {
+                if(sizeof(Auth::user()->roles) == 0) {
+
+                    throw new NotFoundException("Invalid User");
+                }
                 $configuration = $this->repository->findWhere([
                     'tenant_id' => null,
                     'configurable_id' => ''
                 ])->first();
+            } elseif (Auth::user()->tenant_id !== null) {
 
+                $configurable_id = Auth::user()->tenant_id;
+                $configuration = $this->repository->where('configurable_id', $configurable_id)->first();
             }
 
+            if (!$configuration) {
 
+                throw new NotFoundException("Configuration not found");
+            }
+
+        try {
             $historyData = [
                 "configuration_id" => $configuration->id,
                 "configuration" => $configuration->configuration
@@ -59,13 +64,4 @@ class UpdateConfigurationTask extends Task
         }
     }
 
-    private function getConfiguration($id){
-        $configuration = $this->repository->where('configurable_id', $id)->first();
-
-        if (!$configuration) {
-
-            throw new NotFoundException("Configuration not found");
-        }
-        return $configuration;
-    }
 }
