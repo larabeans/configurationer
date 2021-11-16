@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @apiGroup           Configurationer
+ * @apiGroup           Configuration
  * @apiName            updateUserConfiguration
  *
  * @api                {PUT} /v1/configurations/user update User Configuration
