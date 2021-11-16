@@ -4,7 +4,6 @@ namespace App\Containers\Vendor\Configurationer\UI\API\Controllers;
 
 use App\Containers\Vendor\Configurationer\Actions\GetHostConfigurationAction;
 use App\Containers\Vendor\Configurationer\Actions\UpdateUserConfigurationAction;
-use App\Containers\Vendor\Configurationer\UI\API\Requests\CreateConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\DeleteConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\GetHostConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\UpdateConfigurationRequest;
@@ -14,7 +13,6 @@ use App\Containers\Vendor\Configurationer\UI\API\Requests\GetConfigurationHistor
 use App\Containers\Vendor\Configurationer\UI\API\Requests\UpdateUserConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Transformers\ConfigurationTransformer;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\GetDefaultConfigurationRequest;
-use App\Containers\Vendor\Configurationer\Actions\CreateConfigurationAction;
 use App\Containers\Vendor\Configurationer\Actions\UpdateConfigurationAction;
 use App\Containers\Vendor\Configurationer\Actions\DeleteConfigurationAction;
 use App\Containers\Vendor\Configurationer\Actions\GetUserConfigurationAction;
@@ -26,12 +24,6 @@ use Illuminate\Http\JsonResponse;
 
 class Controller extends ApiController
 {
-    public function createConfiguration(CreateConfigurationRequest $request): JsonResponse
-    {
-
-        $configuration = app(CreateConfigurationAction::class)->run($request);
-        return $this->created($this->transform($configuration, ConfigurationTransformer::class));
-    }
 
     public function getConfigurationHistory(GetConfigurationHistoryRequest $request)
     {
