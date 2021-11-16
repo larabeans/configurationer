@@ -21,10 +21,17 @@ class GetConfigurationTask extends Task
         $this->repository = $repository;
     }
 
-    public function run()
+    public function run($type = null)
     {
         $configurationData = null;
 
+        if ($type !== null) {
+            $configurationData = $this->repository->where([
+                'tenant_id' => null,
+                'configurable_id' => '',
+                "configurable_type" => ''
+            ])->first();
+        } else {
             if (Auth::user()->tenant_id == null) {
                 if ($this->isHost() == false) {
                     $configurableId = Auth::user()->id;
@@ -48,8 +55,8 @@ class GetConfigurationTask extends Task
             }
             if (!$configurationData) {
                 throw new NotFoundException("No Configuration Found");
-
-            return $configurationData;
+            }
         }
+        return $configurationData;
     }
 }
