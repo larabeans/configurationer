@@ -2,13 +2,10 @@
 
 namespace App\Containers\Vendor\Configurationer\UI\API\Controllers;
 
-use App\Containers\Vendor\Configurationer\Actions\GetHostConfigurationAction;
 use App\Containers\Vendor\Configurationer\Actions\UpdateUserConfigurationAction;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\DeleteConfigurationRequest;
-use App\Containers\Vendor\Configurationer\UI\API\Requests\GetHostConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\UpdateConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\GetUserConfigurationRequest;
-use App\Containers\Vendor\Configurationer\UI\API\Requests\GetTenantConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\GetConfigurationHistoryRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\UpdateUserConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Transformers\ConfigurationTransformer;
@@ -17,7 +14,6 @@ use App\Containers\Vendor\Configurationer\Actions\UpdateConfigurationAction;
 use App\Containers\Vendor\Configurationer\Actions\DeleteConfigurationAction;
 use App\Containers\Vendor\Configurationer\Actions\GetUserConfigurationAction;
 use App\Containers\Vendor\Configurationer\Actions\GetDefaultConfigurationAction;
-use App\Containers\Vendor\Configurationer\Actions\GetTenantConfigurationAction;
 use App\Containers\Vendor\Configurationer\Actions\GetConfigurationHistoryAction;
 use App\Ship\Parents\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
@@ -29,12 +25,6 @@ class Controller extends ApiController
     {
         $configurations = app(GetConfigurationHistoryAction::class)->run($request);
         return $configurations;//$this->transform($configurations, ConfigurationTransformer::class);
-    }
-
-    public function getHostConfiguration(GetHostConfigurationRequest $request)
-    {
-        $configurations = app(GetHostConfigurationAction::class)->run($request);
-        return $this->transform($configurations, ConfigurationTransformer::class);
     }
 
     public function defaultConfiguration(GetDefaultConfigurationRequest $request): array
@@ -54,15 +44,6 @@ class Controller extends ApiController
         $configurations = app(GetUserConfigurationAction::class)->run($request);
         return $this->transform($configurations, ConfigurationTransformer::class);
     }
-
-
-    public function getTenantConfiguration(GetTenantConfigurationRequest $request)//: array
-    {
-
-        $configurations = app(GetTenantConfigurationAction::class)->run($request);
-        return $this->transform($configurations, ConfigurationTransformer::class);
-    }
-
 
     public function updateConfiguration(UpdateConfigurationRequest $request)
     {
