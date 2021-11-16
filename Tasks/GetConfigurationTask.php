@@ -24,7 +24,7 @@ class GetConfigurationTask extends Task
     public function run()
     {
         $configurationData = null;
-        try {
+
             if (Auth::user()->tenant_id == null) {
                 if ($this->isHost() == false) {
                     $configurableId = Auth::user()->id;
@@ -46,9 +46,10 @@ class GetConfigurationTask extends Task
                     "configurable_type" => config('configuration.configurable_types.tenant.class_path')
                 ])->first();
             }
+            if (!$configurationData) {
+                throw new NotFoundException("No Configuration Found");
+
             return $configurationData;
-        } catch (Exception $exception) {
-            throw new NotFoundException($exception);
         }
     }
 }
