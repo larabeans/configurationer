@@ -2,15 +2,18 @@
 
 namespace App\Containers\Vendor\Configurationer\Tasks;
 
-use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserTask;
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
+use App\Containers\Vendor\Configurationer\Traits\IsHostTrait;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Tasks\Task;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class GetConfigurationTask extends Task
 {
+    use IsHostTrait;
+
     protected ConfigurationRepository $repository;
 
     public function __construct(ConfigurationRepository $repository)
@@ -18,29 +21,34 @@ class GetConfigurationTask extends Task
         $this->repository = $repository;
     }
 
-    public function run($type)
+    public function run()
     {
-
-        $response = null;
+        $configurationData = null;
         try {
-            if ($type == "user") {
-                $id = Auth::id();
-                $response = $this->repository->where('configurable_id', $id)->first();
-
-            } elseif ($type == "tenant") {
-                $tenant_id = Auth::user()->tenant_id;
-                $response = $this->repository->findWhere(['configurable_id' => $tenant_id])->first();
-
-            } elseif ($type == "host") {
-                $response = $this->repository->findWhere([
-                    'tenant_id' => null,
-                    'configurable_id' => ''
+            if (Auth::user()->tenant_id == null) {
+                if ($this->isHost() == false) {
+                    $configurableId = Auth::user()->id;
+                    $configurationData = $this->repository->where([
+                        "configurable_id" => $configurableId,
+                        "configurable_type" => config('configuration.configurable_types.user.class_path')
+                    ])->first();
+                } else {
+                    $configurationData = $this->repository->where([
+                        'tenant_id' => null,
+                        'configurable_id' => '',
+                        "configurable_type" => ''
+                    ])->first();
+                }
+            } elseif (Auth::user()->tenant_id !== null) {
+                $configurableId = Auth::user()->tenant_id;
+                $configurationData = $this->repository->where([
+                    "configurable_id" => $configurableId,
+                    "configurable_type" => config('configuration.configurable_types.tenant.class_path')
                 ])->first();
             }
-
-            return $response;
+            return $configurationData;
         } catch (Exception $exception) {
-            throw new NotFoundException();
+            throw new NotFoundException($exception);
         }
     }
 }
