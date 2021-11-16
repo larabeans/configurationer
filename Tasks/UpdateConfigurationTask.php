@@ -4,15 +4,19 @@ namespace App\Containers\Vendor\Configurationer\Tasks;
 
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationHistoryRepository;
+use App\Containers\Vendor\Configurationer\Traits\IsHostTrait;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Exceptions\UpdateResourceFailedException;
 use App\Ship\Parents\Tasks\Task;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use App\Containers\Vendor\Configurationer\Tasks\CreateConfigurationHistoryTask;
+use Illuminate\Validation\UnauthorizedException;
 
 class UpdateConfigurationTask extends Task
 {
+    use IsHostTrait;
+
     protected ConfigurationRepository $repository;
     protected ConfigurationHistoryRepository $historyRepository;
 
@@ -24,29 +28,24 @@ class UpdateConfigurationTask extends Task
 
     public function run(array $data)
     {
-        $configurable_id = null;
-        $configuration =null;
+        $configurableId = null;
+        $configuration = null;
+        if (Auth::user()->tenant_id == null && $this->isHost()) {
+            $configuration = $this->repository->findWhere([
+                'tenant_id' => null,
+                'configurable_id' => ''
+            ])->first();
+        } elseif (Auth::user()->tenant_id !== null) {
 
-            if (Auth::user()->tenant_id == null ) {
+            $configurableId = Auth::user()->tenant_id;
+            $configuration = $this->repository->where('configurable_id', $configurableId)->first();
+        } else {
+            throw new UnauthorizedException("Unauthorized User");
+        }
 
-                if(sizeof(Auth::user()->roles) == 0) {
-
-                    throw new NotFoundException("Invalid User");
-                }
-                $configuration = $this->repository->findWhere([
-                    'tenant_id' => null,
-                    'configurable_id' => ''
-                ])->first();
-            } elseif (Auth::user()->tenant_id !== null) {
-
-                $configurable_id = Auth::user()->tenant_id;
-                $configuration = $this->repository->where('configurable_id', $configurable_id)->first();
-            }
-
-            if (!$configuration) {
-
-                throw new NotFoundException("Configuration not found");
-            }
+        if (!$configuration) {
+            throw new NotFoundException("Configuration not found");
+        }
 
         try {
             $historyData = [
@@ -60,7 +59,7 @@ class UpdateConfigurationTask extends Task
             ];
             return $this->repository->update($d, $configuration->id);
         } catch (Exception $exception) {
-            throw new UpdateResourceFailedException($exception);
+            throw new UpdateResourceFailedException();
         }
     }
 
