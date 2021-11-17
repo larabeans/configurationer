@@ -4,7 +4,7 @@ namespace App\Containers\Vendor\Configurationer\Tasks;
 
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationHistoryRepository;
-use App\Containers\Vendor\Configurationer\Traits\IsHostTrait;
+use App\Containers\Vendor\Configurationer\Traits\IsHostAdminTrait;
 use App\Ship\Exceptions\CreateResourceFailedException;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Exceptions\UpdateResourceFailedException;
@@ -16,7 +16,7 @@ use Illuminate\Validation\UnauthorizedException;
 
 class UpdateUserConfigurationTask extends Task
 {
-    use IsHostTrait;
+    use IsHostAdminTrait;
 
     protected ConfigurationRepository $repository;
     protected ConfigurationHistoryRepository $historyRepository;
@@ -30,7 +30,7 @@ class UpdateUserConfigurationTask extends Task
     public function run(array $data)
     {
         $configurableId = null;
-        if (Auth::user()->tenant_id == null && $this->isHost() == false) {
+        if (Auth::user()->tenant_id == null && $this->isHostAdmin() == false) {
             $configurableId = Auth::id();
         } else {
             throw new UnauthorizedException('Invalid User');

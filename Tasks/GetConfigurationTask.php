@@ -3,7 +3,7 @@
 namespace App\Containers\Vendor\Configurationer\Tasks;
 
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
-use App\Containers\Vendor\Configurationer\Traits\IsHostTrait;
+use App\Containers\Vendor\Configurationer\Traits\IsHostAdminTrait;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Tasks\Task;
 use Exception;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class GetConfigurationTask extends Task
 {
-    use IsHostTrait;
+    use IsHostAdminTrait;
 
     protected ConfigurationRepository $repository;
 
@@ -33,7 +33,7 @@ class GetConfigurationTask extends Task
             ])->first();
         } else {
             if (Auth::user()->tenant_id == null) {
-                if ($this->isHost() == false) {
+                if ($this->isHostAdmin() == false) {
                     $configurableId = Auth::user()->id;
                     $configurationData = $this->repository->where([
                         "configurable_id" => $configurableId,
