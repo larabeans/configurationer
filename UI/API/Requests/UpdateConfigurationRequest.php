@@ -18,7 +18,7 @@ class UpdateConfigurationRequest extends Request
      * Id's that needs decoding before applying the validation rules.
      */
     protected array $decode = [
-        'id',
+       // 'id',
     ];
 
     /**
@@ -26,7 +26,6 @@ class UpdateConfigurationRequest extends Request
      * validation rules on them and allows accessing them like request data.
      */
     protected array $urlParameters = [
-        'type',
     ];
 
     /**
@@ -35,7 +34,7 @@ class UpdateConfigurationRequest extends Request
     public function rules(): array
     {
         return [
-            'type' => 'required'
+           // 'type' => 'required'
         ];
     }
 
