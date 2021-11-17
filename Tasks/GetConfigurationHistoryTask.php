@@ -4,6 +4,7 @@ namespace App\Containers\Vendor\Configurationer\Tasks;
 
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationHistoryRepository;
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
+use App\Containers\Vendor\Configurationer\Traits\IsHostTrait;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Tasks\Task;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 
 class GetConfigurationHistoryTask extends Task
 {
+    use IsHostTrait;
+
     protected ConfigurationHistoryRepository $repository;
     protected ConfigurationRepository $configurationRepository;
 
@@ -20,29 +23,30 @@ class GetConfigurationHistoryTask extends Task
         $this->configurationRepository = $configurationRepository;
     }
 
-    public function run(string $type)
+    public function run()
     {
-        $Configurable_id = null;
-        if ($type == "user") {
-            $Configurable_id = Auth::user()->id;
-        } elseif ($type == "tenant") {
-            $Configurable_id = Auth::user()->tenant_id;
-        }
-        if ($Configurable_id == null) {
-            throw new NotFoundException("No " . ucfirst($type) . " Found");
+        $configurationData = null;
+        if (Auth::user()->tenant_id == null) {
+            if ($this->isHost() == false) {
+                $configurableId = Auth::user()->id;
+                $configurationData = DB::table('configurations')->where("configurable_id", $configurableId)->first();
+            } else {
+                $configurationData = DB::table('configurations')->where(['tenant_id' => null, 'configurable_id' => ''])->first();
+            }
+        } elseif (Auth::user()->tenant_id !== null) {
+            $configurableId = Auth::user()->tenant_id;
+            $configurationData = DB::table('configurations')->where("configurable_id", $configurableId)->first();
         }
 
-        $ConfigurationData = DB::table('configurations')->where("configurable_id", $Configurable_id)->first();
-
-        if (!$ConfigurationData) {
+        if (!$configurationData) {
             throw new NotFoundException("No Configuration Found");
         }
 
-        $data = $this->repository->where("configuration_id", $ConfigurationData->id)->orderBy("created_at", 'DESC')->paginate();
+        $data = $this->repository->where("configuration_id", $configurationData->id)->orderBy("created_at", 'DESC')->paginate();
 
         if (sizeof($data) == 0) {
             throw new NotFoundException("No History");
         }
-        return $data;
+        return json_encode($data);
     }
 }
