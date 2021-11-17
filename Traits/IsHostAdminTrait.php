@@ -4,7 +4,7 @@ namespace App\Containers\Vendor\Configurationer\Traits;
 
 use Illuminate\Support\Facades\Auth;
 
-trait IsHostTrait
+trait IsHostAdminTrait
 {
     public function isHost(): bool
     {
