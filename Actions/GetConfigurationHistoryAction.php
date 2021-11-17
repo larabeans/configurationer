@@ -10,6 +10,6 @@ class GetConfigurationHistoryAction extends Action
 {
     public function run(GetConfigurationHistoryRequest $request)
     {
-        return app(GetConfigurationHistoryTask::class)->run($request->type);
+        return app(GetConfigurationHistoryTask::class)->run();
     }
 }

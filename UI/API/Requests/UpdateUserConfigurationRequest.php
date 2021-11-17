@@ -4,14 +4,14 @@ namespace App\Containers\Vendor\Configurationer\UI\API\Requests;
 
 use App\Ship\Parents\Requests\Request;
 
-class GetHostConfigurationRequest extends Request
+class UpdateUserConfigurationRequest extends Request
 {
     /**
      * Define which Roles and/or Permissions has access to this request.
      */
     protected array $access = [
         'permissions' => '',
-        'roles' => 'admin',
+        'roles'       => '',
     ];
 
     /**
@@ -21,7 +21,7 @@ class GetHostConfigurationRequest extends Request
         // 'id',
     ];
 
-    /**s
+    /**
      * Defining the URL parameters (e.g, `/user/{id}`) allows applying
      * validation rules on them and allows accessing them like request data.
      */
