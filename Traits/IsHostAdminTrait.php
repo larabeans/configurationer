@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 trait IsHostAdminTrait
 {
-    public function isHost(): bool
+    public function isHostAdmin(): bool
     {
         $user = Auth::user();
         if (sizeof($user->roles) == 0) {
