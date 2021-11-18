@@ -3,8 +3,10 @@
 namespace App\Containers\Vendor\Configurationer\UI\API\Controllers;
 
 use App\Containers\Vendor\Configurationer\Actions\GetConfigurationAction;
+use App\Containers\Vendor\Configurationer\Actions\GetConfigurationByDomainAction;
 use App\Containers\Vendor\Configurationer\Actions\UpdateUserConfigurationAction;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\DeleteConfigurationRequest;
+use App\Containers\Vendor\Configurationer\UI\API\Requests\GetConfigurationByDomainRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\GetConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\UpdateConfigurationRequest;
 use App\Containers\Vendor\Configurationer\UI\API\Requests\GetUserConfigurationRequest;
@@ -43,6 +45,12 @@ class Controller extends ApiController
     public function getUserConfiguration(GetUserConfigurationRequest $request)//: array
     {
         $configurations = app(GetUserConfigurationAction::class)->run($request);
+        return $this->transform($configurations, ConfigurationTransformer::class);
+    }
+
+    public function getConfigurationByDomain(GetConfigurationByDomainRequest $request)//: array
+    {
+        $configurations = app(GetConfigurationByDomainAction::class)->run($request);
         return $this->transform($configurations, ConfigurationTransformer::class);
     }
 
