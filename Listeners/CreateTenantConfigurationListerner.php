@@ -25,7 +25,7 @@ class CreateTenantConfigurationListerner
      */
     public function handle(TenantRegisteredEvent $event)
     {
-        app(CreateConfigurationTask::class)->run(['configurable_type' => 'tenant', 'configuration' => [], 'tenant_id' => $event->entity->id]);
+        app(CreateConfigurationTask::class)->run(['configurable_type' => 'tenant', 'configuration' => config('default-tenant-configuration.configuration'), 'tenant_id' => $event->entity->id]);
 
 
         // Access the tenant using $event->entity
