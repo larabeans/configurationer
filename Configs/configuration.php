@@ -165,6 +165,10 @@ return [
 //
 //        'custom' => []
     ],
+    'theme' => [
+        'logo' => 'default',
+        'css' => 'example.css'
+    ],
     'configurable_types' => [
         'user' => [
             'identifier' => 'user',
