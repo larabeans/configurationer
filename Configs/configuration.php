@@ -140,12 +140,12 @@ return [
         'timing' => [
             'time_zone_info' => [
                 // prepare from server settings
-                'server' => [
-                    'time_zone_id' => 'UTC',
-                    'base_utc_offset_in_milliseconds' => 0.0,
-                    'current_utc_offset_in_milliseconds' => 0.0,
-                    'is_day_light_saving_time_now' => false
-                ],
+//                'server' => [
+//                    'time_zone_id' => 'UTC',
+//                    'base_utc_offset_in_milliseconds' => 0.0,
+//                    'current_utc_offset_in_milliseconds' => 0.0,
+//                    'is_day_light_saving_time_now' => false
+//                ],
                 'iana' => [
                     'time_zone_id' => 'Etc / UTC'
                 ]
