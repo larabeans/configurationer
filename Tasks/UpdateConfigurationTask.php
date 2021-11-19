@@ -57,7 +57,9 @@ class UpdateConfigurationTask extends Task
             $d = [
                 'configuration' => $data['configuration']
             ];
-            return $this->repository->update($d, $configuration->id);
+            $configurations = $this->repository->update($d, $configuration->id);
+            $configurations->configuration = json_decode($configurations->configuration);
+            return $configurations;
         } catch (Exception $exception) {
             throw new UpdateResourceFailedException();
         }

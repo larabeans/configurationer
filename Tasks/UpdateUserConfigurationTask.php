@@ -55,7 +55,10 @@ class UpdateUserConfigurationTask extends Task
                 'configurable_id' => $configurableId,
                 'configuration' => json_encode($configuration)
             ];
-            return $this->repository->create($data);
+
+            $configuration = $this->repository->create($data);
+            $configuration->configuration = json_decode($configuration->configuration);
+            return $configuration;
         } catch (Exception $exception) {
             throw new CreateResourceFailedException($exception);
         }
@@ -72,7 +75,10 @@ class UpdateUserConfigurationTask extends Task
         ];
         try {
             $history = $this->historyRepository->create($historyData);
-            return $this->repository->update($data, $historyConfiguration->id);
+            $configuration = $this->repository->update($data, $historyConfiguration->id);
+            $configuration->configuration = json_decode($configuration->configuration);
+            return $configuration;
+
         } catch (Exception $exception) {
             throw new UpdateResourceFailedException();
         }
