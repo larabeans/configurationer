@@ -26,6 +26,7 @@ class GetConfigurationByDomainTask extends Task
             if ($domain == null) {
                 throw new NotFoundException();
             }
+
             $configuration = $this->repository->findWhere([
                 'configurable_id' => $domain->id,
                 'configurable_type' => config('configuration.configurable_types.tenant.class_path')
@@ -34,48 +35,33 @@ class GetConfigurationByDomainTask extends Task
             if ($configuration == null) {
                 throw new NotFoundException();
             }
-            $configuration->configuration = json_encode(array_merge((array) json_decode($configuration->configuration), $this->mergeThemeData(), $this->mergeClockAndTime()));
-            //dd(json_decode( $configuration));
-            return $configuration;
+            // $configuration->configuration = json_encode(array_merge((array)json_decode($configuration->configuration), $this->mergeThemeData(), $this->mergeClockAndTime()));
+            return $this->mergeData($configuration);
 
         } catch (Exception $exception) {
             throw new NotFoundException();
         }
-
     }
 
-    private function mergeThemeData()
+    private function mergeData($configuration)
     {
-        return [
-            "theme" => [
-                "log" => "https://www.istockphoto.com/photo/one-like-social-media-notification-with-thumb-up-icon-gm1200899039-344150884?utm_source=unsplash&utm_medium=affiliate&utm_campaign=srp_photos_top&utm_content=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Flogo&utm_term=logo%3A%3A%3A",
-                "css" => "index.css"
-            ]
-        ];
+        $config = json_decode($configuration->configuration);
+        if (isset($config->clock) && isset($config->timing) && isset($config->theme)) {
+            $configuration= (array)$config;
+            return $configuration;
+        }
+        $config = array_merge((array)$config, $this->mergeClockThemeAndTime());
+        $configuration = $config;
+        return $configuration;
     }
 
-    private function mergeClockAndTime()
+    private function mergeClockThemeAndTime()
     {
-        return [
-            'clock' => [
-                'provider' => 'unspecifiedClockProvider'
-            ],
-
-            'timing' => [
-                'time_zone_info' => [
-                    // prepare from server settings
-                    'server' => [
-                        'time_zone_id' => 'UTC',
-                        'base_utc_offset_in_milliseconds' => 0.0,
-                        'current_utc_offset_in_milliseconds' => 0.0,
-                        'is_day_light_saving_time_now' => false
-                    ],
-                    'iana' => [
-                        'time_zone_id' => 'Etc / UTC'
-                    ]
-                ]
-            ]
+        $res = [
+            'clock' => config('configuration.configuration.clock'),
+            'timing' => config('configuration.configuration.timing'),
+            'theme' => config('configuration.theme')
         ];
+        return $res;
     }
-
 }
