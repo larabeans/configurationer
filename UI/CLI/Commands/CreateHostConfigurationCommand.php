@@ -18,7 +18,10 @@ class CreateHostConfigurationCommand extends Command
         if (!empty($configuration)) {
             $this->line("<fg=red>" . "Configuration already exist.");
         } else {
-            empty(app(CreateConfigurationTask::class)->run(['configurable_type' => 'host', 'configuration' => []])) ?: $this->line("<fg=green>" . "Configuration created sucessfully");
+            empty(app(CreateConfigurationTask::class)->run([
+                'configurable_type' => 'host',
+                'configuration' => config('default-tenant-configuration.configuration')
+            ])) ?: $this->line("<fg=green>" . "Configuration created sucessfully");
         }
     }
 }
