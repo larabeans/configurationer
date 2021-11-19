@@ -47,6 +47,6 @@ class GetConfigurationHistoryTask extends Task
         if (sizeof($data) == 0) {
             throw new NotFoundException("No History");
         }
-        return json_encode($data);
+        return $data;
     }
 }
