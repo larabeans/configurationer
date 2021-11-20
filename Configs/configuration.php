@@ -1,7 +1,21 @@
 <?php
 
 return [
-    'configuration' => [
+    'configurable_types' => [
+        'user' => [
+            'identifier' => 'user',
+            'display_name' => 'User',
+            'class_path' => 'App\Containers\AppSection\User\Models\User'
+        ],
+        'tenant' => [
+            'identifier' => 'tenant',
+            'display_name' => 'Tenant',
+            'class_path' => 'App\Containers\Vendor\Tenanter\Models\Tenant'
+        ]
+    ],
+
+    'system' => [
+
         // MultiTenancy Will Remain Part of Default Configurations
         'multi_tenancy' => [
             'is_enabled' => true,
@@ -9,6 +23,35 @@ return [
             'sides' => [
                 'host' => 2, // Who is hosting multiple tenants
                 'tenant' => 1 // A customer which has its own users, roles, permissions, settings... and uses the application completely isolated from other tenants
+            ]
+        ],
+
+        // Default, configurable at HOST and TENANT level
+        'clock' => [
+            'provider' => 'unspecifiedClockProvider'
+        ],
+
+        // Default, configurable at HOST and TENANT level
+        'timing' => [
+            'time_zone_info' => [
+                // prepare from server settings
+                'server' => [
+                    'time_zone_id' => 'UTC',
+                    'base_utc_offset_in_milliseconds' => 0.0,
+                    'current_utc_offset_in_milliseconds' => 0.0,
+                    'is_day_light_saving_time_now' => false
+                ],
+                'iana' => [
+                    'time_zone_id' => 'Etc / UTC'
+                ]
+            ]
+        ],
+
+        // Default
+        'security' => [
+            'anti_forgery' => [
+                'token_cookie_name' => 'XSRF-TOKEN',
+                'token_header_name' => 'X-XSRF-TOKEN'
             ]
         ],
 
@@ -127,60 +170,23 @@ return [
 //        ],
 
         // Not implemented in first release, may be part of coming releases
-//        'features' => [
-//            'all_features' => []
-//        ],
-
-        // Default, configurable at HOST and TENANT level
-        'clock' => [
-            'provider' => 'unspecifiedClockProvider'
+        'features' => [
+            'all_features' => []
         ],
-
-        // Default, configurable at HOST and TENANT level
-        'timing' => [
-            'time_zone_info' => [
-                // prepare from server settings
-//                'server' => [
-//                    'time_zone_id' => 'UTC',
-//                    'base_utc_offset_in_milliseconds' => 0.0,
-//                    'current_utc_offset_in_milliseconds' => 0.0,
-//                    'is_day_light_saving_time_now' => false
-//                ],
-                'iana' => [
-                    'time_zone_id' => 'Etc / UTC'
-                ]
-            ]
-        ],
-
-        // Default
-//        'security' => [
-//            'anti_forgery' => [
-//                'token_cookie_name' => 'XSRF-TOKEN',
-//                'token_header_name' => 'X-XSRF-TOKEN'
-//            ]
-//        ],
 
         // Settings will be created dynamically
-//        'settings' => [],
-//
-//        'custom' => []
+        'settings' => [],
+
+        'custom' => []
     ],
-    'theme' => [
+
+    'appearance' => [
         'logo' => 'default',
         'css' => 'example.css'
     ],
-    'configurable_types' => [
-        'user' => [
-            'identifier' => 'user',
-            'display_name' => 'User',
-            'class_path' => 'App\Containers\AppSection\User\Models\User'
-        ],
-        'tenant' => [
-            'identifier' => 'tenant',
-            'display_name' => 'Tenant',
-            'class_path' => 'App\Containers\Vendor\Tenanter\Models\Tenant'
-        ]
-    ],
+
+    // [depreciated] Old setting form, remove after team discussions
+    // this is replace with below default (after making sure this is not referenced anywhere)
     'settings' => [
         'general' => [
             'clock' => 'UTC' //UTC,Unspecified,Local
@@ -189,8 +195,10 @@ return [
             'form_based_registration' => [
                 'allowed' => true,
                 'active_by_default' => 'admin',
-                'default_mode' => 'active' // active,passive
-
+                'default_mode' => 'active' // active: can login, passive: can not login
+            ],
+            'profile' => [
+                'avatar' => true
             ],
             'session' => [
                 'timeout' => 0.0,
@@ -202,9 +210,6 @@ return [
             'other' => [
                 'email_confirmation' => true
             ],
-            'profile' => [
-                'avatar' => true
-            ]
         ],
         'user_management' => [
             'form_based_registration' => [
@@ -243,5 +248,51 @@ return [
             'address' => null,
             'tax #' => 0000
         ]
+    ],
+
+    // Configuration form default (also used as default while creating new tenant's)
+    'default' => [
+        "appearance" => [
+            "animation_logo" => null,
+            "style" => null
+        ],
+        "user_management" => [
+            "register_user_in_system" => true,
+            "new_user_active_by_default" => true,
+            "captcha_on_registration" => true,
+            "captcha_on_login" => true,
+            "enabled_cookie_consent" => true,
+            "enabled_session_timeout" => false,
+            "email_confirmation_for_login" => false,
+            "allow_profile_picture" => true
+        ],
+        "security" => [
+            "user_default_settings" => true,
+            "user_account_locking" => true,
+            "number_of_login_attemps" => 222,
+            "account_locking_duration" => 333,
+            "password" => [
+                "require_digit" => false,
+                "require_lowercase" => true,
+                "require_non_alphanumeric" => false,
+                "require_uppercase" => true,
+                "password_length" => 111,
+            ]
+        ],
+        "invoice" => [
+            "name" => "Legal Name",
+            "address" => "VPO",
+            "tax_number" => "313133"
+        ],
+        'clock' => [
+            'provider' => 'unspecifiedClockProvider'
+        ],
+        'timing' => [
+            'time_zone_info' => [
+                'iana' => [
+                    'time_zone_id' => 'Etc / UTC'
+                ]
+            ]
+        ],
     ]
 ];

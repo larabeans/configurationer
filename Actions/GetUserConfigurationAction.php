@@ -10,7 +10,6 @@ class GetUserConfigurationAction extends Action
 {
     public function run(Request $request)
     {
-
         return app(GetUserConfigurationTask::class)->run();
     }
 }

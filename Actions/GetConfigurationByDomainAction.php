@@ -11,7 +11,6 @@ class GetConfigurationByDomainAction extends Action
 {
     public function run(GetConfigurationByDomainRequest $request)
     {
-        //dd($request->header('Axis-Host'));
         return app(GetConfigurationByDomainTask::class)->run($request->header('Axis-Host'));
     }
 }

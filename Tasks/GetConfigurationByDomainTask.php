@@ -4,7 +4,6 @@ namespace App\Containers\Vendor\Configurationer\Tasks;
 
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
 use App\Containers\Vendor\Tenanter\Data\Repositories\TenantRepository;
-use App\Ship\Exceptions\NotFoundException;
 use Exception;
 use App\Ship\Parents\Tasks\Task;
 
@@ -58,8 +57,8 @@ class GetConfigurationByDomainTask extends Task
     private function mergeClockThemeAndTime()
     {
         $res = [
-            'clock' => config('configuration.configuration.clock'),
-            'timing' => config('configuration.configuration.timing'),
+            'clock' => config('configuration.system.clock'),
+            'timing' => config('configuration.system.timing'),
             'theme' => config('configuration.theme')
         ];
         return $res;

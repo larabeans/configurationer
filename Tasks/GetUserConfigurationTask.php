@@ -6,7 +6,6 @@ use App\Containers\AppSection\Authorization\Tasks\FindRoleTask;
 use App\Containers\AppSection\Authorization\Tasks\GetAllPermissionsTask;
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
 use App\Containers\Vendor\Configurationer\Traits\IsHostAdminTrait;
-use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Tasks\Task;
 use Illuminate\Support\Facades\Auth;
 
@@ -109,8 +108,8 @@ class GetUserConfigurationTask extends Task
     private function mergeClockThemeAndTime()
     {
         $res = [
-            'clock' => config('configuration.configuration.clock'),
-            'timing' => config('configuration.configuration.timing'),
+            'clock' => config('configuration.system.clock'),
+            'timing' => config('configuration.system.timing'),
             'theme' => config('configuration.theme')
         ];
         return $res;
