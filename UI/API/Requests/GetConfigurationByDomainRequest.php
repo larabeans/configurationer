@@ -4,21 +4,21 @@ namespace App\Containers\Vendor\Configurationer\UI\API\Requests;
 
 use App\Ship\Parents\Requests\Request;
 
-class UpdateConfigurationRequest extends Request
+class GetConfigurationByDomainRequest extends Request
 {
     /**
      * Define which Roles and/or Permissions has access to this request.
      */
     protected array $access = [
         'permissions' => '',
-        'roles' => '',
+        'roles'       => '',
     ];
 
     /**
      * Id's that needs decoding before applying the validation rules.
      */
     protected array $decode = [
-       // 'id',
+        // 'id',
     ];
 
     /**
@@ -26,6 +26,7 @@ class UpdateConfigurationRequest extends Request
      * validation rules on them and allows accessing them like request data.
      */
     protected array $urlParameters = [
+         //'domain',
     ];
 
     /**
@@ -34,7 +35,7 @@ class UpdateConfigurationRequest extends Request
     public function rules(): array
     {
         return [
-           // 'type' => 'required'
+            // 'domain' => 'required'
         ];
     }
 

@@ -6,13 +6,10 @@ use App\Containers\AppSection\Authorization\Tasks\FindRoleTask;
 use App\Containers\AppSection\Authorization\Tasks\GetAllPermissionsTask;
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
 use App\Containers\Vendor\Configurationer\Traits\IsHostAdminTrait;
-use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Tasks\Task;
-use Exception;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
-class GetConfigurationTask extends Task
+class GetUserConfigurationTask extends Task
 {
     use IsHostAdminTrait;
 
@@ -23,46 +20,46 @@ class GetConfigurationTask extends Task
         $this->repository = $repository;
     }
 
-    public function run($type = null)
+    public function run()
     {
         $configurationData = null;
-
-        if ($type !== null) {
-            $configurationData = $this->repository->where([
-                'tenant_id' => null,
-                'configurable_id' => '',
-                "configurable_type" => ''
-            ])->first();
-        } else {
-            if (Auth::user()->tenant_id == null) {
-                if ($this->isHostAdmin() == false) {
-                    $configurableId = Auth::user()->id;
-                    $configurationData = $this->repository->where([
-                        "configurable_id" => $configurableId,
-                        "configurable_type" => config('configuration.configurable_types.user.class_path')
-                    ])->first();
-                } else {
-                    $configurationData = $this->repository->where([
-                        'tenant_id' => null,
-                        'configurable_id' => '',
-                        "configurable_type" => ''
-                    ])->first();
-                }
-            } elseif (Auth::user()->tenant_id !== null) {
-                $configurableId = Auth::user()->tenant_id;
+        if (Auth::user()->tenant_id == null) {
+            if ($this->isHostAdmin() == false) {
+                $configurableId = Auth::user()->id;
                 $configurationData = $this->repository->where([
                     "configurable_id" => $configurableId,
-                    "configurable_type" => config('configuration.configurable_types.tenant.class_path')
+                    "configurable_type" => config('configuration.configurable_types.user.class_path')
+                ])->first();
+            } else {
+                $configurationData = $this->repository->where([
+                    'tenant_id' => null,
+                    'configurable_id' => '',
+                    "configurable_type" => ''
                 ])->first();
             }
-            if (!$configurationData) {
-                throw new NotFoundException("No Configuration Found");
-            }
-
-            $userData = $this->getSessionAndPermissionData();
-            $configurationData->configuration = array_merge((array)json_decode($configurationData->configuration), $userData);
+        } elseif (Auth::user()->tenant_id !== null) {
+            $configurableId = Auth::user()->tenant_id;
+            $configurationData = $this->repository->where([
+                "configurable_id" => $configurableId,
+                "configurable_type" => config('configuration.configurable_types.tenant.class_path')
+            ])->first();
         }
+        if (!$configurationData) {
+            throw new NotFoundException("No Configuration Found");
+        }
+
+        $userData = $this->getSessionAndPermissionData();
+        $configurationData = array_merge($this->mergeData($configurationData), $userData);
         return $configurationData;
+    }
+
+    private function mergeData($configuration)
+    {
+        $config = json_decode($configuration->configuration);
+
+        $config = array_merge((array)$config, $this->mergeClockThemeAndTime());
+        $configuration->configuration = $config;
+        return $config;
     }
 
     private function getSessionAndPermissionData()
@@ -106,5 +103,15 @@ class GetConfigurationTask extends Task
         }
         $response = array_merge($data, ['session' => $session], ['auth' => $auth]);
         return $response;
+    }
+
+    private function mergeClockThemeAndTime()
+    {
+        $res = [
+            'clock' => config('configuration.system.clock'),
+            'timing' => config('configuration.system.timing'),
+            'theme' => config('configuration.theme')
+        ];
+        return $res;
     }
 }

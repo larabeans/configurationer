@@ -4,7 +4,7 @@ namespace App\Containers\Vendor\Configurationer\Tasks;
 
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationHistoryRepository;
-use App\Containers\Vendor\Configurationer\Traits\IsHostTrait;
+use App\Containers\Vendor\Configurationer\Traits\IsHostAdminTrait;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Exceptions\UpdateResourceFailedException;
 use App\Ship\Parents\Tasks\Task;
@@ -15,7 +15,7 @@ use Illuminate\Validation\UnauthorizedException;
 
 class UpdateConfigurationTask extends Task
 {
-    use IsHostTrait;
+    use IsHostAdminTrait;
 
     protected ConfigurationRepository $repository;
     protected ConfigurationHistoryRepository $historyRepository;
@@ -30,7 +30,7 @@ class UpdateConfigurationTask extends Task
     {
         $configurableId = null;
         $configuration = null;
-        if (Auth::user()->tenant_id == null && $this->isHost()) {
+        if (Auth::user()->tenant_id == null && $this->isHostAdmin()) {
             $configuration = $this->repository->findWhere([
                 'tenant_id' => null,
                 'configurable_id' => ''
@@ -57,7 +57,9 @@ class UpdateConfigurationTask extends Task
             $d = [
                 'configuration' => $data['configuration']
             ];
-            return $this->repository->update($d, $configuration->id);
+            $configurations = $this->repository->update($d, $configuration->id);
+            $configurations->configuration = json_decode($configurations->configuration);
+            return $configurations;
         } catch (Exception $exception) {
             throw new UpdateResourceFailedException();
         }

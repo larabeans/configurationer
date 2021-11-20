@@ -4,7 +4,7 @@ namespace App\Containers\Vendor\Configurationer\Tasks;
 
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationHistoryRepository;
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
-use App\Containers\Vendor\Configurationer\Traits\IsHostTrait;
+use App\Containers\Vendor\Configurationer\Traits\IsHostAdminTrait;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Tasks\Task;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class GetConfigurationHistoryTask extends Task
 {
-    use IsHostTrait;
+    use IsHostAdminTrait;
 
     protected ConfigurationHistoryRepository $repository;
     protected ConfigurationRepository $configurationRepository;
@@ -27,7 +27,7 @@ class GetConfigurationHistoryTask extends Task
     {
         $configurationData = null;
         if (Auth::user()->tenant_id == null) {
-            if ($this->isHost() == false) {
+            if ($this->isHostAdmin() == false) {
                 $configurableId = Auth::user()->id;
                 $configurationData = DB::table('configurations')->where("configurable_id", $configurableId)->first();
             } else {
@@ -47,6 +47,6 @@ class GetConfigurationHistoryTask extends Task
         if (sizeof($data) == 0) {
             throw new NotFoundException("No History");
         }
-        return json_encode($data);
+        return $data;
     }
 }
