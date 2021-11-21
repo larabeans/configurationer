@@ -2,9 +2,9 @@
 
 namespace App\Containers\Vendor\Configurationer\Providers;
 
-use App\Containers\Vendor\Configurationer\Listeners\TenantRegsiteredEventListener;
+use App\Containers\Vendor\Configurationer\Listeners\CreateRegisteredTenantConfiguration;
 
-use App\Containers\Vendor\Tenanter\Events\TenantRegisteredEvent;
+use App\Containers\Vendor\Tenanter\Events\TenantRegistered;
 use App\Ship\Parents\Providers\MainProvider;
 use Illuminate\Support\Facades\Event;
 
@@ -38,9 +38,6 @@ class MainServiceProvider extends MainProvider
     public function register(): void
     {
         parent::register();
-
-        // $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
-        // ...
     }
 
     public function boot(): void
@@ -48,8 +45,8 @@ class MainServiceProvider extends MainProvider
         parent::boot();
 
         Event::listen(
-            TenantRegisteredEvent::class,
-            [TenantRegsiteredEventListener::class, 'handle']
+            TenantRegistered::class,
+            [CreateRegisteredTenantConfiguration::class, 'handle']
         );
     }
 }
