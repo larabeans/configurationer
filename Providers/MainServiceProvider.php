@@ -44,9 +44,8 @@ class MainServiceProvider extends MainProvider
     {
         parent::boot();
 
-        Event::listen(
-            TenantRegistered::class,
-            [CreateRegisteredTenantConfiguration::class, 'handle']
-        );
+        Event::listen(TenantRegistered::class, [
+            CreateRegisteredTenantConfiguration::class, 'handle'
+        ]);
     }
 }
