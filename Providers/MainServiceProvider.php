@@ -2,7 +2,7 @@
 
 namespace App\Containers\Vendor\Configurationer\Providers;
 
-use App\Containers\Vendor\Configurationer\Listeners\CreateTenantConfigurationListerner;
+use App\Containers\Vendor\Configurationer\Listeners\TenantRegsiteredEventListener;
 
 use App\Containers\Vendor\Tenanter\Events\TenantRegisteredEvent;
 use App\Ship\Parents\Providers\MainProvider;
@@ -49,7 +49,7 @@ class MainServiceProvider extends MainProvider
 
         Event::listen(
             TenantRegisteredEvent::class,
-            [CreateTenantConfigurationListerner::class, 'handle']
+            [TenantRegsiteredEventListener::class, 'handle']
         );
     }
 }
