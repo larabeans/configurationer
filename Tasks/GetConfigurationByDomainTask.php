@@ -6,6 +6,7 @@ use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationReposit
 use App\Containers\Vendor\Tenanter\Data\Repositories\TenantRepository;
 use Exception;
 use App\Ship\Parents\Tasks\Task;
+use App\Ship\Exceptions\NotFoundException;
 
 class GetConfigurationByDomainTask extends Task
 {
@@ -21,19 +22,13 @@ class GetConfigurationByDomainTask extends Task
     public function run($domain)
     {
         try {
-            $domain = $this->tenantRepository->findWhere(['domain' => $domain])->first();
-            if ($domain == null) {
-                throw new NotFoundException();
-            }
+            $domain = $this->tenantRepository->findWhere(['domain' => 'tenant.com'])->first();
 
             $configuration = $this->repository->findWhere([
                 'configurable_id' => $domain->id,
                 'configurable_type' => config('configuration.configurable_types.tenant.class_path')
             ])->first();
 
-            if ($configuration == null) {
-                throw new NotFoundException();
-            }
             // $configuration->configuration = json_encode(array_merge((array)json_decode($configuration->configuration), $this->mergeThemeData(), $this->mergeClockAndTime()));
             return $this->mergeData($configuration);
 

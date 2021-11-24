@@ -27,7 +27,7 @@ class GetDefaultConfigurationTask extends Task
         $settingData = [];
 
 
-        $configData = config('configuration.configuration');
+        $configData = config('configuration.system', false);
 //        $user = app(GetAuthenticatedUserTask::class)->run();
 //
 //        $allPermissions = app(GetAllPermissionsTask::class)->run(true);
