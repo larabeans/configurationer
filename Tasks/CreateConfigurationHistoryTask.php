@@ -2,10 +2,10 @@
 
 namespace App\Containers\Vendor\Configurationer\Tasks;
 
-use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationHistoryRepository;
+use Exception;
 use App\Ship\Exceptions\CreateResourceFailedException;
 use App\Ship\Parents\Tasks\Task;
-use Exception;
+use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationHistoryRepository;
 
 class CreateConfigurationHistoryTask extends Task
 {
