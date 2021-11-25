@@ -2,12 +2,12 @@
 
 namespace App\Containers\Vendor\Configurationer\Tasks;
 
-use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
+use Exception;
+use Illuminate\Support\Facades\Auth;
 use App\Ship\Exceptions\CreateResourceFailedException;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Tasks\Task;
-use Exception;
-use Illuminate\Support\Facades\Auth;
+use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
 
 class CreateConfigurationTask extends Task
 {
@@ -45,7 +45,6 @@ class CreateConfigurationTask extends Task
                 if ($type == "user") {
                     $Configurable_id = Auth::user()->id;
                 } elseif ($type == "tenant") {
-
                     //if data comming from TenantRegisteredListener, get tenant_id from data else from auth token
                     if (isset($data['tenant_id'])) {
                         $Configurable_id = $data['tenant_id'];
