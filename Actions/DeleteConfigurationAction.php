@@ -2,9 +2,9 @@
 
 namespace App\Containers\Vendor\Configurationer\Actions;
 
-use App\Containers\Vendor\Configurationer\Tasks\DeleteConfigurationTask;
 use App\Ship\Parents\Actions\Action;
 use App\Ship\Parents\Requests\Request;
+use App\Containers\Vendor\Configurationer\Tasks\DeleteConfigurationTask;
 
 class DeleteConfigurationAction extends Action
 {
