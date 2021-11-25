@@ -2,16 +2,19 @@
 
 namespace App\Containers\Vendor\Configurationer\Tasks;
 
+use Illuminate\Support\Facades\Auth;
+use App\Ship\Parents\Tasks\Task;
+use App\Ship\Exceptions\NotFoundException;
+use App\Containers\Vendor\Tenanter\Traits\IsTenantAdminTrait;
 use App\Containers\AppSection\Authorization\Tasks\FindRoleTask;
 use App\Containers\AppSection\Authorization\Tasks\GetAllPermissionsTask;
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
-use App\Containers\Vendor\Configurationer\Traits\IsHostAdminTrait;
-use App\Ship\Parents\Tasks\Task;
-use Illuminate\Support\Facades\Auth;
+use App\Containers\Vendor\Beaner\Traits\IsHostAdminTrait;
 
 class GetUserConfigurationTask extends Task
 {
     use IsHostAdminTrait;
+    use IsTenantAdminTrait;
 
     protected ConfigurationRepository $repository;
 
@@ -23,26 +26,26 @@ class GetUserConfigurationTask extends Task
     public function run()
     {
         $configurationData = null;
-        if (Auth::user()->tenant_id == null) {
-            if ($this->isHostAdmin() == false) {
+        if (Auth::user()->tenant_id == null && $this->isHostAdmin()) {
+            $configurationData = $this->repository->where([
+                'tenant_id' => null,
+                'configurable_id' => '',
+                "configurable_type" => ''
+            ])->first();
+        } elseif (Auth::user()->tenant_id !== null) {
+            if ($this->isTenantAdmin(Auth::user()->tenant_id)) {
+                $configurableId = Auth::user()->tenant_id;
+                $configurationData = $this->repository->where([
+                    "configurable_id" => $configurableId,
+                    "configurable_type" => config('configuration.configurable_types.tenant.class_path')
+                ])->first();
+            } else {
                 $configurableId = Auth::user()->id;
                 $configurationData = $this->repository->where([
                     "configurable_id" => $configurableId,
                     "configurable_type" => config('configuration.configurable_types.user.class_path')
                 ])->first();
-            } else {
-                $configurationData = $this->repository->where([
-                    'tenant_id' => null,
-                    'configurable_id' => '',
-                    "configurable_type" => ''
-                ])->first();
             }
-        } elseif (Auth::user()->tenant_id !== null) {
-            $configurableId = Auth::user()->tenant_id;
-            $configurationData = $this->repository->where([
-                "configurable_id" => $configurableId,
-                "configurable_type" => config('configuration.configurable_types.tenant.class_path')
-            ])->first();
         }
         if (!$configurationData) {
             throw new NotFoundException("No Configuration Found");
@@ -110,7 +113,7 @@ class GetUserConfigurationTask extends Task
         $res = [
             'clock' => config('configuration.system.clock'),
             'timing' => config('configuration.system.timing'),
-            'theme' => config('configuration.theme')
+            'theme' => config('configuration.appearance')
         ];
         return $res;
     }
