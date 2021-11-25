@@ -2,13 +2,13 @@
 
 namespace App\Containers\Vendor\Configurationer\Tasks;
 
-use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationHistoryRepository;
-use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
-use App\Containers\Vendor\Configurationer\Traits\IsHostAdminTrait;
-use App\Ship\Exceptions\NotFoundException;
-use App\Ship\Parents\Tasks\Task;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Ship\Exceptions\NotFoundException;
+use App\Ship\Parents\Tasks\Task;
+use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationHistoryRepository;
+use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
+use App\Containers\Vendor\Beaner\Traits\IsHostAdminTrait;
 
 class GetConfigurationHistoryTask extends Task
 {
