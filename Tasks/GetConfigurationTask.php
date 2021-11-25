@@ -2,19 +2,17 @@
 
 namespace App\Containers\Vendor\Configurationer\Tasks;
 
-use App\Containers\AppSection\Authorization\Tasks\FindRoleTask;
-use App\Containers\AppSection\Authorization\Tasks\GetAllPermissionsTask;
-use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
-use App\Containers\Vendor\Configurationer\Traits\IsHostAdminTrait;
+use App\Containers\Vendor\Tenanter\Traits\IsTenantAdminTrait;
+use Illuminate\Support\Facades\Auth;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Tasks\Task;
-use Exception;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
+use App\Containers\Vendor\Beaner\Traits\IsHostAdminTrait;
 
 class GetConfigurationTask extends Task
 {
     use IsHostAdminTrait;
+    use IsTenantAdminTrait;
 
     protected ConfigurationRepository $repository;
 
@@ -26,7 +24,6 @@ class GetConfigurationTask extends Task
     public function run($type = null)
     {
         $configurationData = null;
-
         if ($type !== null) {
             $configurationData = $this->repository->where([
                 'tenant_id' => null,
@@ -34,77 +31,32 @@ class GetConfigurationTask extends Task
                 "configurable_type" => ''
             ])->first();
         } else {
-            if (Auth::user()->tenant_id == null) {
-                if ($this->isHostAdmin() == false) {
+            if (Auth::user()->tenant_id == null && $this->isHostAdmin()) {
+                $configurationData = $this->repository->where([
+                    'tenant_id' => null,
+                    'configurable_id' => '',
+                    "configurable_type" => ''
+                ])->first();
+            } elseif (Auth::user()->tenant_id !== null) {
+                if ($this->isTenantAdmin(Auth::user()->tenant_id)) {
+                    $configurableId = Auth::user()->tenant_id;
+                    $configurationData = $this->repository->where([
+                        "configurable_id" => $configurableId,
+                        "configurable_type" => config('configuration.configurable_types.tenant.class_path')
+                    ])->first();
+                } else {
                     $configurableId = Auth::user()->id;
                     $configurationData = $this->repository->where([
                         "configurable_id" => $configurableId,
                         "configurable_type" => config('configuration.configurable_types.user.class_path')
                     ])->first();
-                } else {
-                    $configurationData = $this->repository->where([
-                        'tenant_id' => null,
-                        'configurable_id' => '',
-                        "configurable_type" => ''
-                    ])->first();
                 }
-            } elseif (Auth::user()->tenant_id !== null) {
-                $configurableId = Auth::user()->tenant_id;
-                $configurationData = $this->repository->where([
-                    "configurable_id" => $configurableId,
-                    "configurable_type" => config('configuration.configurable_types.tenant.class_path')
-                ])->first();
             }
             if (!$configurationData) {
                 throw new NotFoundException("No Configuration Found");
             }
-
-            $userData = $this->getSessionAndPermissionData();
-            $configurationData->configuration = array_merge((array)json_decode($configurationData->configuration), $userData);
+            $configurationData->configuration = json_decode($configurationData->configuration);
         }
         return $configurationData;
-    }
-
-    private function getSessionAndPermissionData()
-    {
-        $assignedPermissionData = [];
-        $allPermissionsData = [];
-        $auth = [];
-        $session = [];
-        $data = [];
-        $user = Auth::user();
-
-        $allPermissions = app(GetAllPermissionsTask::class)->run(true);
-        foreach ($allPermissions as $value) {
-            array_push($allPermissionsData, $value->name);
-        }
-
-        //checking if user has role, if it has fetch all the permission assign to role
-        if (sizeof($user->roles) == 0) {
-
-            $auth['granted_permissions'] = null;
-        } else {
-            foreach ($user->roles as $role) {
-                $roleData = app(FindRoleTask::class)->run($role->id);
-
-                foreach ($roleData->permissions as $r) {
-                    array_push($assignedPermissionData, $r->name);
-                }
-            };
-            $assignedPermissionData = array_unique($assignedPermissionData);
-            $auth['granted_permissions'] = $assignedPermissionData;
-        }
-        $auth['all_permissions'] = $allPermissionsData;
-        $session['user_id'] = $user->id;
-
-        if ($user->tenant_id == null) {
-            $session['tenant_id'] = null;
-            $session['multi_tenancy_side'] = 2;
-        } else {
-            $session['tenant_id'] = $user->tenant_id;
-            $session['multi_tenancy_side'] = 1;
-        }
-        $response = array_merge($data, ['session' => $session], ['auth' => $auth]);
-        return $response;
     }
 }
