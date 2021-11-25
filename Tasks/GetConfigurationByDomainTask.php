@@ -2,11 +2,11 @@
 
 namespace App\Containers\Vendor\Configurationer\Tasks;
 
-use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
-use App\Containers\Vendor\Tenanter\Data\Repositories\TenantRepository;
 use Exception;
 use App\Ship\Parents\Tasks\Task;
 use App\Ship\Exceptions\NotFoundException;
+use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
+use App\Containers\Vendor\Tenanter\Data\Repositories\TenantRepository;
 
 class GetConfigurationByDomainTask extends Task
 {
@@ -22,16 +22,12 @@ class GetConfigurationByDomainTask extends Task
     public function run($domain)
     {
         try {
-            $domain = $this->tenantRepository->findWhere(['domain' => 'tenant.com'])->first();
-
+            $domain = $this->tenantRepository->findWhere(['domain' => $domain])->first();
             $configuration = $this->repository->findWhere([
                 'configurable_id' => $domain->id,
                 'configurable_type' => config('configuration.configurable_types.tenant.class_path')
             ])->first();
-
-            // $configuration->configuration = json_encode(array_merge((array)json_decode($configuration->configuration), $this->mergeThemeData(), $this->mergeClockAndTime()));
             return $this->mergeData($configuration);
-
         } catch (Exception $exception) {
             throw new NotFoundException();
         }
@@ -41,7 +37,7 @@ class GetConfigurationByDomainTask extends Task
     {
         $config = json_decode($configuration->configuration);
         if (isset($config->clock) && isset($config->timing) && isset($config->theme)) {
-            $configuration= (array)$config;
+            $configuration = (array)$config;
             return $configuration;
         }
         $config = array_merge((array)$config, $this->mergeClockThemeAndTime());
@@ -54,7 +50,7 @@ class GetConfigurationByDomainTask extends Task
         $res = [
             'clock' => config('configuration.system.clock'),
             'timing' => config('configuration.system.timing'),
-            'theme' => config('configuration.theme')
+            'theme' => config('configuration.appearance')
         ];
         return $res;
     }
