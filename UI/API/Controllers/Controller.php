@@ -29,51 +29,54 @@ class Controller extends ApiController
 
     public function getConfigurationHistory(GetConfigurationHistoryRequest $request)
     {
-        $configurations = app(GetConfigurationHistoryAction::class)->run($request);
-        return $this->transform($configurations, ConfigurationHistoryTransformer::class);
+        return $this->transform(
+            app(GetConfigurationHistoryAction::class)->run($request),
+            ConfigurationHistoryTransformer::class
+        );
     }
 
-    public function defaultConfiguration(GetDefaultConfigurationRequest $request): array
+    public function getSystemConfiguration(GetDefaultConfigurationRequest $request): array
     {
         // TODO:
         // 1. Load Default from config file
         // 2. Load From DB where Teanant is null (HOST Config)
         // 3. Load from from DB, using tenant id
         // Merge by overwriting as priority Tenant Config > Host Config > Default Config
-        $configurations = app(GetSystemConfigurationAction::class)->run($request);
-        return $configurations;
+        return app(GetSystemConfigurationAction::class)->run($request);
     }
 
     public function getUserConfiguration(GetUserConfigurationRequest $request)//: array
     {
-        $configurations = app(GetUserConfigurationAction::class)->run($request);
-        return $configurations;
-        //return $this->transform($configurations, ConfigurationTransformer::class);
+        return app(GetUserConfigurationAction::class)->run($request);
     }
 
-    public function getConfigurationByDomain(GetDomainConfigurationRequest $request)//: array
+    public function getDomainConfiguration(GetDomainConfigurationRequest $request)//: array
     {
-        $configurations = app(GetDomainConfigurationAction::class)->run($request);
-        return $configurations;
-//        return $this->transform($configurations, ConfigurationTransformer::class);
+        return app(GetDomainConfigurationAction::class)->run($request);
     }
 
     public function getConfiguration(GetConfigurationRequest $request)//: array
     {
-        $configurations = app(GetConfigurationAction::class)->run($request);
-        return $this->transform($configurations, ConfigurationTransformer::class);
+        return $this->transform(
+            app(GetConfigurationAction::class)->run($request),
+            ConfigurationTransformer::class
+        );
     }
 
     public function updateConfiguration(UpdateConfigurationRequest $request)
     {
-        $configuration = app(UpdateConfigurationAction::class)->run($request);
-        return $this->transform($configuration, ConfigurationTransformer::class);
+        return $this->transform(
+            app(UpdateConfigurationAction::class)->run($request),
+            ConfigurationTransformer::class
+        );
     }
 
     public function updateUserConfiguration(UpdateUserConfigurationRequest $request)
     {
-        $configuration = app(UpdateUserConfigurationAction::class)->run($request);
-        return $this->transform($configuration, ConfigurationTransformer::class);
+        return $this->transform(
+            app(UpdateUserConfigurationAction::class)->run($request),
+            ConfigurationTransformer::class
+        );
     }
 
     public function deleteConfiguration(DeleteConfigurationRequest $request): JsonResponse

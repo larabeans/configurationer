@@ -10,7 +10,7 @@ class CreateHostConfigurationCommand extends Command
 {
     protected $description = 'Generate host configuration';
 
-    protected $name = 'larabeans:host:configuration';
+    protected $name = 'configurationer:setup:host';
 
     public function handle()
     {
