@@ -22,7 +22,7 @@
 use App\Containers\Vendor\Configurationer\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::get('configurations/domain', [Controller::class, 'getConfigurationByDomain'])
-    ->name('api_configurationer_get_configuration_by_domain');
+Route::get('configurations/domain', [Controller::class, 'getDomainConfiguration'])
+    ->name('api_configurationer_get_domain_configuration');
     //->middleware(['auth:api']);
 

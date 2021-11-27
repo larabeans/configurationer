@@ -5,7 +5,7 @@ namespace App\Containers\Vendor\Configurationer\Tasks;
 use App\Ship\Parents\Tasks\Task;
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
 
-class GetDefaultConfigurationTask extends Task
+class GetSystemConfigurationTask extends Task
 {
     protected ConfigurationRepository $repository;
 

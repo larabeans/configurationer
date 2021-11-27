@@ -25,6 +25,7 @@ class GetUserConfigurationTask extends Task
 
     public function run()
     {
+        // TODO: Need Refactoring
         $configurationData = null;
         if (Auth::user()->tenant_id == null && $this->isHostAdmin()) {
             $configurationData = $this->repository->where([

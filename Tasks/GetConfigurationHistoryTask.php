@@ -25,6 +25,7 @@ class GetConfigurationHistoryTask extends Task
 
     public function run()
     {
+        // TODO: Need Refactoring
         $configurationData = null;
         if (Auth::user()->tenant_id == null) {
             if ($this->isHostAdmin() == false) {

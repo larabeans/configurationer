@@ -8,7 +8,7 @@ use App\Ship\Exceptions\NotFoundException;
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
 use App\Containers\Vendor\Tenanter\Data\Repositories\TenantRepository;
 
-class GetConfigurationByDomainTask extends Task
+class GetDomainConfigurationTask extends Task
 {
     protected ConfigurationRepository $repository;
     protected TenantRepository $tenantRepository;
@@ -27,31 +27,29 @@ class GetConfigurationByDomainTask extends Task
                 'configurable_id' => $domain->id,
                 'configurable_type' => config('configuration.configurable_types.tenant.class_path')
             ])->first();
-            return $this->mergeData($configuration);
+            return $this->validate($configuration);
         } catch (Exception $exception) {
             throw new NotFoundException();
         }
     }
 
-    private function mergeData($configuration)
+    private function validate($configuration)
     {
-        $config = json_decode($configuration->configuration);
-        if (isset($config->clock) && isset($config->timing) && isset($config->theme)) {
-            $configuration = (array)$config;
-            return $configuration;
+        $configuration = json_decode($configuration->configuration);
+
+        if (isset($configuration->clock) && isset($configuration->timing) && isset($configuration->appearance)) {
+           return (array) $configuration;
         }
-        $config = array_merge((array)$config, $this->mergeClockThemeAndTime());
-        $configuration = $config;
-        return $configuration;
+
+        return array_merge( (array) $configuration, $this->getDefault());
     }
 
-    private function mergeClockThemeAndTime()
+    private function getDefault()
     {
-        $res = [
-            'clock' => config('configuration.system.clock'),
-            'timing' => config('configuration.system.timing'),
-            'theme' => config('configuration.appearance')
+        return  [
+            'clock' => config('configuration.default.clock'),
+            'timing' => config('configuration.default.timing'),
+            'appearance' => config('configuration.default.appearance')
         ];
-        return $res;
     }
 }

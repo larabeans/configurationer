@@ -23,6 +23,7 @@ class GetConfigurationTask extends Task
 
     public function run($type = null)
     {
+        // TODO: Need Refactoring
         $configurationData = null;
         if ($type !== null) {
             $configurationData = $this->repository->where([
