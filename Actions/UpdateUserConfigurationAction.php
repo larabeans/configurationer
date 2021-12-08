@@ -2,10 +2,10 @@
 
 namespace App\Containers\Vendor\Configurationer\Actions;
 
-use App\Containers\Vendor\Configurationer\Models\Configuration;
-use App\Containers\Vendor\Configurationer\Tasks\UpdateUserConfigurationTask;
 use App\Ship\Parents\Actions\Action;
 use App\Ship\Parents\Requests\Request;
+use App\Containers\Vendor\Configurationer\Models\Configuration;
+use App\Containers\Vendor\Configurationer\Tasks\UpdateUserConfigurationTask;
 
 class UpdateUserConfigurationAction extends Action
 {

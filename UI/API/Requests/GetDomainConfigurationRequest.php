@@ -4,7 +4,7 @@ namespace App\Containers\Vendor\Configurationer\UI\API\Requests;
 
 use App\Ship\Parents\Requests\Request;
 
-class GetConfigurationByDomainRequest extends Request
+class GetDomainConfigurationRequest extends Request
 {
     /**
      * Define which Roles and/or Permissions has access to this request.

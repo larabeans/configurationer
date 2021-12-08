@@ -2,9 +2,9 @@
 
 namespace App\Containers\Vendor\Configurationer\Actions;
 
-use App\Containers\Vendor\Configurationer\Tasks\GetUserConfigurationTask;
 use App\Ship\Parents\Actions\Action;
 use App\Ship\Parents\Requests\Request;
+use App\Containers\Vendor\Configurationer\Tasks\GetUserConfigurationTask;
 
 class GetUserConfigurationAction extends Action
 {
