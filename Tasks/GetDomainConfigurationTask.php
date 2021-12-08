@@ -23,11 +23,15 @@ class GetDomainConfigurationTask extends Task
     {
         try {
             $domain = $this->tenantRepository->findWhere(['domain' => $domain])->first();
-            $configuration = $this->repository->findWhere([
-                'configurable_id' => $domain->id,
-                'configurable_type' => config('configuration.configurable_types.tenant.class_path')
-            ])->first();
-            return $this->validate($configuration);
+            if($domain) {
+                $configuration = $this->repository->findWhere([
+                    'configurable_id' => $domain->id,
+                    'configurable_type' => config('configuration.configurable_types.tenant.class_path')
+                ])->firstOrNull();
+                return $this->validate($configuration);
+            } else {
+                return null;
+            }
         } catch (Exception $exception) {
             throw new NotFoundException();
         }
