@@ -43,13 +43,13 @@ class GetConfigurationTask extends Task
                     $configurableId = Auth::user()->tenant_id;
                     $configurationData = $this->repository->where([
                         "configurable_id" => $configurableId,
-                        "configurable_type" => config('configuration.configurable_types.tenant.class_path')
+                        "configurable_type" => config('configurationer.entities.tenant.model')
                     ])->first();
                 } else {
                     $configurableId = Auth::user()->id;
                     $configurationData = $this->repository->where([
                         "configurable_id" => $configurableId,
-                        "configurable_type" => config('configuration.configurable_types.user.class_path')
+                        "configurable_type" => config('configurationer.entities.user.model')
                     ])->first();
                 }
             }

@@ -20,7 +20,7 @@ class CreateHostConfigurationCommand extends Command
         } else {
             empty(app(CreateConfigurationTask::class)->run([
                 'configurable_type' => 'host',
-                'configuration' => config('configuration.default')
+                'configuration' => config('configurationer.default')
             ])) ?: $this->line("<fg=green>" . "Configuration created sucessfully");
         }
     }

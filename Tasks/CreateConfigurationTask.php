@@ -29,14 +29,14 @@ class CreateConfigurationTask extends Task
                     'configuration' => json_encode($data['configuration'])
                 ]);
             } else {
-                $configurationType = config('configuration.configurable_types');
+                $configurationType = config('configurationer.entities');
                 $index = "";
                 $type = $data['configurable_type'];
 
-                // getting the address of configable type from the array of configurable_types from config file.
+                // getting the address of configable type from the array of configurable_entities from config file.
                 foreach ($configurationType as $key => $value) {
                     if ($key == $type) {
-                        $index = $value['class_path'];
+                        $index = $value['model'];
                     }
                 }
                 if ($index == null) {

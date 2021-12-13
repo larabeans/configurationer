@@ -38,7 +38,7 @@ class UpdateUserConfigurationTask extends Task
         } else {
             throw new UnauthorizedException('Invalid User');
         }
-        $configurableType = config('configuration.configurable_types.user.class_path');
+        $configurableType = config('configurationer.entities.user.model');
         $configuration = DB::table('configurations')->where([
             'configurable_type' => $configurableType,
             'configurable_id' => $configurableId

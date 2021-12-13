@@ -20,7 +20,7 @@
 use App\Containers\Vendor\Configurationer\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::get('configurations', [Controller::class, 'getConfiguration'])
-    ->name('api_configurationer_get_configuration')
-    ->middleware(['auth:api']);
-
+//Route::get('configurations', [Controller::class, 'getConfiguration'])
+//    ->name('api_configurationer_get_configuration')
+//    ->middleware(['auth:api']);
+//

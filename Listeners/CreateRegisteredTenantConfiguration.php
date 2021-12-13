@@ -28,7 +28,7 @@ class CreateRegisteredTenantConfiguration
         // Access the tenant using $event->entity
         app(CreateConfigurationTask::class)->run([
             'configurable_type' => 'tenant',
-            'configuration' => config('configuration.default'),
+            'configuration' => config('configurationer.default'),
             'tenant_id' => $event->entity->id
         ]);
     }

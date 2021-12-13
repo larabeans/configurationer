@@ -17,6 +17,6 @@
 use App\Containers\Vendor\Configurationer\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::get('configuration/user', [Controller::class, 'getUserConfiguration'])
-    ->name('api_configuration_get_user_configuration')
+Route::get('configurations/user', [Controller::class, 'getUserConfiguration'])
+    ->name('api_configuration_get_user_configurations')
     ->middleware(['auth:api']);

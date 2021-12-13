@@ -16,6 +16,6 @@ class GetSystemConfigurationTask extends Task
 
     public function run()
     {
-        return config('configuration.system', false);
+        return config('configurationer.system', false);
     }
 }

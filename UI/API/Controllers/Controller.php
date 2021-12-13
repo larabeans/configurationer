@@ -26,12 +26,11 @@ use Illuminate\Http\JsonResponse;
 
 class Controller extends ApiController
 {
-
-    public function getConfigurationHistory(GetConfigurationHistoryRequest $request)
+    public function getConfiguration(GetConfigurationRequest $request)//: array
     {
         return $this->transform(
-            app(GetConfigurationHistoryAction::class)->run($request),
-            ConfigurationHistoryTransformer::class
+            app(GetConfigurationAction::class)->run($request),
+            ConfigurationTransformer::class
         );
     }
 
@@ -55,14 +54,6 @@ class Controller extends ApiController
         return app(GetDomainConfigurationAction::class)->run($request);
     }
 
-    public function getConfiguration(GetConfigurationRequest $request)//: array
-    {
-        return $this->transform(
-            app(GetConfigurationAction::class)->run($request),
-            ConfigurationTransformer::class
-        );
-    }
-
     public function updateConfiguration(UpdateConfigurationRequest $request)
     {
         return $this->transform(
@@ -84,4 +75,13 @@ class Controller extends ApiController
         app(DeleteConfigurationAction::class)->run($request);
         return $this->noContent();
     }
+
+    public function getConfigurationHistory(GetConfigurationHistoryRequest $request)
+    {
+        return $this->transform(
+            app(GetConfigurationHistoryAction::class)->run($request),
+            ConfigurationHistoryTransformer::class
+        );
+    }
+
 }

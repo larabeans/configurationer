@@ -13,7 +13,7 @@
  * @apiSuccessExample  {json}       Success-Response:
  * HTTP/1.1 202 OK
  * {
- * "multi_tenancy": {
+ * "tenancy": {
  * "is_enabled": true,
  * "ignore_feature_check_for_host_users": false,
  * "sides": {
@@ -44,5 +44,5 @@ use App\Containers\Vendor\Configurationer\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 Route::get('configurations/system', [Controller::class, 'getSystemConfiguration'])
-    ->name('api_configuration_get_system_configuration');
+    ->name('api_configuration_get_system_configurations');
 //->middleware(['auth:api']);

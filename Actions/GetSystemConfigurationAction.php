@@ -10,6 +10,6 @@ class GetSystemConfigurationAction extends Action
 {
     public function run(Request $request)
     {
-        return app(GetSystemConfigurationTask::class)->run($request->type);
+        return app(GetSystemConfigurationTask::class)->run();
     }
 }

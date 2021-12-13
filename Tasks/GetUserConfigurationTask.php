@@ -38,13 +38,13 @@ class GetUserConfigurationTask extends Task
                 $configurableId = Auth::user()->tenant_id;
                 $configurationData = $this->repository->where([
                     "configurable_id" => $configurableId,
-                    "configurable_type" => config('configuration.configurable_types.tenant.class_path')
+                    "configurable_type" => config('configurationer.entities.tenant.model')
                 ])->first();
             } else {
                 $configurableId = Auth::user()->id;
                 $configurationData = $this->repository->where([
                     "configurable_id" => $configurableId,
-                    "configurable_type" => config('configuration.configurable_types.user.class_path')
+                    "configurable_type" => config('configurationer.entities.user.model')
                 ])->first();
             }
         }
@@ -98,12 +98,13 @@ class GetUserConfigurationTask extends Task
         $auth['all_permissions'] = $allPermissionsData;
         $session['user_id'] = $user->id;
 
+        // TODO: Update as per new tenancy workflow, hint: use tenancy() helper function
         if ($user->tenant_id == null) {
             $session['tenant_id'] = null;
-            $session['multi_tenancy_side'] = 2;
+            $session['tenancy_side'] = 2;
         } else {
             $session['tenant_id'] = $user->tenant_id;
-            $session['multi_tenancy_side'] = 1;
+            $session['tenancy_side'] = 1;
         }
         $response = array_merge($data, ['session' => $session], ['auth' => $auth]);
         return $response;
@@ -112,9 +113,9 @@ class GetUserConfigurationTask extends Task
     private function mergeClockThemeAndTime()
     {
         $res = [
-            'clock' => config('configuration.system.clock'),
-            'timing' => config('configuration.system.timing'),
-            'theme' => config('configuration.appearance')
+            'clock' => config('configurationer.system.clock'),
+            'timing' => config('configurationer.system.timing'),
+            'theme' => config('configurationer.system.branding')
         ];
         return $res;
     }

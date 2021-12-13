@@ -26,7 +26,7 @@ class GetDomainConfigurationTask extends Task
             if($domain) {
                 $configuration = $this->repository->findWhere([
                     'configurable_id' => $domain->id,
-                    'configurable_type' => config('configuration.configurable_types.tenant.class_path')
+                    'configurable_type' => config('configurationer.entities.tenant.model')
                 ])->firstOrNull();
                 return $this->validate($configuration);
             } else {
@@ -41,7 +41,7 @@ class GetDomainConfigurationTask extends Task
     {
         $configuration = json_decode($configuration->configuration);
 
-        if (isset($configuration->clock) && isset($configuration->timing) && isset($configuration->appearance)) {
+        if (isset($configuration->clock) && isset($configuration->timing) && isset($configuration->branding)) {
            return (array) $configuration;
         }
 
@@ -51,9 +51,9 @@ class GetDomainConfigurationTask extends Task
     private function getDefault()
     {
         return  [
-            'clock' => config('configuration.default.clock'),
-            'timing' => config('configuration.default.timing'),
-            'appearance' => config('configuration.default.appearance')
+            'clock' => config('configurationer.default.clock'),
+            'timing' => config('configurationer.default.timing'),
+            'branding' => config('configurationer.default.branding')
         ];
     }
 }
