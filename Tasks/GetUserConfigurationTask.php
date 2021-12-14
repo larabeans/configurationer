@@ -9,7 +9,7 @@ use App\Containers\Vendor\Tenanter\Traits\IsTenantAdminTrait;
 use App\Containers\AppSection\Authorization\Tasks\FindRoleTask;
 use App\Containers\AppSection\Authorization\Tasks\GetAllPermissionsTask;
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
-use App\Containers\Vendor\Beaner\Traits\IsHostAdminTrait;
+use App\Containers\Vendor\Tenanter\Traits\IsHostAdminTrait;
 
 class GetUserConfigurationTask extends Task
 {

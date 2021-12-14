@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Tasks\Task;
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
-use App\Containers\Vendor\Beaner\Traits\IsHostAdminTrait;
+use App\Containers\Vendor\Tenanter\Traits\IsHostAdminTrait;
 
 class GetConfigurationTask extends Task
 {

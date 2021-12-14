@@ -12,7 +12,7 @@ use App\Ship\Exceptions\UpdateResourceFailedException;
 use App\Ship\Parents\Tasks\Task;
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationHistoryRepository;
-use App\Containers\Vendor\Beaner\Traits\IsHostAdminTrait;
+use App\Containers\Vendor\Tenanter\Traits\IsHostAdminTrait;
 
 
 class UpdateUserConfigurationTask extends Task
