@@ -35,6 +35,11 @@
     "larabeans/core": "*"
   },
   "require-dev": {},
+    "autoload": {
+        "files": [
+            "helpers.php"
+        ]
+    },
   "minimum-stability": "dev",
   "prefer-stable": true
 }

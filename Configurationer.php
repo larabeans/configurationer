@@ -10,13 +10,31 @@ class Configurationer
     use Macroable;
 
     /** @var bool */
-    public $initialized = false;
+    public $initialized = true;
 
-    // TODO: Add function to get system configurations
+    public static function addSystemConfiguration($key, $value)
+    {
+        config(['configurationer.system.' . $key => $value]);
+    }
 
-    // TODO: Add function to feed system configurations
+    public static function getSystemConfiguration($key)
+    {
+        return config('configurationer.system.' . $key, []);
+    }
 
-    // TODO: Add function to get configurable entities
+    public static function addConfigurableEntity($source)
+    {
+        $target = config('configurationer.entities');
+        config(['configurationer.entities' => array_merge($target, $source)]);
+    }
 
-    // TODO: Add function to feed configurable entities
+    public static function getConfigurableEntity($key)
+    {
+        return config('configurationer.entities.' . $key, []);
+    }
+
+    public static function getConfigurableEntities()
+    {
+        return config('configurationer.entities', []);
+    }
 }
