@@ -30,7 +30,7 @@ class Configurationer
 
     public static function getConfigurableEntity($key)
     {
-        return config('configurationer.entities.' . $key, []);
+        return config('configurationer.entities.' . $key, false);
     }
 
     public static function getConfigurableEntities()
