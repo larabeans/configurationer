@@ -26,8 +26,11 @@ class GetUserConfigurationTask extends Task
 
     public function run(Request $request, $key)
     {
+        // Auth::user() will not work here, because this route is excluded from auth:api middleware
+        // We are are called api guard here implicitly, to verify & get authenticated user
+
         $configurations = $this->repository->where([
-            "configurable_id" => Auth::user()->id,
+            "configurable_id" => Auth::guard('api')->user()->id,
             "configurable_type" => configurationer()::getModel($key)
         ])->first();
 

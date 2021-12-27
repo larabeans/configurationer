@@ -12,7 +12,9 @@ class GetConfigurationAction extends Action
 {
     public function run(Request $request, $key)
     {
-        if(configurationer()::authenticate($key) && ! Auth::check()) {
+        // Auth::check() will not work here, because this route is excluded from auth:api middleware
+        // We are are called api guard here implicitly, to verify authenticated user
+        if(configurationer()::authenticate($key) && !Auth::guard('api')->check()) {
             throw new AuthenticationException();
         }
 
@@ -31,7 +33,7 @@ class GetConfigurationAction extends Action
     private function runDefault(Request $request, $key)
     {
         // run default task, expect id
-        return app(GetConfigurationTask::class)->run();
+        return app(GetConfigurationTask::class)->run($request, $key);
     }
 
 
