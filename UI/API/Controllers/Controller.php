@@ -23,7 +23,7 @@ use Illuminate\Http\JsonResponse;
 
 class Controller extends ApiController
 {
-    public function getConfiguration(GetConfigurationRequest $request, $key)//: array
+    public function getConfiguration(GetConfigurationRequest $request, $key = null)//: array
     {
         return app(GetConfigurationAction::class)->run($request, $key);
     }
@@ -35,15 +35,6 @@ class Controller extends ApiController
             ConfigurationTransformer::class
         );
     }
-
-//    STILL NEED TO PROCESS
-//    public function updateUserConfiguration(UpdateUserConfigurationRequest $request)
-//    {
-//        return $this->transform(
-//            app(UpdateUserConfigurationAction::class)->run($request),
-//            ConfigurationTransformer::class
-//        );
-//    }
 
     public function deleteConfiguration(DeleteConfigurationRequest $request): JsonResponse
     {

@@ -22,7 +22,7 @@ class Configurationer
         return self::getDefault('system');
     }
 
-    public static function getEntities()
+    public static function getEntities($after = null)
     {
         return config('configurationer.entities', []);
     }
@@ -32,11 +32,21 @@ class Configurationer
         return array_keys(self::getEntities());
     }
 
-    public static function addEntity($source)
+    public static function addEntity($source, $after = null)
     {
-        $target = config('configurationer.entities');
+        $entities = config('configurationer.entities');
 
-        config(['configurationer.entities' => array_merge($target, $source)]);
+        if(!empty($after)) {
+
+            $offset = (array_search($after, self::getEntityKeys())) + 1 ;
+
+            $last = array_splice($entities, $offset);
+
+            config(['configurationer.entities' => array_merge($entities, $source, $last)]);
+
+        } else {
+            config(['configurationer.entities' => array_merge($entities, $source)]);
+        }
     }
 
     public static function exists($type)
@@ -77,6 +87,15 @@ class Configurationer
         return true;
     }
 
+    public static function loadInDefaultTask($key)
+    {
+        if($entity = self::getEntity($key)){
+            return $entity['load_in_default_task'];
+        }
+
+        return true;
+    }
+
     public static function getDefault($key)
     {
         if($entity = self::getEntity($key))
@@ -85,5 +104,13 @@ class Configurationer
         return [];
     }
 
+    public static function format($data, $type = null)
+    {
+        if(is_array($data)) {
+            return $data;
+        } else {
+            return  json_decode($data);
+        }
 
+    }
 }

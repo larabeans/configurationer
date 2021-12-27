@@ -5,36 +5,39 @@ namespace App\Containers\Vendor\Configurationer\Actions;
 use Illuminate\Support\Facades\Auth;
 use App\Ship\Parents\Actions\Action;
 use App\Ship\Parents\Requests\Request;
-use App\Containers\Vendor\Configurationer\Tasks\GetConfigurationTask;
+use App\Containers\Vendor\Configurationer\Tasks\GetDefaultConfigurationTask;
 use App\Ship\Exceptions\AuthenticationException;
+use Illuminate\Support\Str;
 
 class GetConfigurationAction extends Action
 {
     public function run(Request $request, $key)
     {
-        // Auth::check() will not work here, because this route is excluded from auth:api middleware
-        // We are are called api guard here implicitly, to verify authenticated user
-        if(configurationer()::authenticate($key) && !Auth::guard('api')->check()) {
-            throw new AuthenticationException();
+        if(Str::isUuid($key)){
+            // only allow for domain
+            // return app(GetConfigurationByIdTask::class)->run($request, $key);
         }
 
         if(configurationer()::exists($key)) {
+
+            // Auth::check() will not work here, because this route is excluded from auth:api middleware
+            // We are are called api guard here implicitly, to verify authenticated user
+            if(configurationer()::authenticate($key) && !Auth::guard('api')->check()) {
+                throw new AuthenticationException();
+            }
+
             if($task = configurationer()::getTask($key, 'get')){
                 return app($task)->run($request, $key);
             }
         }
 
-        // run default task, expect id
-        return $this->runDefault($request, $key);
-
+        return $this->default($request, $key);
     }
 
 
-    private function runDefault(Request $request, $key)
+    private function default(Request $request, $key)
     {
-        // run default task, expect id
-        return app(GetConfigurationTask::class)->run($request, $key);
+        return app(GetDefaultConfigurationTask::class)->run($request, $key);
     }
-
 
 }
