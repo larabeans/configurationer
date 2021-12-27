@@ -2,6 +2,7 @@
 
 namespace App\Containers\Vendor\Configurationer\Tasks;
 
+use App\Ship\Parents\Requests\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Ship\Parents\Tasks\Task;
 use App\Ship\Exceptions\NotFoundException;
@@ -23,38 +24,18 @@ class GetUserConfigurationTask extends Task
         $this->repository = $repository;
     }
 
-    public function run()
+    public function run(Request $request, $key)
     {
-        // TODO: Need Refactoring
-        $configurationData = null;
-        if (Auth::user()->tenant_id == null && $this->isHostAdmin()) {
-            $configurationData = $this->repository->where([
-                'tenant_id' => null,
-                'configurable_id' => '',
-                "configurable_type" => ''
-            ])->first();
-        } elseif (Auth::user()->tenant_id !== null) {
-            if ($this->isTenantAdmin(Auth::user()->tenant_id)) {
-                $configurableId = Auth::user()->tenant_id;
-                $configurationData = $this->repository->where([
-                    "configurable_id" => $configurableId,
-                    "configurable_type" => config('configurationer.entities.tenant.model')
-                ])->first();
-            } else {
-                $configurableId = Auth::user()->id;
-                $configurationData = $this->repository->where([
-                    "configurable_id" => $configurableId,
-                    "configurable_type" => config('configurationer.entities.user.model')
-                ])->first();
-            }
-        }
-        if (!$configurationData) {
+        $configurations = $this->repository->where([
+            "configurable_id" => Auth::user()->id,
+            "configurable_type" => configurationer()::getModel($key)
+        ])->first();
+
+        if (!$configurations) {
             throw new NotFoundException("No Configuration Found");
         }
 
-        $userData = $this->getSessionAndPermissionData();
-        $configurationData = array_merge($this->mergeData($configurationData), $userData);
-        return $configurationData;
+        return array_merge($this->mergeData($configurations), $this->getSessionAndPermissionData());
     }
 
     private function mergeData($configuration)

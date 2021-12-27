@@ -23,7 +23,13 @@ class GetConfigurationTask extends Task
 
     public function run($type = null)
     {
-        // TODO: Need Refactoring
+        //TODO:
+        // 1. Pass Configurable Entity Type From Request
+        // 2. Based on Type, Get Entity Detail
+        // 3. Write Type handler Class with two methods (setter and getter, and optional validate)
+        // 4. Execute handler class getter method to format, validate etc
+        // 5. Return response from handler class
+
         $configurationData = null;
         if ($type !== null) {
             $configurationData = $this->repository->where([

@@ -29,7 +29,13 @@ class UpdateConfigurationTask extends Task
 
     public function run(array $data)
     {
-        // TODO: Need Refactoring
+        //TODO:
+        // 1. Pass Configureable Entity Type From Request
+        // 2. Based on Type, Get Entity Detail
+        // 3. Write Type handler Class with two methods (setter and getter, and optional validate)
+        // 4. Execute handler class setter method to format, validate etc
+        // 5. Save response from handler class
+
         $configurableId = null;
         $configuration = null;
         if (Auth::user()->tenant_id == null && $this->isHostAdmin()) {

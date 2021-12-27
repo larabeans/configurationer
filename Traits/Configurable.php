@@ -4,7 +4,7 @@ namespace App\Containers\Vendor\Configurationer\Traits;
 
 use App\Containers\Vendor\Configurationer\Models\Configuration;
 
-trait HasConfiguration
+trait Configurable
 {
     public function configuration()
     {

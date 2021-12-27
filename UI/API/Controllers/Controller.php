@@ -23,30 +23,12 @@ use Illuminate\Http\JsonResponse;
 
 class Controller extends ApiController
 {
-    public function getConfiguration(GetConfigurationRequest $request)//: array
+    public function getConfiguration(GetConfigurationRequest $request, $key)//: array
     {
-        return $this->transform(
-            app(GetConfigurationAction::class)->run($request),
-            ConfigurationTransformer::class
-        );
+        return app(GetConfigurationAction::class)->run($request, $key);
     }
 
-    public function getSystemConfiguration(GetDefaultConfigurationRequest $request): array
-    {
-        // TODO:
-        // 1. Load Default from config file
-        // 2. Load From DB where Teanant is null (HOST Config)
-        // 3. Load from from DB, using tenant id
-        // Merge by overwriting as priority Tenant Config > Host Config > Default Config
-        return app(GetSystemConfigurationAction::class)->run($request);
-    }
-
-    public function getUserConfiguration(GetUserConfigurationRequest $request)//: array
-    {
-        return app(GetUserConfigurationAction::class)->run($request);
-    }
-
-    public function updateConfiguration(UpdateConfigurationRequest $request)
+    public function updateConfiguration(UpdateConfigurationRequest $request, $id)
     {
         return $this->transform(
             app(UpdateConfigurationAction::class)->run($request),
@@ -54,13 +36,14 @@ class Controller extends ApiController
         );
     }
 
-    public function updateUserConfiguration(UpdateUserConfigurationRequest $request)
-    {
-        return $this->transform(
-            app(UpdateUserConfigurationAction::class)->run($request),
-            ConfigurationTransformer::class
-        );
-    }
+//    STILL NEED TO PROCESS
+//    public function updateUserConfiguration(UpdateUserConfigurationRequest $request)
+//    {
+//        return $this->transform(
+//            app(UpdateUserConfigurationAction::class)->run($request),
+//            ConfigurationTransformer::class
+//        );
+//    }
 
     public function deleteConfiguration(DeleteConfigurationRequest $request): JsonResponse
     {

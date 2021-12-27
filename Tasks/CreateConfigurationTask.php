@@ -20,7 +20,13 @@ class CreateConfigurationTask extends Task
 
     public function run(array $data)
     {
-        // TODO: Need Refactoring
+        //TODO:
+        // 1. Pass Configureable Entity Type From Request
+        // 2. Based on Type, Get Entity Detail
+        // 3. Write Type handler Class with two methods (setter and getter, and optional validate)
+        // 4. Execute handler class setter method to format, validate etc
+        // 5. Save response from handler class
+
         try {
             if ($data['configurable_type'] == 'host') {
                 return $this->repository->create([
@@ -33,7 +39,7 @@ class CreateConfigurationTask extends Task
                 $index = "";
                 $type = $data['configurable_type'];
 
-                // getting the address of configable type from the array of configurable_entities from config file.
+                // getting the address of configable type from the array of configurable from config file.
                 foreach ($configurationType as $key => $value) {
                     if ($key == $type) {
                         $index = $value['model'];

@@ -4,7 +4,7 @@
  * @apiGroup           Configuration
  * @apiName            updateConfiguration
  *
- * @api                {PATCH} /v1/configurations Update Configuration
+ * @api                {PATCH} /v1/configurations/:id Update Configuration
  * @apiDescription     Update Configuration
  *
  * @apiVersion         1.0.0
@@ -18,6 +18,6 @@
 use App\Containers\Vendor\Configurationer\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::patch('configurations', [Controller::class, 'updateConfiguration'])
+Route::patch('configurations/{id}', [Controller::class, 'updateConfiguration'])
     ->name('api_configuration_update_configuration')
     ->middleware(['auth:api']);

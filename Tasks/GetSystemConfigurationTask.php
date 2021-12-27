@@ -16,6 +16,6 @@ class GetSystemConfigurationTask extends Task
 
     public function run()
     {
-        return config('configurationer.system', false);
+        return configurationer()::getSystemConfiguration();
     }
 }
