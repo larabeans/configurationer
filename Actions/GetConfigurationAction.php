@@ -14,6 +14,7 @@ class GetConfigurationAction extends Action
     public function run(Request $request, $key)
     {
         if(Str::isUuid($key)){
+            // TODO: Pending
             // only allow for domain
             // return app(GetConfigurationByIdTask::class)->run($request, $key);
         }

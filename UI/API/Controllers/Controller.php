@@ -28,10 +28,10 @@ class Controller extends ApiController
         return app(GetConfigurationAction::class)->run($request, $key);
     }
 
-    public function updateConfiguration(UpdateConfigurationRequest $request, $id)
+    public function updateConfiguration(UpdateConfigurationRequest $request, $key, $id)
     {
         return $this->transform(
-            app(UpdateConfigurationAction::class)->run($request),
+            app(UpdateConfigurationAction::class)->run($request, $key, $id),
             ConfigurationTransformer::class
         );
     }

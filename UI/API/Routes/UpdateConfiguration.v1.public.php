@@ -18,6 +18,6 @@
 use App\Containers\Vendor\Configurationer\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::patch('configurations/{id}', [Controller::class, 'updateConfiguration'])
+Route::patch('configurations/{key}/{id}', [Controller::class, 'updateConfiguration'])
     ->name('api_configuration_update_configuration')
     ->middleware(['auth:api']);

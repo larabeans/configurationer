@@ -3,6 +3,7 @@
 namespace App\Containers\Vendor\Configurationer\Tasks;
 
 use App\Containers\Vendor\Tenanter\Traits\IsTenantAdminTrait;
+use App\Ship\Parents\Requests\Request;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -29,60 +30,35 @@ class UpdateUserConfigurationTask extends Task
         $this->historyRepository = $historyRepository;
     }
 
-    public function run(array $data)
-    {
-        // TODO: Need Refactoring
-        $configurableId = null;
-        if (Auth::user()->tenant_id !== null && $this->isHostAdmin() == false && $this->isTenantAdmin(Auth::user()->tenant_id) == false) {
-            $configurableId = Auth::id();
-        } else {
-            throw new UnauthorizedException('Invalid User');
-        }
-        $configurableType = config('configurationer.entities.user.model');
-        $configuration = DB::table('configurations')->where([
-            'configurable_type' => $configurableType,
-            'configurable_id' => $configurableId
-        ])->first();
-        if ($configuration == null) {
-            return $this->createConfiguration($data['configuration'], $configurableId, $configurableType);
-        } else {
-            return $this->updateConfiguration(json_encode($data['configuration']), $configuration);
-        }
-    }
-
-    private function createConfiguration($configuration, $configurableId, $configurableType)
+    public function run(Request $request, Configuration $configuration, $key, $id)
     {
         try {
-            $data = [
-                'configurable_type' => $configurableType,
-                'configurable_id' => $configurableId,
-                'configuration' => json_encode($configuration)
-            ];
+            // checks owns configuration record
+            if (Auth::id() === $configuration->configurable_id) {
 
-            $configuration = $this->repository->create($data);
-            $configuration->configuration = json_decode($configuration->configuration);
-            return $configuration;
-        } catch (Exception $exception) {
-            throw new CreateResourceFailedException($exception);
-        }
-    }
+                // First Save History
+                $history = [
+                    "configuration_id" => $configuration->id,
+                    "configuration" => $configuration->configuration
+                ];
+                $this->historyRepository->create($history);
 
-    private function updateConfiguration($configuration, $historyConfiguration)
-    {
-        $historyData = [
-            "configuration_id" => $historyConfiguration->id,
-            "configuration" => $historyConfiguration->configuration
-        ];
-        $data = [
-            'configuration' => $configuration
-        ];
-        try {
-            $history = $this->historyRepository->create($historyData);
-            $configuration = $this->repository->update($data, $historyConfiguration->id);
-            $configuration->configuration = json_decode($configuration->configuration);
-            return $configuration;
+                // Update Configurations
+                $data = [
+                    'configuration' => json_encode($request->configuration)
+                ];
+
+                $configurations = $this->repository->update($data, $id);
+
+                $configurations->configuration = json_decode($configurations->configuration);
+
+                return $configurations;
+            }
+
         } catch (Exception $exception) {
             throw new UpdateResourceFailedException();
         }
+
+
     }
 }

@@ -101,7 +101,7 @@ return [
             'tasks' => [
                 'get' => App\Containers\Vendor\Configurationer\Tasks\GetAuthenticatedUserConfigurationTask::class,
                 'create' => null,
-                'update' => null
+                'update' => App\Containers\Vendor\Configurationer\Tasks\UpdateUserConfigurationTask::class,
             ],
             'authenticate' => true,
             'load_in_default_task' => true,
