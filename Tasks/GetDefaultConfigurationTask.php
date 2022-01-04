@@ -8,6 +8,7 @@ use App\Ship\Parents\Tasks\Task;
 use App\Containers\AppSection\Authorization\Tasks\GetAllPermissionsTask;
 
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class GetDefaultConfigurationTask extends Task
 {

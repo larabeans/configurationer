@@ -23,31 +23,15 @@ class GetConfigurationHistoryTask extends Task
         $this->configurationRepository = $configurationRepository;
     }
 
-    public function run()
+    public function run($id)
     {
         // TODO: Need Refactoring
-        $configurationData = null;
-        if (Auth::user()->tenant_id == null) {
-            if ($this->isHostAdmin() == false) {
-                $configurableId = Auth::user()->id;
-                $configurationData = DB::table('configurations')->where("configurable_id", $configurableId)->first();
-            } else {
-                $configurationData = DB::table('configurations')->where(['tenant_id' => null, 'configurable_id' => ''])->first();
-            }
-        } elseif (Auth::user()->tenant_id !== null) {
-            $configurableId = Auth::user()->tenant_id;
-            $configurationData = DB::table('configurations')->where("configurable_id", $configurableId)->first();
-        }
 
-        if (!$configurationData) {
-            throw new NotFoundException("No Configuration Found");
-        }
+        $configuration = $this->repository->where("configuration_id", $id)->orderBy("created_at", 'DESC')->paginate();
 
-        $data = $this->repository->where("configuration_id", $configurationData->id)->orderBy("created_at", 'DESC')->paginate();
-
-        if (sizeof($data) == 0) {
+        if (!$configuration) {
             throw new NotFoundException("No History");
         }
-        return $data;
+        return $configuration;
     }
 }

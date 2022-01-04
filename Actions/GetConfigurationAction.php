@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 class GetConfigurationAction extends Action
 {
-    public function run(Request $request, $key)
+    public function run(Request $request, $key, $transform=null)
     {
         if(Str::isUuid($key)){
             // TODO: Pending
@@ -28,7 +28,7 @@ class GetConfigurationAction extends Action
             }
 
             if($task = configurationer()::getTask($key, 'get')){
-                return app($task)->run($request, $key);
+                return app($task)->run($request, $key, $transform);
             }
         }
 
@@ -38,7 +38,7 @@ class GetConfigurationAction extends Action
 
     private function default(Request $request, $key)
     {
-        return app(GetDefaultConfigurationTask::class)->run($request, $key);
+        return app(GetDefaultConfigurationTask::class)->run($request, $key, true);
     }
 
 }

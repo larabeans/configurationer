@@ -4,7 +4,7 @@ namespace App\Containers\Vendor\Configurationer\Tasks;
 
 use App\Containers\Vendor\Tenanter\Traits\IsTenantAdminTrait;
 use App\Ship\Parents\Requests\Request;
-use Exception;
+use App\Ship\Parents\Exceptions\Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\UnauthorizedException;

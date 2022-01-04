@@ -28,6 +28,14 @@ class Controller extends ApiController
         return app(GetConfigurationAction::class)->run($request, $key);
     }
 
+    public function getTransformedConfiguration (GetConfigurationRequest $request, $key = null, $transform=null)
+    {
+        return $this->transform(
+            app(GetConfigurationAction::class)->run($request, $key, $transform),
+            ConfigurationTransformer::class
+        );
+    }
+
     public function updateConfiguration(UpdateConfigurationRequest $request, $key, $id)
     {
         return $this->transform(

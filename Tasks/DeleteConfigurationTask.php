@@ -2,7 +2,7 @@
 
 namespace App\Containers\Vendor\Configurationer\Tasks;
 
-use Exception;
+use App\Ship\Parents\Exceptions\Exception;
 use App\Ship\Parents\Tasks\Task;
 use App\Ship\Exceptions\DeleteResourceFailedException;
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;

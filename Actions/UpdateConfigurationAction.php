@@ -10,7 +10,7 @@ use App\Containers\Vendor\Configurationer\Tasks\UpdateConfigurationTask;
 
 class UpdateConfigurationAction extends Action
 {
-    public function run(Request $request, $key, $id): Configuration
+    public function run(Request $request, $key, $id)
     {
         if( $configuration = app(FindConfigurationtByIdTask::class)->run($id)) {
             if(configurationer()::exists($key)) {

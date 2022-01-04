@@ -25,13 +25,12 @@ class ConfigurationTransformer extends Transformer
     {
         $response = [
             'object' => $configuration->getResourceKey(),
-            //'id' => $configuration->getHashedKey(),
+            'id' => $configuration->getHashedKey(),
             'configuration' => $configuration->configuration,
             'created_at' => $configuration->created_at,
             'updated_at' => $configuration->updated_at,
             'readable_created_at' => $configuration->created_at->diffForHumans(),
             'readable_updated_at' => $configuration->updated_at->diffForHumans(),
-
         ];
 
         $response = $this->ifAdmin([

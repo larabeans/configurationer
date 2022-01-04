@@ -4,11 +4,13 @@
  * @apiGroup           Configuration
  * @apiName            getConfiguration
  *
- * @api                {GET} /v1/configurations/:key getConfiguration
+ * @api                {GET} /v1/configurations/:key Get Configuration
  * @apiDescription     It show the configurations of tenant and host
  *
  * @apiVersion         1.0.0
  * @apiPermission      Authenticated User
+ *
+ * * @apiParam         {String} [key]  domain or user or host or tenant
  *
  * @apiSuccessExample  {json}  Success-Response:
  * HTTP/1.1 200 OK

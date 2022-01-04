@@ -17,7 +17,7 @@ class GetAuthenticatedUserConfigurationTask extends Task
         $this->repository = $repository;
     }
 
-    public function run(Request $request, $key)
+    public function run(Request $request, $key, $transform=null)
     {
         // Auth::user() will not work here, because this route is excluded from auth:api middleware
         // We are are called api guard here implicitly, to verify & get authenticated user
@@ -29,7 +29,12 @@ class GetAuthenticatedUserConfigurationTask extends Task
             ])->first();
 
             if ($configurations) {
-                return (array) json_decode($configurations->configuration);
+                $configurations->configuration = (array) json_decode($configurations->configuration);
+                if($transform) {
+                    return $configurations;
+                }
+                return $configurations->configuration;
+
             }
         }
 
