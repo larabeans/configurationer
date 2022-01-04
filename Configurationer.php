@@ -14,7 +14,7 @@ class Configurationer
 
     public static function addSystemConfiguration($key, $value)
     {
-        config(['configurationer.entities.system.' . $key => $value]);
+        config(['configurationer.entities.system.default.' . $key => $value]);
     }
 
     public static function getSystemConfiguration()
