@@ -19,6 +19,7 @@ class MainServiceProvider extends MainProvider
      */
     public $serviceProviders = [
         ConfigurationServiceProvider::class,
+        EventsServiceProvider::class
     ];
 
     /**

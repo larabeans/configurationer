@@ -2,6 +2,7 @@
 
 namespace App\Containers\Vendor\Configurationer\Tasks;
 
+use App\Containers\Vendor\Configurationer\Models\Configuration;
 use App\Containers\Vendor\Tenanter\Traits\IsTenantAdminTrait;
 use App\Ship\Parents\Requests\Request;
 use App\Ship\Parents\Exceptions\Exception;
