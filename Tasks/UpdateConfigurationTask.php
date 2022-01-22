@@ -2,21 +2,17 @@
 
 namespace App\Containers\Vendor\Configurationer\Tasks;
 
-use App\Containers\Vendor\Tenanter\Traits\IsTenantAdminTrait;
-use Exception;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\UnauthorizedException;
-use App\Ship\Exceptions\NotFoundException;
-use App\Ship\Exceptions\UpdateResourceFailedException;
+use App\Ship\Parents\Requests\Request;
+use App\Ship\Parents\Exceptions\Exception;
 use App\Ship\Parents\Tasks\Task;
+use App\Ship\Exceptions\UpdateResourceFailedException;
+use App\Containers\Vendor\Configurationer\Models\Configuration;
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationHistoryRepository;
-use App\Containers\Vendor\Beaner\Traits\IsHostAdminTrait;
+
 
 class UpdateConfigurationTask extends Task
 {
-    use IsHostAdminTrait;
-    use IsTenantAdminTrait;
 
     protected ConfigurationRepository $repository;
     protected ConfigurationHistoryRepository $historyRepository;
@@ -27,40 +23,27 @@ class UpdateConfigurationTask extends Task
         $this->historyRepository = $historyRepository;
     }
 
-    public function run(array $data)
+    public function run(Request $request, Configuration $configuration, $key, $id)
     {
-        // TODO: Need Refactoring
-        $configurableId = null;
-        $configuration = null;
-        if (Auth::user()->tenant_id == null && $this->isHostAdmin()) {
-            $configuration = $this->repository->findWhere([
-                'tenant_id' => null,
-                'configurable_id' => ''
-            ])->first();
-        } elseif (Auth::user()->tenant_id !== null && $this->isTenantAdmin(Auth::user()->tenant_id)) {
-            $configurableId = Auth::user()->tenant_id;
-            $configuration = $this->repository->where('configurable_id', $configurableId)->first();
-        } else {
-            throw new UnauthorizedException("Unauthorized User");
-        }
-
-        if (!$configuration) {
-            throw new NotFoundException("Configuration not found");
-        }
-
         try {
-            $historyData = [
+            // First Save History
+            $history = [
                 "configuration_id" => $configuration->id,
                 "configuration" => $configuration->configuration
             ];
-            $history = $this->historyRepository->create($historyData);
+            $this->historyRepository->create($history);
 
-            $d = [
-                'configuration' => $data['configuration']
+            // Update Configurations
+            $data = [
+                'configuration' => json_encode($request->configuration)
             ];
-            $configurations = $this->repository->update($d, $configuration->id);
+
+            $configurations = $this->repository->update($data, $id);
+
             $configurations->configuration = json_decode($configurations->configuration);
+
             return $configurations;
+
         } catch (Exception $exception) {
             throw new UpdateResourceFailedException();
         }

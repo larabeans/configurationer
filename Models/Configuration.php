@@ -36,8 +36,13 @@ class Configuration extends Model
      */
     protected string $resourceKey = 'Configuration';
 
-    public function ConfigurationHistory()
+    public function configurationHistory()
     {
         return $this->hasMany(ConfigurationHistory::class);
+    }
+
+    public function configurable()
+    {
+        return $this->morphTo();
     }
 }

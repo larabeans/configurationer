@@ -2,10 +2,13 @@
 
 namespace App\Containers\Vendor\Configurationer\Tasks;
 
+use App\Ship\Parents\Exceptions\Exception;
 use App\Ship\Parents\Tasks\Task;
 use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
 
-class GetSystemConfigurationTask extends Task
+
+
+class FindConfigurationtByIdTask extends Task
 {
     protected ConfigurationRepository $repository;
 
@@ -14,8 +17,12 @@ class GetSystemConfigurationTask extends Task
         $this->repository = $repository;
     }
 
-    public function run()
+    public function run($id)
     {
-        return configurationer()::getSystemConfiguration();
+        try {
+            return $this->repository->findWhere(['id' => $id])->first();
+        } catch (Exception $exception) {
+            throw new NotFoundException($exception);
+        }
     }
 }
