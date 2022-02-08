@@ -41,28 +41,23 @@ class GetDefaultConfigurationTask extends Task
             }
         }
 
-        $this->getSessionAndPermissions();
-
-        return array_merge(
-            $configurations,
-            $this->getSessionAndPermissions()
-        );
-    }
-
-
-    private function getSessionAndPermissions()
-    {
         if(! Auth::guard('api')->check())
-            return [];
+            return $configurations;
 
         $user = Auth::guard('api')->user();
 
+        // if configuration has session key, get and use existing session,
+        // else create empty
+        $session = $configurations['session'] ?? array ();
+
         return array_merge(
+            $configurations,
             array(
-                'session' => array(
-                    'user_id' => $user->id,
-                    // 'tenant_id' => tenant()->getTenantKey() ?? null, // should not be here belongs to tenancy
-                    // 'tenancy_side' => tenancy()->side() // should not be here belongs to tenancy
+                'session' => array_merge(
+                    $session,
+                    array(
+                        'user' => $user->id
+                    )
                 )
             ),
             array(
@@ -76,5 +71,4 @@ class GetDefaultConfigurationTask extends Task
             )
         );
     }
-
 }
