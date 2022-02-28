@@ -3,7 +3,7 @@
 namespace App\Containers\Vendor\Configurationer\Listeners;
 
 use App\Containers\Vendor\Beaner\Events\UserCreated;
-use App\Containers\Vendor\Tenanter\Tasks\CreateConfigurationTask;
+use App\Containers\Vendor\Configurationer\Tasks\CreateConfigurationTask;
 
 class CreateUserConfiguration
 {
