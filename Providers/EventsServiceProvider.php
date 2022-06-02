@@ -5,9 +5,9 @@ namespace App\Containers\Vendor\Configurationer\Providers;
 use App\Containers\Vendor\Beaner\Events\UserCreated;
 use App\Containers\Vendor\Configurationer\Listeners\CreateUserConfiguration;
 use App\Containers\Vendor\Configurationer\Listeners;
-use App\Ship\Parents\Providers\EventsProvider;
+use App\Ship\Parents\Providers\EventServiceProvider;
 
-class EventsServiceProvider extends EventsProvider
+class EventsServiceProvider extends EventServiceProvider
 {
     /**
      * The event listener mappings for the application.
