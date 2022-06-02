@@ -2,10 +2,10 @@
 
 namespace App\Containers\Vendor\Configurationer\Providers;
 
-use App\Ship\Parents\Providers\MainProvider;
+use App\Ship\Parents\Providers\MainServiceProvider as ParentMainServiceProvider;
 use App\Containers\Vendor\Configurationer\Configurationer;
 
-class ConfigurationServiceProvider extends MainProvider
+class ConfigurationServiceProvider extends ParentMainServiceProvider
 {
 
     public function register():void

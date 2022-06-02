@@ -2,7 +2,7 @@
 
 namespace App\Containers\Vendor\Configurationer\Providers;
 
-use App\Ship\Parents\Providers\MainProvider;
+use App\Ship\Parents\Providers\MainServiceProvider as ParentMainServiceProvider;
 use App\Containers\Vendor\Configurationer\Providers\ConfigurationServiceProvider;
 
 /**
@@ -10,7 +10,7 @@ use App\Containers\Vendor\Configurationer\Providers\ConfigurationServiceProvider
  *
  * The Main Service Provider of this container, it will be automatically registered in the framework.
  */
-class MainServiceProvider extends MainProvider
+class MainServiceProvider extends ParentMainServiceProvider
 {
     /**
      * Container Service Providers.
