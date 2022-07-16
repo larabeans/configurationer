@@ -13,7 +13,7 @@
  * @apiUse             ConfigurationSuccessSingleResponse
  */
 
-use App\Containers\Vendor\Configurationer\UI\API\Controllers\Controller;
+use App\Containers\Larabeans\Configurationer\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 Route::get('configurations/{id}/history', [Controller::class, 'getConfigurationHistory'])

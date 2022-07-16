@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Containers\Vendor\Configurationer\Actions;
+namespace App\Containers\Larabeans\Configurationer\Actions;
 
 use Illuminate\Support\Facades\Auth;
 use App\Ship\Parents\Actions\Action;
 use App\Ship\Parents\Requests\Request;
-use App\Containers\Vendor\Configurationer\Tasks\GetDefaultConfigurationTask;
+use App\Containers\Larabeans\Configurationer\Tasks\GetDefaultConfigurationTask;
 use App\Ship\Exceptions\AuthenticationException;
 use Illuminate\Support\Str;
 

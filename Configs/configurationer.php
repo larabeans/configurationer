@@ -31,7 +31,7 @@ return [
             'name' => 'System',
             'model' => null,
             'tasks' => [
-                'get' => App\Containers\Vendor\Configurationer\Tasks\GetSystemConfigurationTask::class,
+                'get' => App\Containers\Larabeans\Configurationer\Tasks\GetSystemConfigurationTask::class,
                 'create' => null,
                 'update' => null
             ],
@@ -99,9 +99,9 @@ return [
             'name' => 'User',
             'model' => App\Containers\AppSection\User\Models\User::class,
             'tasks' => [
-                'get' => App\Containers\Vendor\Configurationer\Tasks\GetAuthenticatedUserConfigurationTask::class,
+                'get' => App\Containers\Larabeans\Configurationer\Tasks\GetAuthenticatedUserConfigurationTask::class,
                 'create' => null,
-                'update' => App\Containers\Vendor\Configurationer\Tasks\UpdateUserConfigurationTask::class,
+                'update' => App\Containers\Larabeans\Configurationer\Tasks\UpdateUserConfigurationTask::class,
             ],
             'authenticate' => true,
             'load_in_default_task' => true,

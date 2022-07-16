@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Containers\Vendor\Configurationer\Tasks;
+namespace App\Containers\Larabeans\Configurationer\Tasks;
 
 use App\Ship\Parents\Exceptions\Exception;
 use App\Ship\Exceptions\CreateResourceFailedException;
 use App\Ship\Parents\Tasks\Task;
-use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationHistoryRepository;
+use App\Containers\Larabeans\Configurationer\Data\Repositories\ConfigurationHistoryRepository;
 
 class CreateConfigurationHistoryTask extends Task
 {

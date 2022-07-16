@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Containers\Vendor\Configurationer\Tasks;
+namespace App\Containers\Larabeans\Configurationer\Tasks;
 
 use App\Ship\Parents\Requests\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Ship\Parents\Tasks\Task;
 use App\Ship\Exceptions\NotFoundException;
-use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
+use App\Containers\Larabeans\Configurationer\Data\Repositories\ConfigurationRepository;
 
 class GetAuthenticatedUserConfigurationTask extends Task
 {

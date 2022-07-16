@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Containers\Vendor\Configurationer\Tasks;
+namespace App\Containers\Larabeans\Configurationer\Tasks;
 
-use App\Containers\Vendor\Configurationer\Models\Configuration;
-use App\Containers\Vendor\Tenanter\Traits\IsTenantAdminTrait;
+use App\Containers\Larabeans\Configurationer\Models\Configuration;
+use App\Containers\Larabeans\Tenanter\Traits\IsTenantAdminTrait;
 use App\Ship\Parents\Requests\Request;
 use App\Ship\Parents\Exceptions\Exception;
 use Illuminate\Support\Facades\Auth;
@@ -12,9 +12,9 @@ use Illuminate\Validation\UnauthorizedException;
 use App\Ship\Exceptions\CreateResourceFailedException;
 use App\Ship\Exceptions\UpdateResourceFailedException;
 use App\Ship\Parents\Tasks\Task;
-use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
-use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationHistoryRepository;
-use App\Containers\Vendor\Tenanter\Traits\IsHostAdminTrait;
+use App\Containers\Larabeans\Configurationer\Data\Repositories\ConfigurationRepository;
+use App\Containers\Larabeans\Configurationer\Data\Repositories\ConfigurationHistoryRepository;
+use App\Containers\Larabeans\Tenanter\Traits\IsHostAdminTrait;
 
 
 class UpdateUserConfigurationTask extends Task

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Containers\Vendor\Configurationer\UI\API\Transformers;
+namespace App\Containers\Larabeans\Configurationer\UI\API\Transformers;
 
-use App\Containers\Vendor\Configurationer\Models\ConfigurationHistory;
+use App\Containers\Larabeans\Configurationer\Models\ConfigurationHistory;
 use App\Ship\Parents\Transformers\Transformer;
 
 class ConfigurationHistoryTransformer extends Transformer

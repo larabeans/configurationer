@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Containers\Vendor\Configurationer\Actions;
+namespace App\Containers\Larabeans\Configurationer\Actions;
 
 use App\Ship\Parents\Actions\Action;
 use App\Ship\Parents\Requests\Request;
-use App\Containers\Vendor\Configurationer\Tasks\DeleteConfigurationTask;
+use App\Containers\Larabeans\Configurationer\Tasks\DeleteConfigurationTask;
 
 class DeleteConfigurationAction extends Action
 {

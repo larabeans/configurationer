@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Containers\Vendor\Configurationer;
+namespace App\Containers\Larabeans\Configurationer;
 
 use Illuminate\Support\Traits\Macroable;
 use Illuminate\Support\Arr;

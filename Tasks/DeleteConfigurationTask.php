@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Containers\Vendor\Configurationer\Tasks;
+namespace App\Containers\Larabeans\Configurationer\Tasks;
 
 use App\Ship\Parents\Exceptions\Exception;
 use App\Ship\Parents\Tasks\Task;
 use App\Ship\Exceptions\DeleteResourceFailedException;
-use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
+use App\Containers\Larabeans\Configurationer\Data\Repositories\ConfigurationRepository;
 
 class DeleteConfigurationTask extends Task
 {

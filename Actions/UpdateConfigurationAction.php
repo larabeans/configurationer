@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Containers\Vendor\Configurationer\Actions;
+namespace App\Containers\Larabeans\Configurationer\Actions;
 
 use App\Ship\Parents\Actions\Action;
 use App\Ship\Parents\Requests\Request;
-use App\Containers\Vendor\Configurationer\Models\Configuration;
-use App\Containers\Vendor\Configurationer\Tasks\FindConfigurationtByIdTask;
-use App\Containers\Vendor\Configurationer\Tasks\UpdateConfigurationTask;
+use App\Containers\Larabeans\Configurationer\Models\Configuration;
+use App\Containers\Larabeans\Configurationer\Tasks\FindConfigurationtByIdTask;
+use App\Containers\Larabeans\Configurationer\Tasks\UpdateConfigurationTask;
 
 class UpdateConfigurationAction extends Action
 {

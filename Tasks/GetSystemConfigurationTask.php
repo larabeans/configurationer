@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Containers\Vendor\Configurationer\Tasks;
+namespace App\Containers\Larabeans\Configurationer\Tasks;
 
 use App\Ship\Parents\Tasks\Task;
-use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
+use App\Containers\Larabeans\Configurationer\Data\Repositories\ConfigurationRepository;
 
 class GetSystemConfigurationTask extends Task
 {
