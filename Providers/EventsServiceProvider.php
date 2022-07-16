@@ -2,7 +2,7 @@
 
 namespace App\Containers\Larabeans\Configurationer\Providers;
 
-use App\Containers\Larabeans\Beaner\Events\UserCreated;
+use App\Containers\Larabeans\Core\Events\UserCreated;
 use App\Containers\Larabeans\Configurationer\Listeners\CreateUserConfiguration;
 use App\Containers\Larabeans\Configurationer\Listeners;
 use App\Ship\Parents\Providers\EventServiceProvider;

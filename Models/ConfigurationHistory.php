@@ -2,7 +2,7 @@
 
 namespace App\Containers\Larabeans\Configurationer\Models;
 
-use App\Containers\Larabeans\Beaner\Parents\Models\Model;
+use App\Containers\Larabeans\Core\Parents\Models\Model;
 use App\Containers\Larabeans\Configurationer\Models\Configuration;
 
 class ConfigurationHistory extends Model

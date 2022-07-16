@@ -2,7 +2,7 @@
 
 namespace App\Containers\Larabeans\Configurationer\Listeners;
 
-use App\Containers\Larabeans\Beaner\Events\UserCreated;
+use App\Containers\Larabeans\Core\Events\UserCreated;
 use App\Containers\Larabeans\Configurationer\Tasks\CreateConfigurationTask;
 
 class CreateUserConfiguration
@@ -20,7 +20,7 @@ class CreateUserConfiguration
     /**
      * Handle the event.
      *
-     * @param \App\Containers\Larabeans\Beaner\Events\UserCreated $event
+     * @param \App\Containers\Larabeans\Core\Events\UserCreated $event
      * @return void
      */
     public function handle(UserCreated $event)
