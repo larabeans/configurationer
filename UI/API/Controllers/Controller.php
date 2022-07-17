@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Containers\Vendor\Configurationer\UI\API\Controllers;
+namespace App\Containers\Larabeans\Configurationer\UI\API\Controllers;
 
-use App\Containers\Vendor\Configurationer\Actions\GetConfigurationAction;
-use App\Containers\Vendor\Configurationer\Actions\UpdateUserConfigurationAction;
-use App\Containers\Vendor\Configurationer\UI\API\Requests\DeleteConfigurationRequest;
-use App\Containers\Vendor\Configurationer\UI\API\Requests\GetConfigurationRequest;
-use App\Containers\Vendor\Configurationer\UI\API\Requests\UpdateConfigurationRequest;
-use App\Containers\Vendor\Configurationer\UI\API\Requests\GetUserConfigurationRequest;
-use App\Containers\Vendor\Configurationer\UI\API\Requests\GetConfigurationHistoryRequest;
-use App\Containers\Vendor\Configurationer\UI\API\Requests\UpdateUserConfigurationRequest;
-use App\Containers\Vendor\Configurationer\UI\API\Transformers\ConfigurationTransformer;
-use App\Containers\Vendor\Configurationer\UI\API\Transformers\ConfigurationHistoryTransformer;
-use App\Containers\Vendor\Configurationer\UI\API\Requests\GetDefaultConfigurationRequest;
-use App\Containers\Vendor\Configurationer\Actions\UpdateConfigurationAction;
-use App\Containers\Vendor\Configurationer\Actions\DeleteConfigurationAction;
-use App\Containers\Vendor\Configurationer\Actions\GetUserConfigurationAction;
-use App\Containers\Vendor\Configurationer\Actions\GetSystemConfigurationAction;
-use App\Containers\Vendor\Configurationer\Actions\GetConfigurationHistoryAction;
+use App\Containers\Larabeans\Configurationer\Actions\GetConfigurationAction;
+use App\Containers\Larabeans\Configurationer\Actions\UpdateUserConfigurationAction;
+use App\Containers\Larabeans\Configurationer\UI\API\Requests\DeleteConfigurationRequest;
+use App\Containers\Larabeans\Configurationer\UI\API\Requests\GetConfigurationRequest;
+use App\Containers\Larabeans\Configurationer\UI\API\Requests\UpdateConfigurationRequest;
+use App\Containers\Larabeans\Configurationer\UI\API\Requests\GetUserConfigurationRequest;
+use App\Containers\Larabeans\Configurationer\UI\API\Requests\GetConfigurationHistoryRequest;
+use App\Containers\Larabeans\Configurationer\UI\API\Requests\UpdateUserConfigurationRequest;
+use App\Containers\Larabeans\Configurationer\UI\API\Transformers\ConfigurationTransformer;
+use App\Containers\Larabeans\Configurationer\UI\API\Transformers\ConfigurationHistoryTransformer;
+use App\Containers\Larabeans\Configurationer\UI\API\Requests\GetDefaultConfigurationRequest;
+use App\Containers\Larabeans\Configurationer\Actions\UpdateConfigurationAction;
+use App\Containers\Larabeans\Configurationer\Actions\DeleteConfigurationAction;
+use App\Containers\Larabeans\Configurationer\Actions\GetUserConfigurationAction;
+use App\Containers\Larabeans\Configurationer\Actions\GetSystemConfigurationAction;
+use App\Containers\Larabeans\Configurationer\Actions\GetConfigurationHistoryAction;
 use App\Ship\Parents\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
 

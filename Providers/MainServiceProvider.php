@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Containers\Vendor\Configurationer\Providers;
+namespace App\Containers\Larabeans\Configurationer\Providers;
 
 use App\Ship\Parents\Providers\MainServiceProvider as ParentMainServiceProvider;
-use App\Containers\Vendor\Configurationer\Providers\ConfigurationServiceProvider;
+use App\Containers\Larabeans\Configurationer\Providers\ConfigurationServiceProvider;
 
 /**
  * Class MainServiceProvider.

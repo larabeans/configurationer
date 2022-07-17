@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Containers\Vendor\Configurationer\Providers;
+namespace App\Containers\Larabeans\Configurationer\Providers;
 
-use App\Containers\Vendor\Beaner\Events\UserCreated;
-use App\Containers\Vendor\Configurationer\Listeners\CreateUserConfiguration;
-use App\Containers\Vendor\Configurationer\Listeners;
+use App\Containers\Larabeans\Core\Events\UserCreated;
+use App\Containers\Larabeans\Configurationer\Listeners\CreateUserConfiguration;
+use App\Containers\Larabeans\Configurationer\Listeners;
 use App\Ship\Parents\Providers\EventServiceProvider;
 
 class EventsServiceProvider extends EventServiceProvider

@@ -1,7 +1,7 @@
 {
   "name": "larabeans/configurationer",
   "description": "Apiato container to make entities configurable",
-  "type": "apiato-container",
+  "type": "larabeans-container",
   "homepage": "https://larabeans.com/",
   "version": "0.1.0",
   "support": {
@@ -26,6 +26,7 @@
   "extra": {
     "apiato": {
       "container": {
+        "section": "Larabeans",
         "name": "Configurationer"
       }
     }

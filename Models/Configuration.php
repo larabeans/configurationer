@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Containers\Vendor\Configurationer\Models;
+namespace App\Containers\Larabeans\Configurationer\Models;
 
-use App\Containers\Vendor\Beaner\Parents\Models\Model;
-use App\Containers\Vendor\Configurationer\Models\ConfigurationHistory;
+use App\Containers\Larabeans\Core\Parents\Models\Model;
+use App\Containers\Larabeans\Configurationer\Models\ConfigurationHistory;
 
 class Configuration extends Model
 {

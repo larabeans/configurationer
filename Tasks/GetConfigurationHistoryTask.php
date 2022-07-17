@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Containers\Vendor\Configurationer\Tasks;
+namespace App\Containers\Larabeans\Configurationer\Tasks;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Tasks\Task;
-use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationHistoryRepository;
-use App\Containers\Vendor\Configurationer\Data\Repositories\ConfigurationRepository;
-use App\Containers\Vendor\Tenanter\Traits\IsHostAdminTrait;
+use App\Containers\Larabeans\Configurationer\Data\Repositories\ConfigurationHistoryRepository;
+use App\Containers\Larabeans\Configurationer\Data\Repositories\ConfigurationRepository;
+use App\Containers\Larabeans\Tenanter\Traits\IsHostAdminTrait;
 
 class GetConfigurationHistoryTask extends Task
 {

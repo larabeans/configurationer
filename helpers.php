@@ -1,6 +1,6 @@
 <?php
 
-use App\Containers\Vendor\Configurationer\Configurationer;
+use App\Containers\Larabeans\Configurationer\Configurationer;
 
 if (! function_exists('configurationer')) {
     /** @return Tenancy */

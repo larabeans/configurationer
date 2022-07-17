@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Containers\Vendor\Configurationer\Traits;
+namespace App\Containers\Larabeans\Configurationer\Traits;
 
-use App\Containers\Vendor\Configurationer\Models\Configuration;
+use App\Containers\Larabeans\Configurationer\Models\Configuration;
 
 trait Configurable
 {
