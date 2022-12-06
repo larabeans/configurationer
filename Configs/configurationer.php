@@ -9,6 +9,7 @@ return [
      * Other containers can feed in this section, from there respective service providers
      *
      */
+    'installed' => true,
     'system' => [
 
     ],
