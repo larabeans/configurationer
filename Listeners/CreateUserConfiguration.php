@@ -27,8 +27,8 @@ class CreateUserConfiguration
     {
         app(CreateConfigurationTask::class)->run([
             'configurable_type' => 'user',
+            'configurable_id' => $event->user->id,
             'configuration' => configurationer()::getDefault('user'),
-            'id' => $event->user->id
         ]);
     }
 }

@@ -8,7 +8,6 @@ use App\Ship\Parents\Tasks\Task;
 use App\Containers\AppSection\Authorization\Tasks\GetAllPermissionsTask;
 
 use App\Containers\Larabeans\Configurationer\Data\Repositories\ConfigurationRepository;
-use PhpParser\Node\Expr\Cast\Object_;
 
 class GetDefaultConfigurationTask extends Task
 {
@@ -32,7 +31,6 @@ class GetDefaultConfigurationTask extends Task
         foreach ($entities as $key => $entity ) {
             if(configurationer()::loadInDefaultTask($key)) {
                 if($task = configurationer()::getTask($key, 'get')){
-
                     $configurations = array_merge(
                         $configurations,
                         (array) app($task)->run($request, $key)
