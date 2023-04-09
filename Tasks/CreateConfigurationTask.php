@@ -24,7 +24,7 @@ class CreateConfigurationTask extends Task
             if ( $model = configurationer()::getModel($data['configurable_type'])) {
                 $queryData = [
                     'configurable_type' => $model,
-                    'configurable_id' => $data['id'],
+                    'configurable_id' => $data['configurable_id'],
                     'configuration' => json_encode($data['configuration']),
                 ];
                 return $this->repository->create($queryData);

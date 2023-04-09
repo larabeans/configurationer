@@ -22,7 +22,7 @@ class GetConfigurationAction extends Action
         if(configurationer()::exists($key)) {
 
             // Auth::check() will not work here, because this route is excluded from auth:api middleware
-            // We are are called api guard here implicitly, to verify authenticated user
+            // Called api guard here implicitly, to verify authenticated user
             if(configurationer()::authenticate($key) && !Auth::guard('api')->check()) {
                 throw new AuthenticationException();
             }
