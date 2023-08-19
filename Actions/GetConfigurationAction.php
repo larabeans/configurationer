@@ -23,7 +23,7 @@ class GetConfigurationAction extends Action
 
             // Auth::check() will not work here, because this route is excluded from auth:api middleware
             // Called api guard here implicitly, to verify authenticated user
-            if(configurationer()::authenticate($key) && !Auth::guard('api')->check()) {
+            if(configurationer()::getEntityAuthenticateAttr($key) && !Auth::guard('api')->check()) {
                 throw new AuthenticationException();
             }
 

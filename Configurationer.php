@@ -22,6 +22,11 @@ class Configurationer
         return self::getDefault('system');
     }
 
+    public static function getSystemConfigurationAttr($attr)
+    {
+        return config('configurationer.entities.system', []);
+    }
+
     public static function getEntities($after = null)
     {
         return config('configurationer.entities', []);
@@ -78,7 +83,7 @@ class Configurationer
         return false;
     }
 
-    public static function authenticate($key)
+    public static function getEntityAuthenticateAttr($key)
     {
         if($entity = self::getEntity($key)){
             return $entity['authenticate'];
@@ -99,7 +104,7 @@ class Configurationer
     public static function getDefault($key)
     {
         if($entity = self::getEntity($key))
-            return $entity['default'];
+            return config('configurationer.entities'.$entity.'default'); //$entity['default];
 
         return [];
     }
