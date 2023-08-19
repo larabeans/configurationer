@@ -27,7 +27,7 @@ class Configurationer
      */
     public static function getSystemConfigurationAttr($attr)
     {
-        return config('configurationer.entities.system'.$attr, []);
+        return config('configurationer.entities.system.default.'.$attr, []);
     }
 
     public static function getEntities($after = null)
