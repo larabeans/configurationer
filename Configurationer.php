@@ -22,9 +22,12 @@ class Configurationer
         return self::getDefault('system');
     }
 
+    /**
+     * $attr is string, can use dot notation
+     */
     public static function getSystemConfigurationAttr($attr)
     {
-        return config('configurationer.entities.system', []);
+        return config('configurationer.entities.system'.$attr, []);
     }
 
     public static function getEntities($after = null)
